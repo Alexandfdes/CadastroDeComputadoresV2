@@ -1,6 +1,6 @@
 object formTelaCadastro: TformTelaCadastro
-  Left = 284
-  Top = 55
+  Left = 278
+  Top = 112
   AutoScroll = False
   BorderIcons = [biSystemMenu]
   Caption = 'Tela de Cadastro'
@@ -23,22 +23,8 @@ object formTelaCadastro: TformTelaCadastro
     Height = 22
     OnClick = SpeedButton2Click
   end
-  object SpeedButton1: TSpeedButton
-    Left = 648
-    Top = 456
-    Width = 69
-    Height = 32
-    Caption = 'Alterar'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = [fsBold]
-    ParentFont = False
-    OnClick = SpeedButton1Click
-  end
   object SpeedButton3: TSpeedButton
-    Left = 728
+    Left = 720
     Top = 456
     Width = 69
     Height = 32
@@ -51,7 +37,7 @@ object formTelaCadastro: TformTelaCadastro
     ParentFont = False
   end
   object SpeedButton4: TSpeedButton
-    Left = 568
+    Left = 544
     Top = 456
     Width = 69
     Height = 32
@@ -62,9 +48,10 @@ object formTelaCadastro: TformTelaCadastro
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
     ParentFont = False
+    OnClick = SpeedButton4Click
   end
   object SpeedButton5: TSpeedButton
-    Left = 488
+    Left = 632
     Top = 456
     Width = 69
     Height = 32
@@ -235,48 +222,47 @@ object formTelaCadastro: TformTelaCadastro
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object DBEdit1: TDBEdit
+      object EditNomeComputador: TDBEdit
         Left = 25
         Top = 104
         Width = 158
         Height = 21
         DataField = 'nome_computador'
-        DataSource = DataModule1.dsTelaCadastro
+        DataSource = DataModule1.dsQuery1
         MaxLength = 15
         TabOrder = 0
       end
-      object DBEdit2: TDBEdit
+      object EditUsuarioResponsavel: TDBEdit
         Left = 25
         Top = 296
         Width = 190
         Height = 21
         DataField = 'usuario_responsavel'
-        DataSource = DataModule1.dsTelaCadastro
+        DataSource = DataModule1.dsQuery1
         MaxLength = 20
         TabOrder = 1
       end
-      object DBEdit5: TDBEdit
+      object EditEnderecoIP: TDBEdit
         Left = 207
         Top = 224
         Width = 156
         Height = 21
         DataField = 'endereco_ip'
-        DataSource = DataModule1.dsTelaCadastro
-        MaxLength = 11
+        DataSource = DataModule1.dsQuery1
         TabOrder = 2
       end
-      object DBEdit6: TDBEdit
-        Left = 215
+      object EditAnyDesk: TDBEdit
+        Left = 207
         Top = 104
         Width = 158
         Height = 21
         DataField = 'anydesk'
-        DataSource = DataModule1.dsTelaCadastro
+        DataSource = DataModule1.dsQuery1
         MaxLength = 15
         TabOrder = 3
-        OnChange = DBEdit6Change
+        OnChange = EditAnyDeskChange
       end
-      object RadioButton1: TRadioButton
+      object RadioDesktop: TRadioButton
         Left = 56
         Top = 352
         Width = 117
@@ -290,7 +276,7 @@ object formTelaCadastro: TformTelaCadastro
         ParentFont = False
         TabOrder = 4
       end
-      object RadioButton2: TRadioButton
+      object RadioNotebook: TRadioButton
         Left = 224
         Top = 352
         Width = 117
@@ -304,16 +290,16 @@ object formTelaCadastro: TformTelaCadastro
         ParentFont = False
         TabOrder = 5
       end
-      object data_cadastro: TDBEdit
+      object DateCadastro: TDBEdit
         Left = 247
         Top = 296
         Width = 118
         Height = 21
         DataField = 'data_cadastro'
-        DataSource = DataModule1.dsTelaCadastro
+        DataSource = DataModule1.dsQuery1
         TabOrder = 6
       end
-      object DBMemo1: TDBMemo
+      object MemoObservacoes: TDBMemo
         Left = 448
         Top = 96
         Width = 309
@@ -322,38 +308,37 @@ object formTelaCadastro: TformTelaCadastro
         DataSource = DataModule1.dsTelaCadastro
         TabOrder = 7
       end
-      object DBLookupComboBox2: TDBLookupComboBox
+      object ComboUnidade: TDBLookupComboBox
         Left = 25
         Top = 160
         Width = 158
         Height = 21
         DataField = 'unidade_id'
-        DataSource = DataModule1.dsTelaCadastro
+        DataSource = DataModule1.dsQuery1
         KeyField = 'id'
         ListField = 'nome'
         ListSource = DataModule1.dsUnidades
         TabOrder = 8
       end
-      object DBLookupComboBox3: TDBLookupComboBox
+      object ComboSetor: TDBLookupComboBox
         Left = 207
         Top = 160
         Width = 158
         Height = 21
         DataField = 'setor_id'
-        DataSource = DataModule1.dsTelaCadastro
+        DataSource = DataModule1.dsQuery1
         KeyField = 'id'
         ListField = 'nome'
         ListSource = DataModule1.dsSetores
         TabOrder = 9
       end
-      object DBEdit3: TDBEdit
+      object EditEnderecoMAC: TDBEdit
         Left = 25
         Top = 224
         Width = 152
         Height = 21
         DataField = 'endereco_mac'
-        DataSource = DataModule1.dsTelaCadastro
-        MaxLength = 17
+        DataSource = DataModule1.dsQuery1
         TabOrder = 10
       end
     end
@@ -372,6 +357,7 @@ object formTelaCadastro: TformTelaCadastro
         TitleFont.Height = -11
         TitleFont.Name = 'Default'
         TitleFont.Style = []
+        OnDblClick = DBGrid1DblClick
         Columns = <
           item
             Expanded = False
@@ -451,7 +437,7 @@ object formTelaCadastro: TformTelaCadastro
     ItemHeight = 13
     TabOrder = 3
   end
-  object Edit1: TEdit
+  object EditPesquisa: TEdit
     Left = 8
     Top = 480
     Width = 225

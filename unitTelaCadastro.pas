@@ -18,21 +18,20 @@ type
     Label6: TLabel;
     Label8: TLabel;
     Label9: TLabel;
-    DBEdit1: TDBEdit;
-    DBEdit2: TDBEdit;
-    DBEdit5: TDBEdit;
-    DBEdit6: TDBEdit;
-    RadioButton1: TRadioButton;
-    RadioButton2: TRadioButton;
-    data_cadastro: TDBEdit;
-    DBMemo1: TDBMemo;
-    DBLookupComboBox2: TDBLookupComboBox;
-    DBLookupComboBox3: TDBLookupComboBox;
-    DBEdit3: TDBEdit;
+    EditNomeComputador: TDBEdit;
+    EditUsuarioResponsavel: TDBEdit;
+    EditEnderecoIP: TDBEdit;
+    EditAnyDesk: TDBEdit;
+    RadioDesktop: TRadioButton;
+    RadioNotebook: TRadioButton;
+    DateCadastro: TDBEdit;
+    MemoObservacoes: TDBMemo;
+    ComboUnidade: TDBLookupComboBox;
+    ComboSetor: TDBLookupComboBox;
+    EditEnderecoMAC: TDBEdit;
     SpeedButton2: TSpeedButton;
     ComboBox1: TComboBox;
     CheckBox1: TCheckBox;
-    SpeedButton1: TSpeedButton;
     SpeedButton3: TSpeedButton;
     SpeedButton4: TSpeedButton;
     SpeedButton5: TSpeedButton;
@@ -42,13 +41,15 @@ type
     TTabSheet2: TPageControl;
     TTabSheet: TTabSheet;
     ComboBox2: TComboBox;
-    Edit1: TEdit;
+    EditPesquisa: TEdit;
     procedure FormShow(Sender: TObject);
-    procedure DBEdit6Change(Sender: TObject);
+    procedure EditAnyDeskChange(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
     procedure TTabSheetShow(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure SpeedButton4Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -64,49 +65,7 @@ uses unitDM, unitPrincipal, unitListagem;
 
 {$R *.dfm}
 
-procedure TformTelaCadastro.FormShow(Sender: TObject);
-begin
-  if not (DataModule1.tabTelaCadastro.State in [dsInsert, dsEdit]) then
-    DataModule1.tabTelaCadastro.Append;
-  DataModule1.tabTelaCadastro.FieldByName('data_cadastro').AsDateTime := Date;
-end;
 
-procedure TformTelaCadastro.DBEdit6Change(Sender: TObject);
-begin
-// Remove todos os espaços, se houver
-  DBEdit6.Text := StringReplace(DBEdit6.Text, ' ', '', [rfReplaceAll]);
-  // Move o cursor para o final do texto após alterar
-  DBEdit6.SelStart := Length(DBEdit6.Text);
-end;
-
-procedure TformTelaCadastro.SpeedButton1Click(Sender: TObject);
-begin
-
- if RadioButton1.Checked then
-  DataModule1.tabTelaCadastro.FieldByName('tipo').AsString := 'Desktop'
-else if RadioButton2.Checked then
-  DataModule1.tabTelaCadastro.FieldByName('tipo').AsString := 'Notebook';
-// Sempre entra em modo de inserção (novo registro)
-  if not (DataModule1.tabTelaCadastro.State in [dsInsert]) then
-    DataModule1.tabTelaCadastro.Append;
-    // Valide se os campos obrigatórios estão preenchidos
-  if DBLookupComboBox2.KeyValue = Null then
-  begin
-    ShowMessage('Selecione uma unidade!');
-    DBLookupComboBox2.SetFocus;
-    Exit;
-  end;
-
-  // Outras validações...
-
-  // Salva o registro
-  DataModule1.tabTelaCadastro.Post;
-  ShowMessage('Registro salvo com sucesso!');
-
-  // Prepara para um novo cadastro, limpando os campos e indo para novo registro
-  DataModule1.tabTelaCadastro.Append;
-
-end;
 
 procedure TformTelaCadastro.ComboBox1Change(Sender: TObject);
 begin
@@ -117,9 +76,10 @@ procedure TformTelaCadastro.SpeedButton2Click(Sender: TObject);
 
 var
 campoBanco, valor, sql: string;
+
 begin
  campoBanco := ComboBox2.Items[comboBox1.ItemIndex]; // pega o campo real
- valor := Edit1.Text; // O que o usuário digitou (ex: "Dell")
+ valor := EditPesquisa.Text; // O que o usuário digitou (ex: "Dell")
 
   sql := 'SELECT * FROM teladecadastro WHERE ';
 
@@ -132,7 +92,11 @@ begin
   DataModule1.ADOQuery1.SQL.Text := sql;
   DataModule1.ADOQuery1.Open;
   // O resultado aparece no DBGrid (já vinculado ao DataSource do Query)
+  // Se encontrar, o DataSet estará no registro e os DBEdits já mostram os dados
+  if DataModule1.ADOQuery1.RecordCount = 0 then
+    ShowMessage('Registro não encontrado!');
 end;
+
 
 
 
@@ -163,6 +127,61 @@ ComboBox2.Items.Add('setor_id');
 ComboBox2.Items.Add('unidade_id');
 ComboBox2.Items.Add('tipo');
 ComboBox2.ItemIndex := 0;  // Deixa o primeiro selecionado
+end;
+
+procedure TformTelaCadastro.DBGrid1DblClick(Sender: TObject);
+begin
+// Mude para a aba de cadastro
+  formTelaCadastro.TTabSheet2.ActivePage := formTelaCadastro.TTabSheet; // Ajuste para o nome correto das abas
+
+  // Se o DataSet já está posicionado, os campos de cadastro serão preenchidos automaticamente!
+  formTelaCadastro.Show; // Se a tela não estiver visível
+
+  // Opcional: trazer o formulário para frente
+  formTelaCadastro.BringToFront;
+end;
+
+procedure TformTelaCadastro.SpeedButton4Click(Sender: TObject);
+begin
+ if not (DataModule1.tabTelaCadastro.State in [dsInsert, dsEdit]) then
+    DataModule1.tabTelaCadastro.Append;
+  DataModule1.tabTelaCadastro.FieldByName('data_cadastro').AsDateTime := Date;
+end;
+
+procedure TformTelaCadastro.EditAnyDeskChange(Sender: TObject);
+begin
+// Remove todos os espaços, se houver
+  EditAnyDesk.Text := StringReplace(EditAnyDesk.Text, ' ', '', [rfReplaceAll]);
+  // Move o cursor para o final do texto após alterar
+  EditAnyDesk.SelStart := Length(EditAnyDesk.Text);
+end;
+
+procedure TformTelaCadastro.SpeedButton1Click(Sender: TObject);
+begin
+
+ if RadioDesktop.Checked then
+  DataModule1.tabTelaCadastro.FieldByName('tipo').AsString := 'Desktop'
+else if RadioNotebook.Checked then
+  DataModule1.tabTelaCadastro.FieldByName('tipo').AsString := 'Notebook';
+// Sempre entra em modo de inserção (novo registro)
+  if not (DataModule1.tabTelaCadastro.State in [dsInsert]) then
+    DataModule1.tabTelaCadastro.Append;
+    // Valide se os campos obrigatórios estão preenchidos
+  if ComboUnidade.KeyValue = Null then
+  begin
+    ShowMessage('Selecione uma unidade!');
+    ComboUnidade.SetFocus;
+    Exit;
+  end;
+
+  // Outras validações...
+
+  // Salva o registro
+  DataModule1.tabTelaCadastro.Post;
+  ShowMessage('Registro salvo com sucesso!');
+
+  // Prepara para um novo cadastro, limpando os campos e indo para novo registro
+  DataModule1.tabTelaCadastro.Append;
 end;
 
 end.

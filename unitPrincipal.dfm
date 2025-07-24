@@ -1,6 +1,6 @@
 object DM: TDM
-  Left = 292
-  Top = 189
+  Left = 747
+  Top = 258
   Width = 870
   Height = 450
   Caption = 'Sistema de Controle'
