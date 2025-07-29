@@ -21,7 +21,6 @@ type
     EditNomeComputador: TDBEdit;
     EditUsuarioResponsavel: TDBEdit;
     EditEnderecoIP: TDBEdit;
-    EditAnyDesk: TDBEdit;
     RadioDesktop: TRadioButton;
     RadioNotebook: TRadioButton;
     DateCadastro: TDBEdit;
@@ -42,14 +41,18 @@ type
     TTabSheet: TTabSheet;
     ComboBox2: TComboBox;
     EditPesquisa: TEdit;
-    procedure FormShow(Sender: TObject);
-    procedure EditAnyDeskChange(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
+    EditAnydesk: TDBEdit;
+    procedure SpeedButton4Click(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
     procedure TTabSheetShow(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
-    procedure SpeedButton4Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure SpeedButton5Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure EditEnderecoMACKeyPress(Sender: TObject; var Key: Char);
+  
+
   private
     { Private declarations }
   public
@@ -105,6 +108,8 @@ end;
 
 procedure TformTelaCadastro.TTabSheetShow(Sender: TObject);
 begin
+
+
 // ComboBox1: nomes amigáveis para o usuário
  ComboBox1.Items.Clear;
 ComboBox1.Items.Add('  ');
@@ -129,59 +134,172 @@ ComboBox2.Items.Add('tipo');
 ComboBox2.ItemIndex := 0;  // Deixa o primeiro selecionado
 end;
 
+
 procedure TformTelaCadastro.DBGrid1DblClick(Sender: TObject);
+
 begin
-// Mude para a aba de cadastro
-  formTelaCadastro.TTabSheet2.ActivePage := formTelaCadastro.TTabSheet; // Ajuste para o nome correto das abas
-
-  // Se o DataSet já está posicionado, os campos de cadastro serão preenchidos automaticamente!
-  formTelaCadastro.Show; // Se a tela não estiver visível
-
-  // Opcional: trazer o formulário para frente
-  formTelaCadastro.BringToFront;
+  // Verifica se existe registro selecionado no dataset
+  if not DataModule1.ADOQuery1.IsEmpty then
+  begin
+    try
+      // Checa se os campos de lookup existem e não estão nulos
+      if (not VarIsNull(DataModule1.ADOQuery1.FieldByName('setor_nome').Value)) and
+         (not VarIsNull(DataModule1.ADOQuery1.FieldByName('unidade_nome').Value)) and
+         (Trim(DataModule1.ADOQuery1.FieldByName('setor_nome').AsString) <> '') and
+         (Trim(DataModule1.ADOQuery1.FieldByName('unidade_nome').AsString) <> '') then
+      begin
+        TTabSheet2.ActivePage := TTabSheet;
+        formTelaCadastro.Show;
+        formTelaCadastro.BringToFront;
+      end
+      else
+        ShowMessage('Cadastro inválido. Verifique setor e unidade do registro.');
+    except
+      on E: Exception do
+        ShowMessage('Erro ao abrir cadastro: ' + E.Message);
+    end;
+  end
+  else
+    ShowMessage('Nenhum registro selecionado.');
 end;
+
+
+
+
+
 
 procedure TformTelaCadastro.SpeedButton4Click(Sender: TObject);
 begin
- if not (DataModule1.tabTelaCadastro.State in [dsInsert, dsEdit]) then
-    DataModule1.tabTelaCadastro.Append;
-  DataModule1.tabTelaCadastro.FieldByName('data_cadastro').AsDateTime := Date;
-end;
 
-procedure TformTelaCadastro.EditAnyDeskChange(Sender: TObject);
-begin
-// Remove todos os espaços, se houver
-  EditAnyDesk.Text := StringReplace(EditAnyDesk.Text, ' ', '', [rfReplaceAll]);
-  // Move o cursor para o final do texto após alterar
-  EditAnyDesk.SelStart := Length(EditAnyDesk.Text);
-end;
+if DataModule1.ADOQuery1.State = dsBrowse then
+    DataModule1.ADOQuery1.Edit;
 
-procedure TformTelaCadastro.SpeedButton1Click(Sender: TObject);
-begin
 
- if RadioDesktop.Checked then
+
+
+  // Validação dos campos obrigatórios
+  if Trim(EditNomeComputador.Text) = '' then
+  begin
+    ShowMessage('Preencha o nome do computador!');
+    EditNomeComputador.SetFocus;
+    Exit;
+  end;
+
+     if RadioDesktop.Checked then
   DataModule1.tabTelaCadastro.FieldByName('tipo').AsString := 'Desktop'
+
 else if RadioNotebook.Checked then
   DataModule1.tabTelaCadastro.FieldByName('tipo').AsString := 'Notebook';
-// Sempre entra em modo de inserção (novo registro)
-  if not (DataModule1.tabTelaCadastro.State in [dsInsert]) then
-    DataModule1.tabTelaCadastro.Append;
+
+
+
     // Valide se os campos obrigatórios estão preenchidos
   if ComboUnidade.KeyValue = Null then
+
+
   begin
     ShowMessage('Selecione uma unidade!');
     ComboUnidade.SetFocus;
     Exit;
   end;
 
-  // Outras validações...
+
+
+
 
   // Salva o registro
-  DataModule1.tabTelaCadastro.Post;
+  DataModule1.ADOQuery1.Post;
   ShowMessage('Registro salvo com sucesso!');
 
-  // Prepara para um novo cadastro, limpando os campos e indo para novo registro
-  DataModule1.tabTelaCadastro.Append;
+ 
+end;
+
+
+
+
+
+
+
+
+
+
+
+procedure TformTelaCadastro.FormShow(Sender: TObject);
+begin
+DataModule1.tabTelaCadastro.Append;
+  DataModule1.ADOQuery1.Open;
+ // Prepara novo registro, deixando os campos em branco
+  if not (DataModule1.ADOQuery1.State in [dsInsert, dsEdit]) then
+    DataModule1.ADOQuery1.Append;
+    // Preenche a data de cadastro automaticamente
+  if DataModule1.ADOQuery1.State = dsInsert then
+    DataModule1.ADOQuery1.FieldByName('data_cadastro').AsDateTime := Date;
+end;
+
+
+
+procedure TformTelaCadastro.SpeedButton5Click(Sender: TObject);
+begin
+
+    DataModule1.ADOQuery1.Append;
+
+    // Preenche a data atual no campo data_cadastro
+  if DataModule1.ADOQuery1.State = dsInsert then
+    DataModule1.ADOQuery1.FieldByName('data_cadastro').AsDateTime := Date;
+
+// Limpa campos não data-aware (manuais)
+  EditPesquisa.Text := '';
+  ComboBox1.ItemIndex := 0;
+  ComboBox2.ItemIndex := 0;
+  CheckBox1.Checked := False;
+
+  // Desmarca RadioButtons (opcional, se quiser que nenhum fique marcado)
+  RadioDesktop.Checked := False;
+  RadioNotebook.Checked := False;
+
+ // Move o foco para o primeiro campo (opcional)
+  EditNomeComputador.SetFocus;
+end;
+
+procedure TformTelaCadastro.SpeedButton3Click(Sender: TObject);
+begin
+ try
+  // Verifica se há um registro selecionado
+  if not DataModule1.ADOQuery1.IsEmpty then
+  begin
+    // Pede confirmação ao usuário
+    if MessageDlg('Tem certeza que deseja excluir este registro?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+    begin
+    DataModule1.ADOQuery1.FieldByName('data_cadastro').AsDateTime := Now;
+      DataModule1.ADOQuery1.Delete;
+      ShowMessage('Registro excluído com sucesso!');
+      // Só tente editar se ainda houver registros!
+      if not DataModule1.ADOQuery1.IsEmpty then
+      begin
+        DataModule1.ADOQuery1.Edit;
+        DataModule1.ADOQuery1.FieldByName('data_cadastro').AsDateTime := Now;
+        DataModule1.ADOQuery1.Post;
+      end;
+
+    end;
+
+  end
+   else
+      ShowMessage('Nenhum registro selecionado para excluir.');
+  except
+    on E: Exception do
+      ShowMessage('Não foi possível excluir ou atualizar o registro. Motivo: ' + E.Message);
+  end;
+end;
+
+
+procedure TformTelaCadastro.EditEnderecoMACKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+
+  if not (Key in ['0'..'9', #8]) then // só permite números e backspace
+    Key := #0;
 end;
 
 end.
+

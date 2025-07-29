@@ -58,7 +58,6 @@ object DataModule1: TDataModule1
     Top = 120
   end
   object tabTelaCadastro: TADOTable
-    Active = True
     Connection = conexao
     CursorType = ctStatic
     TableName = 'teladecadastro'
@@ -71,9 +70,6 @@ object DataModule1: TDataModule1
     object tabTelaCadastronome_computador: TStringField
       FieldName = 'nome_computador'
       Size = 10
-    end
-    object tabTelaCadastroanydesk: TLargeintField
-      FieldName = 'anydesk'
     end
     object tabTelaCadastrounidade_id: TIntegerField
       FieldName = 'unidade_id'
@@ -106,6 +102,10 @@ object DataModule1: TDataModule1
     object tabTelaCadastrodata_cadastro: TDateTimeField
       FieldName = 'data_cadastro'
     end
+    object tabTelaCadastroanydesk: TStringField
+      FieldName = 'anydesk'
+      Size = 15
+    end
   end
   object dsTelaCadastro: TDataSource
     DataSet = tabTelaCadastro
@@ -120,8 +120,65 @@ object DataModule1: TDataModule1
   object ADOQuery1: TADOQuery
     Connection = ADOConnection1
     Parameters = <>
-    Left = 200
+    SQL.Strings = (
+      'SELECT t.*, s.nome AS setor_nome, u.nome AS unidade_nome'
+      'FROM teladecadastro t'
+      'LEFT JOIN setores s ON t.setor_id = s.id'
+      'LEFT JOIN unidades u ON t.unidade_id = u.id')
+    Left = 208
     Top = 192
+    object ADOQuery1id: TAutoIncField
+      FieldName = 'id'
+      ReadOnly = True
+    end
+    object ADOQuery1nome_computador: TStringField
+      FieldName = 'nome_computador'
+      Size = 10
+    end
+    object ADOQuery1endereco_mac: TStringField
+      FieldName = 'endereco_mac'
+      EditMask = 'AA-AA-AA-AA-AA-AA;1;_'
+      Size = 50
+    end
+    object ADOQuery1usuario_responsavel: TStringField
+      FieldName = 'usuario_responsavel'
+      Size = 50
+    end
+    object ADOQuery1endereco_ip: TStringField
+      FieldName = 'endereco_ip'
+      EditMask = '##.##.#.###;1;_'
+      Size = 50
+    end
+    object ADOQuery1tipo: TStringField
+      FieldName = 'tipo'
+      Size = 50
+    end
+    object ADOQuery1observacoes: TMemoField
+      FieldName = 'observacoes'
+      BlobType = ftMemo
+    end
+    object ADOQuery1data_cadastro: TDateTimeField
+      FieldName = 'data_cadastro'
+    end
+    object ADOQuery1anydesk: TStringField
+      FieldName = 'anydesk'
+      EditMask = '# ### ### ###;1;_'
+      Size = 15
+    end
+    object ADOQuery1setor_nome: TStringField
+      FieldName = 'setor_nome'
+      Size = 50
+    end
+    object ADOQuery1unidade_nome: TStringField
+      FieldName = 'unidade_nome'
+      Size = 50
+    end
+    object ADOQuery1unidade_id: TIntegerField
+      FieldName = 'unidade_id'
+    end
+    object ADOQuery1setor_id: TIntegerField
+      FieldName = 'setor_id'
+    end
   end
   object ADOConnection1: TADOConnection
     Connected = True

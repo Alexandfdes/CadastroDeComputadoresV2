@@ -1,9 +1,10 @@
 object DM: TDM
-  Left = 747
-  Top = 258
-  Width = 870
-  Height = 450
+  Left = 211
+  Top = 212
+  BorderStyle = bsSingle
   Caption = 'Sistema de Controle'
+  ClientHeight = 411
+  ClientWidth = 854
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,6 +12,7 @@ object DM: TDM
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel

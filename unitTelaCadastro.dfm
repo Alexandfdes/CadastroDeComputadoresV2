@@ -1,11 +1,11 @@
 object formTelaCadastro: TformTelaCadastro
-  Left = 278
-  Top = 112
-  AutoScroll = False
+  Left = 268
+  Top = 115
   BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
   Caption = 'Tela de Cadastro'
-  ClientHeight = 514
-  ClientWidth = 803
+  ClientHeight = 511
+  ClientWidth = 810
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,6 +13,7 @@ object formTelaCadastro: TformTelaCadastro
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  Position = poMainFormCenter
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -35,6 +36,7 @@ object formTelaCadastro: TformTelaCadastro
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
     ParentFont = False
+    OnClick = SpeedButton3Click
   end
   object SpeedButton4: TSpeedButton
     Left = 544
@@ -62,6 +64,7 @@ object formTelaCadastro: TformTelaCadastro
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
     ParentFont = False
+    OnClick = SpeedButton5Click
   end
   object Label10: TLabel
     Left = 8
@@ -81,7 +84,7 @@ object formTelaCadastro: TformTelaCadastro
     Top = 0
     Width = 809
     Height = 433
-    ActivePage = TTabSheet
+    ActivePage = TabSheet2
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -94,7 +97,7 @@ object formTelaCadastro: TformTelaCadastro
       OnShow = TTabSheetShow
       object Label1: TLabel
         Left = 25
-        Top = 88
+        Top = 96
         Width = 122
         Height = 13
         Caption = 'Nome do Computador'
@@ -159,7 +162,7 @@ object formTelaCadastro: TformTelaCadastro
       end
       object Label6: TLabel
         Left = 207
-        Top = 88
+        Top = 96
         Width = 51
         Height = 13
         Caption = 'AnyDesk'
@@ -224,7 +227,7 @@ object formTelaCadastro: TformTelaCadastro
       end
       object EditNomeComputador: TDBEdit
         Left = 25
-        Top = 104
+        Top = 112
         Width = 158
         Height = 21
         DataField = 'nome_computador'
@@ -251,17 +254,6 @@ object formTelaCadastro: TformTelaCadastro
         DataSource = DataModule1.dsQuery1
         TabOrder = 2
       end
-      object EditAnyDesk: TDBEdit
-        Left = 207
-        Top = 104
-        Width = 158
-        Height = 21
-        DataField = 'anydesk'
-        DataSource = DataModule1.dsQuery1
-        MaxLength = 15
-        TabOrder = 3
-        OnChange = EditAnyDeskChange
-      end
       object RadioDesktop: TRadioButton
         Left = 56
         Top = 352
@@ -274,7 +266,7 @@ object formTelaCadastro: TformTelaCadastro
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 3
       end
       object RadioNotebook: TRadioButton
         Left = 224
@@ -288,7 +280,7 @@ object formTelaCadastro: TformTelaCadastro
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 5
+        TabOrder = 4
       end
       object DateCadastro: TDBEdit
         Left = 247
@@ -297,16 +289,16 @@ object formTelaCadastro: TformTelaCadastro
         Height = 21
         DataField = 'data_cadastro'
         DataSource = DataModule1.dsQuery1
-        TabOrder = 6
+        TabOrder = 5
       end
       object MemoObservacoes: TDBMemo
-        Left = 448
+        Left = 440
         Top = 96
         Width = 309
         Height = 241
         DataField = 'observacoes'
-        DataSource = DataModule1.dsTelaCadastro
-        TabOrder = 7
+        DataSource = DataModule1.dsQuery1
+        TabOrder = 6
       end
       object ComboUnidade: TDBLookupComboBox
         Left = 25
@@ -318,19 +310,19 @@ object formTelaCadastro: TformTelaCadastro
         KeyField = 'id'
         ListField = 'nome'
         ListSource = DataModule1.dsUnidades
-        TabOrder = 8
+        TabOrder = 7
       end
       object ComboSetor: TDBLookupComboBox
         Left = 207
         Top = 160
         Width = 158
         Height = 21
-        DataField = 'setor_id'
+        DataField = 'setor_nome'
         DataSource = DataModule1.dsQuery1
         KeyField = 'id'
         ListField = 'nome'
         ListSource = DataModule1.dsSetores
-        TabOrder = 9
+        TabOrder = 8
       end
       object EditEnderecoMAC: TDBEdit
         Left = 25
@@ -339,6 +331,16 @@ object formTelaCadastro: TformTelaCadastro
         Height = 21
         DataField = 'endereco_mac'
         DataSource = DataModule1.dsQuery1
+        TabOrder = 9
+        OnKeyPress = EditEnderecoMACKeyPress
+      end
+      object EditAnydesk: TDBEdit
+        Left = 209
+        Top = 112
+        Width = 152
+        Height = 21
+        DataField = 'anydesk'
+        DataSource = DataModule1.dsQuery1
         TabOrder = 10
       end
     end
@@ -346,7 +348,7 @@ object formTelaCadastro: TformTelaCadastro
       Caption = 'Listagem'
       ImageIndex = 1
       object DBGrid1: TDBGrid
-        Left = 0
+        Left = -8
         Top = 0
         Width = 801
         Height = 401
@@ -362,51 +364,62 @@ object formTelaCadastro: TformTelaCadastro
           item
             Expanded = False
             FieldName = 'nome_computador'
+            Width = 101
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'usuario_responsavel'
+            Width = 188
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'setor_id'
+            FieldName = 'setor_nome'
+            Width = 177
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'unidade_nome'
+            Title.Caption = 'Unidade'
+            Width = 142
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'anydesk'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'endereco_mac'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'unidade_id'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'endereco_ip'
+            Width = 120
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'tipo'
+            Width = 113
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'endereco_mac'
+            Width = 209
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'endereco_ip'
+            Width = 164
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'observacoes'
+            Width = 315
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'data_cadastro'
+            Width = 87
             Visible = True
           end>
       end

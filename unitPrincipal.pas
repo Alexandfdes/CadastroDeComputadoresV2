@@ -11,12 +11,14 @@ type
     Panel1: TPanel;
     BitBtn1: TBitBtn;
     procedure BitBtn1Click(Sender: TObject);
+     procedure TrataExcecao(Sender: TObject; E: Exception);
   private
     { Private declarations }
   public
     { Public declarations }
   end;
 
+ 
 var
   DM: TDM;
 
@@ -30,5 +32,11 @@ procedure TDM.BitBtn1Click(Sender: TObject);
 begin
  formTelaCadastro.showModal; 
   end;
+
+
+ procedure TDM.TrataExcecao(Sender: TObject; E: Exception);
+begin
+  ShowMessage('Erro inesperado: ' + E.Message);
+end;
 
 end.

@@ -19,7 +19,6 @@ type
     tabTelaCadastro: TADOTable;
     tabTelaCadastroid: TAutoIncField;
     tabTelaCadastronome_computador: TStringField;
-    tabTelaCadastroanydesk: TLargeintField;
     tabTelaCadastrounidade_id: TIntegerField;
     tabTelaCadastrosetor_id: TIntegerField;
     tabTelaCadastroendereco_mac: TStringField;
@@ -32,6 +31,20 @@ type
     dsQuery1: TDataSource;
     ADOQuery1: TADOQuery;
     ADOConnection1: TADOConnection;
+    ADOQuery1id: TAutoIncField;
+    ADOQuery1nome_computador: TStringField;
+    ADOQuery1endereco_mac: TStringField;
+    ADOQuery1endereco_ip: TStringField;
+    ADOQuery1usuario_responsavel: TStringField;
+    ADOQuery1tipo: TStringField;
+    ADOQuery1observacoes: TMemoField;
+    ADOQuery1data_cadastro: TDateTimeField;
+    ADOQuery1anydesk: TStringField;
+    tabTelaCadastroanydesk: TStringField;
+    ADOQuery1setor_nome: TStringField;
+    ADOQuery1unidade_nome: TStringField;
+    ADOQuery1unidade_id: TIntegerField;
+    ADOQuery1setor_id: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
