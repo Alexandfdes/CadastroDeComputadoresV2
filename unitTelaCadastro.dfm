@@ -84,7 +84,7 @@ object formTelaCadastro: TformTelaCadastro
     Top = 0
     Width = 809
     Height = 433
-    ActivePage = TabSheet2
+    ActivePage = TTabSheet
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -231,7 +231,7 @@ object formTelaCadastro: TformTelaCadastro
         Width = 158
         Height = 21
         DataField = 'nome_computador'
-        DataSource = DataModule1.dsQuery1
+        DataSource = DataModule1.dsTelaCadastro
         MaxLength = 15
         TabOrder = 0
       end
@@ -241,7 +241,7 @@ object formTelaCadastro: TformTelaCadastro
         Width = 190
         Height = 21
         DataField = 'usuario_responsavel'
-        DataSource = DataModule1.dsQuery1
+        DataSource = DataModule1.dsTelaCadastro
         MaxLength = 20
         TabOrder = 1
       end
@@ -251,7 +251,7 @@ object formTelaCadastro: TformTelaCadastro
         Width = 156
         Height = 21
         DataField = 'endereco_ip'
-        DataSource = DataModule1.dsQuery1
+        DataSource = DataModule1.dsTelaCadastro
         TabOrder = 2
       end
       object RadioDesktop: TRadioButton
@@ -288,7 +288,7 @@ object formTelaCadastro: TformTelaCadastro
         Width = 118
         Height = 21
         DataField = 'data_cadastro'
-        DataSource = DataModule1.dsQuery1
+        DataSource = DataModule1.dsTelaCadastro
         TabOrder = 5
       end
       object MemoObservacoes: TDBMemo
@@ -297,7 +297,7 @@ object formTelaCadastro: TformTelaCadastro
         Width = 309
         Height = 241
         DataField = 'observacoes'
-        DataSource = DataModule1.dsQuery1
+        DataSource = DataModule1.dsTelaCadastro
         TabOrder = 6
       end
       object ComboUnidade: TDBLookupComboBox
@@ -306,7 +306,7 @@ object formTelaCadastro: TformTelaCadastro
         Width = 158
         Height = 21
         DataField = 'unidade_id'
-        DataSource = DataModule1.dsQuery1
+        DataSource = DataModule1.dsTelaCadastro
         KeyField = 'id'
         ListField = 'nome'
         ListSource = DataModule1.dsUnidades
@@ -317,8 +317,8 @@ object formTelaCadastro: TformTelaCadastro
         Top = 160
         Width = 158
         Height = 21
-        DataField = 'setor_nome'
-        DataSource = DataModule1.dsQuery1
+        DataField = 'setor_id'
+        DataSource = DataModule1.dsTelaCadastro
         KeyField = 'id'
         ListField = 'nome'
         ListSource = DataModule1.dsSetores
@@ -330,7 +330,7 @@ object formTelaCadastro: TformTelaCadastro
         Width = 152
         Height = 21
         DataField = 'endereco_mac'
-        DataSource = DataModule1.dsQuery1
+        DataSource = DataModule1.dsTelaCadastro
         TabOrder = 9
         OnKeyPress = EditEnderecoMACKeyPress
       end
@@ -340,7 +340,7 @@ object formTelaCadastro: TformTelaCadastro
         Width = 152
         Height = 21
         DataField = 'anydesk'
-        DataSource = DataModule1.dsQuery1
+        DataSource = DataModule1.dsTelaCadastro
         TabOrder = 10
       end
     end
