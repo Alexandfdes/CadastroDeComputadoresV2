@@ -18,16 +18,8 @@ type
     Label6: TLabel;
     Label8: TLabel;
     Label9: TLabel;
-    EditNomeComputador: TDBEdit;
-    EditUsuarioResponsavel: TDBEdit;
-    EditEnderecoIP: TDBEdit;
     RadioDesktop: TRadioButton;
     RadioNotebook: TRadioButton;
-    DateCadastro: TDBEdit;
-    MemoObservacoes: TDBMemo;
-    ComboUnidade: TDBLookupComboBox;
-    ComboSetor: TDBLookupComboBox;
-    EditEnderecoMAC: TDBEdit;
     SpeedButton2: TSpeedButton;
     ComboBox1: TComboBox;
     CheckBox1: TCheckBox;
@@ -41,7 +33,15 @@ type
     TTabSheet: TTabSheet;
     ComboBox2: TComboBox;
     EditPesquisa: TEdit;
-    EditAnydesk: TDBEdit;
+    EditNomeComputador: TEdit;
+    EditUsuarioResponsavel: TEdit;
+    EditEnderecoMAC: TEdit;
+    EditAnydesk: TEdit;
+    EditEnderecoIP: TEdit;
+    DateCadastro: TEdit;
+    ComboUnidade: TComboBox;
+    ComboSetor: TComboBox;
+    MemoObservacoes: TMemo;
     procedure SpeedButton4Click(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
@@ -51,10 +51,12 @@ type
     procedure SpeedButton5Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
     procedure EditEnderecoMACKeyPress(Sender: TObject; var Key: Char);
+    procedure SpeedButton1Click(Sender: TObject);
   
 
   private
-    { Private declarations }
+  procedure CarregarCampos;
+    procedure SalvarCampos;
   public
     { Public declarations }
   end;
@@ -76,46 +78,41 @@ begin
 end;
 
 procedure TformTelaCadastro.SpeedButton2Click(Sender: TObject);
-
 var
-campoBanco, valor, sql: string;
+  campoBanco, valor, sql: string;
+begin
+  DataModule1.ADOQuery1.Open;
+  if DataModule1.ADOQuery1.RecordCount > 0 then
+    CarregarCampos;
 
-begin
- 
- campoBanco := ComboBox2.Items[comboBox1.ItemIndex]; // pega o campo real
- valor := EditPesquisa.Text; // O que o usuário digitou (ex: "Dell")
- if Trim(campoBanco) = '' then
-begin
-  ShowMessage('Selecione um campo para pesquisar!');
-  Exit;
-end;
+  campoBanco := ComboBox2.Items[ComboBox1.ItemIndex]; // pega o campo real
+  valor := EditPesquisa.Text; // O que o usuário digitou (ex: "Dell")
+  if Trim(campoBanco) = '' then
+  begin
+    ShowMessage('Selecione um campo para pesquisar!');
+    Exit;
+  end;
 
   sql := 'SELECT t.*, s.nome AS setor_nome, u.nome AS unidade_nome ' +
-'FROM teladecadastro t ' +
-'LEFT JOIN setores s ON t.setor_id = s.id ' +
-'LEFT JOIN unidades u ON t.unidade_id = u.id ';
+    'FROM teladecadastro t ' +
+    'LEFT JOIN setores s ON t.setor_id = s.id ' +
+    'LEFT JOIN unidades u ON t.unidade_id = u.id ';
 
-
-if valor <> '' then
-  if CheckBox1.Checked then
-    sql := sql + ' WHERE '+ campoBanco + ' LIKE ' + QuotedStr('%' + valor + '%')
-  else
-    sql := sql + ' WHERE '+ campoBanco + ' = ' + QuotedStr(valor);
+  if valor <> '' then
+    if CheckBox1.Checked then
+      sql := sql + ' WHERE ' + campoBanco + ' LIKE ' + QuotedStr('%' + valor + '%')
+    else
+      sql := sql + ' WHERE ' + campoBanco + ' = ' + QuotedStr(valor);
 
   DataModule1.ADOQuery1.Close;
   DataModule1.ADOQuery1.SQL.Text := sql;
   DataModule1.ADOQuery1.Open;
-   // Troca para a aba de listagem
+
   TTabSheet2.ActivePage := TabSheet2;
-  // O resultado aparece no DBGrid (já vinculado ao DataSource do Query)
-  // Se encontrar, o DataSet estará no registro e os DBEdits já mostram os dados
+
   if DataModule1.ADOQuery1.RecordCount = 0 then
     ShowMessage('Registro não encontrado!');
-
 end;
-
-
-
 
 
 
@@ -149,44 +146,44 @@ ComboBox2.ItemIndex := 0;  // Deixa o primeiro selecionado
 end;
 
 
+
 procedure TformTelaCadastro.DBGrid1DblClick(Sender: TObject);
-
-
- var
+var
   id: Integer;
 begin
   if not DataModule1.ADOQuery1.IsEmpty then
   begin
     id := DataModule1.ADOQuery1.FieldByName('id').AsInteger;
     DataModule1.tabTelaCadastro.Locate('id', id, []);
+    CarregarCampos; // <-- aqui!
     TTabSheet2.ActivePage := TTabSheet; // volta para aba Cadastro
     EditNomeComputador.SetFocus;
+
   end;
 end;
 
 
 
 
-
 procedure TformTelaCadastro.SpeedButton4Click(Sender: TObject);
 begin
-
- // Validação dos campos obrigatórios
+if not (DataModule1.tabTelaCadastro.State in [dsEdit, dsInsert]) then
+  DataModule1.tabTelaCadastro.Edit;
+  // Validação dos campos obrigatórios
   if Trim(EditNomeComputador.Text) = '' then
   begin
     ShowMessage('Preencha o nome do computador!');
     EditNomeComputador.SetFocus;
     Exit;
   end;
-
-  if ComboUnidade.KeyValue = Null then
+  if Trim(ComboUnidade.Text) = '' then
   begin
     ShowMessage('Selecione uma unidade!');
     ComboUnidade.SetFocus;
     Exit;
   end;
-
-// Define tipo
+  
+  // Define tipo
   if RadioDesktop.Checked then
     DataModule1.tabTelaCadastro.FieldByName('tipo').AsString := 'Desktop'
   else if RadioNotebook.Checked then
@@ -195,23 +192,27 @@ begin
   // Garante que está em modo edição/insert
   if not (DataModule1.tabTelaCadastro.State in [dsEdit, dsInsert]) then
     DataModule1.tabTelaCadastro.Edit;
- if Trim(EditNomeComputador.Text) = '' then
+
+ if DataModule1.tabTelaCadastro.Locate('endereco_mac', EditEnderecoMAC.Text, []) then
 begin
-  ShowMessage('O nome do computador é obrigatório!');
-  EditNomeComputador.SetFocus;
-  Exit;
+  // Já existe um registro com esse MAC, então atualiza os campos
+  DataModule1.tabTelaCadastro.Edit;
+  // Atualize os campos como normalmente faria ao editar
+end
+else
+begin
+  // Não existe, então cria um novo
+  DataModule1.tabTelaCadastro.Append;
+  // Preencha os campos normalmente
 end;
 
+// Preencha os campos normalmente (em ambos os casos)
+DataModule1.tabTelaCadastro.FieldByName('nome_computador').AsString := EditNomeComputador.Text;
+// ... e assim por diante para os outros campos
 
+DataModule1.tabTelaCadastro.Post;
 
-// Verificar duplicidade de MAC
-if DataModule1.tabTelaCadastro.Locate('endereco_mac', EditEnderecoMAC.Text, []) then
-begin
-  ShowMessage('Já existe um computador com esse endereço MAC!');
-  EditEnderecoMAC.SetFocus;
-  Exit;
-end;
-  // Salva o registro
+  SalvarCampos;
   DataModule1.tabTelaCadastro.Post;
   ShowMessage('Registro salvo com sucesso!');
 end;
@@ -221,30 +222,104 @@ end;
 
 
 
-
-
 procedure TformTelaCadastro.FormShow(Sender: TObject);
 begin
+DataModule1.tabTelaCadastro.Append; // ou .Insert
+ DateCadastro.Text := FormatDateTime('dd/mm/yyyy', Now);
   DataModule1.tabTelaCadastro.Open;
   DataModule1.tabUnidades.Open;
   DataModule1.tabSetores.Open;
+
+
+    // Preencher ComboBox de Unidades
+  ComboUnidade.Items.Clear;
+  DataModule1.tabUnidades.First;
+  while not DataModule1.tabUnidades.Eof do
+  begin
+    ComboUnidade.Items.Add(DataModule1.tabUnidades.FieldByName('nome').AsString);
+    DataModule1.tabUnidades.Next;
+  end;
+
+  // Preencher ComboBox de Setores
+  ComboSetor.Items.Clear;
+  DataModule1.tabSetores.First;
+  while not DataModule1.tabSetores.Eof do
+  begin
+    ComboSetor.Items.Add(DataModule1.tabSetores.FieldByName('nome').AsString);
+    DataModule1.tabSetores.Next;
+  end;
+  
 end;
 
 
+procedure TformTelaCadastro.CarregarCampos;
+begin
+  EditNomeComputador.Text    := DataModule1.tabTelaCadastro.FieldByName('nome_computador').AsString;
+  EditEnderecoIP.Text        := DataModule1.tabTelaCadastro.FieldByName('endereco_ip').AsString;
+  EditUsuarioResponsavel.Text:= DataModule1.tabTelaCadastro.FieldByName('usuario_responsavel').AsString;
+  EditEnderecoMAC.Text       := DataModule1.tabTelaCadastro.FieldByName('endereco_mac').AsString;
+  EditAnydesk.Text           := DataModule1.tabTelaCadastro.FieldByName('anydesk').AsString;
+  ComboSetor.Text            := DataModule1.tabTelaCadastro.FieldByName('setor_id').AsString;
+  ComboUnidade.Text          := DataModule1.tabTelaCadastro.FieldByName('unidade_id').AsString;
+  DateCadastro.Text          := DataModule1.tabTelaCadastro.FieldByName('data_cadastro').AsString;
+  MemoObservacoes.Text       := DataModule1.tabTelaCadastro.FieldByName('observacoes').AsString;
 
+end;
+
+procedure TformTelaCadastro.SalvarCampos;
+var
+  setorID, unidadeID: Variant;
+begin
+  if not (DataModule1.tabTelaCadastro.State in [dsEdit, dsInsert]) then
+    DataModule1.tabTelaCadastro.Edit;
+  DataModule1.tabTelaCadastro.FieldByName('nome_computador').AsString      := EditNomeComputador.Text;
+  DataModule1.tabTelaCadastro.FieldByName('endereco_ip').AsString          := EditEnderecoIP.Text;
+  DataModule1.tabTelaCadastro.FieldByName('usuario_responsavel').AsString  := EditUsuarioResponsavel.Text;
+  DataModule1.tabTelaCadastro.FieldByName('endereco_mac').AsString         := EditEnderecoMAC.Text;
+  DataModule1.tabTelaCadastro.FieldByName('anydesk').AsString              := EditAnydesk.Text;
+
+  // Busca o ID correspondente ao nome selecionado no ComboBox
+  setorID := DataModule1.tabSetores.Lookup('nome', ComboSetor.Text, 'id');
+  unidadeID := DataModule1.tabUnidades.Lookup('nome', ComboUnidade.Text, 'id');
+
+  // Só atribui se encontrou (evita erro de valor inválido)
+  if not VarIsNull(setorID) then
+    DataModule1.tabTelaCadastro.FieldByName('setor_id').AsInteger := setorID
+  else
+    DataModule1.tabTelaCadastro.FieldByName('setor_id').Clear;
+
+  if not VarIsNull(unidadeID) then
+    DataModule1.tabTelaCadastro.FieldByName('unidade_id').AsInteger := unidadeID
+  else
+    DataModule1.tabTelaCadastro.FieldByName('unidade_id').Clear;
+
+if Trim(DateCadastro.Text) = '' then
+  DataModule1.tabTelaCadastro.FieldByName('data_cadastro').Clear
+else
+  DataModule1.tabTelaCadastro.FieldByName('data_cadastro').AsDateTime := StrToDate(DateCadastro.Text);
+  DataModule1.tabTelaCadastro.FieldByName('observacoes').AsString          := MemoObservacoes.Text;
+end;
 procedure TformTelaCadastro.SpeedButton5Click(Sender: TObject);
 begin
-  DataModule1.tabTelaCadastro.Append;
-  DataModule1.tabTelaCadastro.FieldByName('data_cadastro').AsDateTime := Date;
-
-  // Limpa controles manuais
-  EditPesquisa.Text := '';
+DataModule1.tabTelaCadastro.Append; // ou .Insert
+   EditNomeComputador.Clear;
+  EditEnderecoIP.Clear;
+  EditUsuarioResponsavel.Clear;
+  EditEnderecoMAC.Clear;
+  EditAnydesk.Clear;
+  ComboSetor.ItemIndex := -1; // se for ComboBox, limpa seleção
+  ComboUnidade.ItemIndex := -1; // idem
+  DateCadastro.Text := DateToStr(Date);
+  
+  MemoObservacoes.Clear;
+  EditPesquisa.Clear;
   ComboBox1.ItemIndex := 0;
   ComboBox2.ItemIndex := 0;
   CheckBox1.Checked := False;
   RadioDesktop.Checked := False;
   RadioNotebook.Checked := False;
   EditNomeComputador.SetFocus;
+
 end;
 
 procedure TformTelaCadastro.SpeedButton3Click(Sender: TObject);
@@ -276,6 +351,15 @@ begin
   if not (Key in ['0'..'9', #8]) then // só permite números e backspace
     Key := #0;
 end;
+
+procedure TformTelaCadastro.SpeedButton1Click(Sender: TObject);
+begin
+SpeedButton4Click(Sender); // Reutiliza o método de salvar
+end;
+
+
+
+
 
 end.
 

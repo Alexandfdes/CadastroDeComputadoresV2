@@ -1,10 +1,10 @@
 object formTelaCadastro: TformTelaCadastro
-  Left = 268
-  Top = 115
+  Left = 254
+  Top = 128
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Tela de Cadastro'
-  ClientHeight = 511
+  ClientHeight = 512
   ClientWidth = 810
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -200,7 +200,7 @@ object formTelaCadastro: TformTelaCadastro
         ParentFont = False
       end
       object Label9: TLabel
-        Left = 247
+        Left = 207
         Top = 282
         Width = 100
         Height = 13
@@ -213,8 +213,8 @@ object formTelaCadastro: TformTelaCadastro
         ParentFont = False
       end
       object Label7: TLabel
-        Left = 448
-        Top = 80
+        Left = 440
+        Top = 96
         Width = 94
         Height = 16
         Caption = 'Observa'#231#245'es'
@@ -224,35 +224,6 @@ object formTelaCadastro: TformTelaCadastro
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-      end
-      object EditNomeComputador: TDBEdit
-        Left = 25
-        Top = 112
-        Width = 158
-        Height = 21
-        DataField = 'nome_computador'
-        DataSource = DataModule1.dsTelaCadastro
-        MaxLength = 15
-        TabOrder = 0
-      end
-      object EditUsuarioResponsavel: TDBEdit
-        Left = 25
-        Top = 296
-        Width = 190
-        Height = 21
-        DataField = 'usuario_responsavel'
-        DataSource = DataModule1.dsTelaCadastro
-        MaxLength = 20
-        TabOrder = 1
-      end
-      object EditEnderecoIP: TDBEdit
-        Left = 207
-        Top = 224
-        Width = 156
-        Height = 21
-        DataField = 'endereco_ip'
-        DataSource = DataModule1.dsTelaCadastro
-        TabOrder = 2
       end
       object RadioDesktop: TRadioButton
         Left = 56
@@ -266,7 +237,7 @@ object formTelaCadastro: TformTelaCadastro
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 0
       end
       object RadioNotebook: TRadioButton
         Left = 224
@@ -280,67 +251,72 @@ object formTelaCadastro: TformTelaCadastro
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
+        TabOrder = 1
+      end
+      object EditNomeComputador: TEdit
+        Left = 24
+        Top = 112
+        Width = 161
+        Height = 21
+        TabOrder = 2
+      end
+      object EditUsuarioResponsavel: TEdit
+        Left = 24
+        Top = 296
+        Width = 161
+        Height = 21
+        TabOrder = 3
+      end
+      object EditEnderecoMAC: TEdit
+        Left = 24
+        Top = 224
+        Width = 161
+        Height = 21
         TabOrder = 4
       end
-      object DateCadastro: TDBEdit
-        Left = 247
-        Top = 296
-        Width = 118
+      object EditAnydesk: TEdit
+        Left = 208
+        Top = 112
+        Width = 161
         Height = 21
-        DataField = 'data_cadastro'
-        DataSource = DataModule1.dsTelaCadastro
         TabOrder = 5
       end
-      object MemoObservacoes: TDBMemo
-        Left = 440
-        Top = 96
-        Width = 309
-        Height = 241
-        DataField = 'observacoes'
-        DataSource = DataModule1.dsTelaCadastro
+      object EditEnderecoIP: TEdit
+        Left = 208
+        Top = 224
+        Width = 161
+        Height = 21
         TabOrder = 6
       end
-      object ComboUnidade: TDBLookupComboBox
-        Left = 25
-        Top = 160
-        Width = 158
+      object DateCadastro: TEdit
+        Left = 208
+        Top = 296
+        Width = 161
         Height = 21
-        DataField = 'unidade_id'
-        DataSource = DataModule1.dsTelaCadastro
-        KeyField = 'id'
-        ListField = 'nome'
-        ListSource = DataModule1.dsUnidades
+        ReadOnly = True
         TabOrder = 7
       end
-      object ComboSetor: TDBLookupComboBox
-        Left = 207
+      object ComboUnidade: TComboBox
+        Left = 24
         Top = 160
-        Width = 158
+        Width = 161
         Height = 21
-        DataField = 'setor_id'
-        DataSource = DataModule1.dsTelaCadastro
-        KeyField = 'id'
-        ListField = 'nome'
-        ListSource = DataModule1.dsSetores
+        ItemHeight = 13
         TabOrder = 8
       end
-      object EditEnderecoMAC: TDBEdit
-        Left = 25
-        Top = 224
-        Width = 152
+      object ComboSetor: TComboBox
+        Left = 208
+        Top = 160
+        Width = 161
         Height = 21
-        DataField = 'endereco_mac'
-        DataSource = DataModule1.dsTelaCadastro
+        ItemHeight = 13
         TabOrder = 9
-        OnKeyPress = EditEnderecoMACKeyPress
       end
-      object EditAnydesk: TDBEdit
-        Left = 209
+      object MemoObservacoes: TMemo
+        Left = 440
         Top = 112
-        Width = 152
-        Height = 21
-        DataField = 'anydesk'
-        DataSource = DataModule1.dsTelaCadastro
+        Width = 289
+        Height = 209
         TabOrder = 10
       end
     end
@@ -449,6 +425,7 @@ object formTelaCadastro: TformTelaCadastro
     Height = 21
     ItemHeight = 13
     TabOrder = 3
+    Visible = False
   end
   object EditPesquisa: TEdit
     Left = 8

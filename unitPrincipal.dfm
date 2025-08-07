@@ -1,10 +1,10 @@
-object DM: TDM
-  Left = 211
-  Top = 212
+object TelaPrincipal: TTelaPrincipal
+  Left = 254
+  Top = 118
   BorderStyle = bsSingle
   Caption = 'Sistema de Controle'
-  ClientHeight = 411
-  ClientWidth = 854
+  ClientHeight = 509
+  ClientWidth = 830
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,10 +18,9 @@ object DM: TDM
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 854
+    Width = 830
     Height = 97
     Align = alTop
-    Caption = 'Panel1'
     TabOrder = 0
     object BitBtn1: TBitBtn
       Left = 0

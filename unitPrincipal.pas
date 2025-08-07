@@ -7,7 +7,7 @@ uses
   Dialogs, StdCtrls, Buttons, ExtCtrls;
 
 type
-  TDM = class(TForm)
+  TTelaPrincipal = class(TForm)
     Panel1: TPanel;
     BitBtn1: TBitBtn;
     procedure BitBtn1Click(Sender: TObject);
@@ -20,7 +20,7 @@ type
 
  
 var
-  DM: TDM;
+  TelaPrincipal: TTelaPrincipal;
 
 implementation
 
@@ -28,13 +28,13 @@ uses unitTelaCadastro, unitDM;
 
 {$R *.dfm}
 
-procedure TDM.BitBtn1Click(Sender: TObject);
+procedure TTelaPrincipal.BitBtn1Click(Sender: TObject);
 begin
  formTelaCadastro.showModal; 
   end;
 
 
- procedure TDM.TrataExcecao(Sender: TObject; E: Exception);
+ procedure TTelaPrincipal.TrataExcecao(Sender: TObject; E: Exception);
 begin
   ShowMessage('Erro inesperado: ' + E.Message);
 end;
