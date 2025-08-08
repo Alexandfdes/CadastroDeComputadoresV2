@@ -1,6 +1,6 @@
 object formTelaCadastro: TformTelaCadastro
   Left = 254
-  Top = 128
+  Top = 109
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Tela de Cadastro'
@@ -94,7 +94,6 @@ object formTelaCadastro: TformTelaCadastro
     TabOrder = 0
     object TTabSheet: TTabSheet
       Caption = 'Cadastro'
-      OnShow = TTabSheetShow
       object Label1: TLabel
         Left = 25
         Top = 96

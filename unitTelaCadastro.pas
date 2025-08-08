@@ -45,7 +45,6 @@ type
     procedure SpeedButton4Click(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
-    procedure TTabSheetShow(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
@@ -117,34 +116,6 @@ end;
 
 
 
-procedure TformTelaCadastro.TTabSheetShow(Sender: TObject);
-begin
-
-
-// ComboBox1: nomes amigáveis para o usuário
- ComboBox1.Items.Clear;
-ComboBox1.Items.Add('  ');
-ComboBox1.Items.Add('Nome');
-ComboBox1.Items.Add('Data Cadastro');
-ComboBox1.Items.Add('Usuário');
-ComboBox1.Items.Add('Setor');
-ComboBox1.Items.Add('Unidade');
-ComboBox1.Items.Add('Tipo');
-ComboBox1.ItemIndex := 0; // Deixa o primeiro selecionado
-
-
-// ComboBox2: nomes dos campos reais do banco
-ComboBox2.Items.Clear;
-ComboBox2.Items.Add('  ');
-ComboBox2.Items.Add('nome_computador');
-ComboBox2.Items.Add('data_cadastro');
-ComboBox2.Items.Add('usuario_responsavel');
-ComboBox2.Items.Add('setor_id');
-ComboBox2.Items.Add('unidade_id');
-ComboBox2.Items.Add('tipo');
-ComboBox2.ItemIndex := 0;  // Deixa o primeiro selecionado
-end;
-
 
 
 procedure TformTelaCadastro.DBGrid1DblClick(Sender: TObject);
@@ -210,7 +181,7 @@ end;
 DataModule1.tabTelaCadastro.FieldByName('nome_computador').AsString := EditNomeComputador.Text;
 // ... e assim por diante para os outros campos
 
-DataModule1.tabTelaCadastro.Post;
+
 
   SalvarCampos;
   DataModule1.tabTelaCadastro.Post;
@@ -248,21 +219,55 @@ DataModule1.tabTelaCadastro.Append; // ou .Insert
     ComboSetor.Items.Add(DataModule1.tabSetores.FieldByName('nome').AsString);
     DataModule1.tabSetores.Next;
   end;
-  
+  begin
+
+
+// ComboBox1: nomes amigáveis para o usuário
+ ComboBox1.Items.Clear;
+ComboBox1.Items.Add('  ');
+ComboBox1.Items.Add('Nome');
+ComboBox1.Items.Add('Data Cadastro');
+ComboBox1.Items.Add('Usuário');
+ComboBox1.Items.Add('Setor');
+ComboBox1.Items.Add('Unidade');
+ComboBox1.Items.Add('Tipo');
+ComboBox1.ItemIndex := 0; // Deixa o primeiro selecionado
+
+
+// ComboBox2: nomes dos campos reais do banco
+ComboBox2.Items.Clear;
+ComboBox2.Items.Add('  ');
+ComboBox2.Items.Add('nome_computador');
+ComboBox2.Items.Add('data_cadastro');
+ComboBox2.Items.Add('usuario_responsavel');
+ComboBox2.Items.Add('setor_id');
+ComboBox2.Items.Add('unidade_id');
+ComboBox2.Items.Add('tipo');
+ComboBox2.ItemIndex := 0;  // Deixa o primeiro selecionado
+end;
 end;
 
 
+
 procedure TformTelaCadastro.CarregarCampos;
+var
+  nomeUnidade, nomeSetor: string;
 begin
   EditNomeComputador.Text    := DataModule1.tabTelaCadastro.FieldByName('nome_computador').AsString;
   EditEnderecoIP.Text        := DataModule1.tabTelaCadastro.FieldByName('endereco_ip').AsString;
   EditUsuarioResponsavel.Text:= DataModule1.tabTelaCadastro.FieldByName('usuario_responsavel').AsString;
   EditEnderecoMAC.Text       := DataModule1.tabTelaCadastro.FieldByName('endereco_mac').AsString;
   EditAnydesk.Text           := DataModule1.tabTelaCadastro.FieldByName('anydesk').AsString;
-  ComboSetor.Text            := DataModule1.tabTelaCadastro.FieldByName('setor_id').AsString;
-  ComboUnidade.Text          := DataModule1.tabTelaCadastro.FieldByName('unidade_id').AsString;
   DateCadastro.Text          := DataModule1.tabTelaCadastro.FieldByName('data_cadastro').AsString;
   MemoObservacoes.Text       := DataModule1.tabTelaCadastro.FieldByName('observacoes').AsString;
+
+  // Busca o nome da unidade pelo ID
+  nomeUnidade := VarToStr(DataModule1.tabUnidades.Lookup('id', DataModule1.tabTelaCadastro.FieldByName('unidade_id').AsInteger, 'nome'));
+  ComboUnidade.Text := nomeUnidade;
+
+  // Busca o nome do setor pelo ID
+  nomeSetor := VarToStr(DataModule1.tabSetores.Lookup('id', DataModule1.tabTelaCadastro.FieldByName('setor_id').AsInteger, 'nome'));
+  ComboSetor.Text := nomeSetor;
 
 end;
 
@@ -301,7 +306,7 @@ else
 end;
 procedure TformTelaCadastro.SpeedButton5Click(Sender: TObject);
 begin
-DataModule1.tabTelaCadastro.Append; // ou .Insert
+
    EditNomeComputador.Clear;
   EditEnderecoIP.Clear;
   EditUsuarioResponsavel.Clear;
@@ -319,25 +324,30 @@ DataModule1.tabTelaCadastro.Append; // ou .Insert
   RadioDesktop.Checked := False;
   RadioNotebook.Checked := False;
   EditNomeComputador.SetFocus;
-
+ DataModule1.tabTelaCadastro.Append; // ou .Insert
 end;
 
 procedure TformTelaCadastro.SpeedButton3Click(Sender: TObject);
+var
+  registroID: Variant;
 begin
-  try
-    if not DataModule1.tabTelaCadastro.IsEmpty then
-    begin
-      if MessageDlg('Tem certeza que deseja excluir este registro?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-      begin
-        DataModule1.tabTelaCadastro.Delete;
-        ShowMessage('Registro excluído com sucesso!');
-      end;
-    end
-    else
-      ShowMessage('Nenhum registro selecionado para excluir.');
-  except
-    on E: Exception do
-      ShowMessage('Não foi possível excluir o registro. Motivo: ' + E.Message);
+  registroID := DataModule1.tabTelaCadastro.FieldByName('id').Value;
+
+  if DataModule1.tabTelaCadastro.IsEmpty or VarIsNull(registroID) then
+  begin
+    ShowMessage('Nenhum registro selecionado para excluir.');
+    Exit;
+  end;
+
+  if MessageDlg('Tem certeza que deseja excluir este registro?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  begin
+    try
+      DataModule1.tabTelaCadastro.Delete;
+      ShowMessage('Registro excluído com sucesso!');
+    except
+      on E: Exception do
+        ShowMessage('Não foi possível excluir o registro. Motivo: ' + E.Message);
+    end;
   end;
 end;
 
