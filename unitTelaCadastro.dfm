@@ -1,11 +1,11 @@
 object formTelaCadastro: TformTelaCadastro
-  Left = 254
-  Top = 109
+  Left = 256
+  Top = 98
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Tela de Cadastro'
-  ClientHeight = 512
-  ClientWidth = 810
+  ClientHeight = 508
+  ClientWidth = 809
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -26,7 +26,7 @@ object formTelaCadastro: TformTelaCadastro
   end
   object SpeedButton3: TSpeedButton
     Left = 720
-    Top = 456
+    Top = 464
     Width = 69
     Height = 32
     Caption = 'Excluir'
@@ -40,7 +40,7 @@ object formTelaCadastro: TformTelaCadastro
   end
   object SpeedButton4: TSpeedButton
     Left = 544
-    Top = 456
+    Top = 464
     Width = 69
     Height = 32
     Caption = 'Incluir'
@@ -54,7 +54,7 @@ object formTelaCadastro: TformTelaCadastro
   end
   object SpeedButton5: TSpeedButton
     Left = 632
-    Top = 456
+    Top = 464
     Width = 69
     Height = 32
     Caption = 'Limpar'
@@ -84,7 +84,7 @@ object formTelaCadastro: TformTelaCadastro
     Top = 0
     Width = 809
     Height = 433
-    ActivePage = TTabSheet
+    ActivePage = TabSheet2
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -339,61 +339,68 @@ object formTelaCadastro: TformTelaCadastro
           item
             Expanded = False
             FieldName = 'nome_computador'
-            Width = 101
+            Title.Caption = 'Nome'
+            Width = 84
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'usuario_responsavel'
-            Width = 188
+            Title.Caption = 'Usuario'
+            Width = 146
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'setor_nome'
-            Width = 177
+            Title.Caption = 'Setor'
+            Width = 156
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'anydesk'
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'unidade_nome'
             Title.Caption = 'Unidade'
-            Width = 142
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'anydesk'
-            Width = 120
+            Width = 108
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'tipo'
-            Width = 113
+            Title.Caption = 'Tipo'
+            Width = 87
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'endereco_mac'
-            Width = 209
+            Title.Caption = 'MAC'
+            Width = 161
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'endereco_ip'
-            Width = 164
+            Title.Caption = 'IP'
+            Width = 119
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'observacoes'
+            Title.Caption = 'Observacoes'
             Width = 315
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'data_cadastro'
+            Title.Caption = 'Data'
             Width = 87
             Visible = True
           end>
@@ -424,7 +431,6 @@ object formTelaCadastro: TformTelaCadastro
     Height = 21
     ItemHeight = 13
     TabOrder = 3
-    Visible = False
   end
   object EditPesquisa: TEdit
     Left = 8

@@ -160,11 +160,6 @@ object DataModule1: TDataModule1
     object ADOQuery1data_cadastro: TDateTimeField
       FieldName = 'data_cadastro'
     end
-    object ADOQuery1anydesk: TStringField
-      FieldName = 'anydesk'
-      EditMask = '# ### ### ###;1;_'
-      Size = 15
-    end
     object ADOQuery1setor_nome: TStringField
       FieldName = 'setor_nome'
       Size = 50
@@ -178,6 +173,10 @@ object DataModule1: TDataModule1
     end
     object ADOQuery1setor_id: TIntegerField
       FieldName = 'setor_id'
+    end
+    object ADOQuery1anydesk: TStringField
+      FieldName = 'anydesk'
+      Size = 15
     end
   end
   object ADOConnection1: TADOConnection

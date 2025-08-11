@@ -39,12 +39,12 @@ type
     ADOQuery1tipo: TStringField;
     ADOQuery1observacoes: TMemoField;
     ADOQuery1data_cadastro: TDateTimeField;
-    ADOQuery1anydesk: TStringField;
     tabTelaCadastroanydesk: TStringField;
     ADOQuery1setor_nome: TStringField;
     ADOQuery1unidade_nome: TStringField;
     ADOQuery1unidade_id: TIntegerField;
     ADOQuery1setor_id: TIntegerField;
+    ADOQuery1anydesk: TStringField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

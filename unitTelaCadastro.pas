@@ -51,7 +51,7 @@ type
     procedure SpeedButton3Click(Sender: TObject);
     procedure EditEnderecoMACKeyPress(Sender: TObject; var Key: Char);
     procedure SpeedButton1Click(Sender: TObject);
-  
+
 
   private
   procedure CarregarCampos;
@@ -71,18 +71,29 @@ uses unitDM, unitPrincipal, unitListagem;
 
 
 
+
+
+
+
+
+
+
 procedure TformTelaCadastro.ComboBox1Change(Sender: TObject);
 begin
  combobox2.ItemIndex := combobox1.ItemIndex;
 end;
 
+
+
+
+
+
 procedure TformTelaCadastro.SpeedButton2Click(Sender: TObject);
 var
   campoBanco, valor, sql: string;
+   nomeUnidade, nomeSeto: Variant;
 begin
-  DataModule1.ADOQuery1.Open;
-  if DataModule1.ADOQuery1.RecordCount > 0 then
-    CarregarCampos;
+
 
   campoBanco := ComboBox2.Items[ComboBox1.ItemIndex]; // pega o campo real
   valor := EditPesquisa.Text; // O que o usuário digitou (ex: "Dell")
@@ -92,26 +103,44 @@ begin
     Exit;
   end;
 
+
+
   sql := 'SELECT t.*, s.nome AS setor_nome, u.nome AS unidade_nome ' +
     'FROM teladecadastro t ' +
     'LEFT JOIN setores s ON t.setor_id = s.id ' +
     'LEFT JOIN unidades u ON t.unidade_id = u.id ';
 
+
+
+
   if valor <> '' then
+  begin
     if CheckBox1.Checked then
       sql := sql + ' WHERE ' + campoBanco + ' LIKE ' + QuotedStr('%' + valor + '%')
     else
       sql := sql + ' WHERE ' + campoBanco + ' = ' + QuotedStr(valor);
+      end;
 
   DataModule1.ADOQuery1.Close;
   DataModule1.ADOQuery1.SQL.Text := sql;
+
   DataModule1.ADOQuery1.Open;
 
   TTabSheet2.ActivePage := TabSheet2;
 
   if DataModule1.ADOQuery1.RecordCount = 0 then
     ShowMessage('Registro não encontrado!');
+
 end;
+
+
+
+
+
+
+
+
+
 
 
 
@@ -194,6 +223,8 @@ end;
 
 
 procedure TformTelaCadastro.FormShow(Sender: TObject);
+var
+  valor: string;
 begin
 DataModule1.tabTelaCadastro.Append; // ou .Insert
  DateCadastro.Text := FormatDateTime('dd/mm/yyyy', Now);
@@ -240,10 +271,15 @@ ComboBox2.Items.Add('  ');
 ComboBox2.Items.Add('nome_computador');
 ComboBox2.Items.Add('data_cadastro');
 ComboBox2.Items.Add('usuario_responsavel');
-ComboBox2.Items.Add('setor_id');
-ComboBox2.Items.Add('unidade_id');
+ComboBox2.Items.Add('s.nome');
+ComboBox2.Items.Add('u.nome');
 ComboBox2.Items.Add('tipo');
 ComboBox2.ItemIndex := 0;  // Deixa o primeiro selecionado
+
+
+
+
+
 end;
 end;
 
