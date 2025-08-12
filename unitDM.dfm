@@ -135,11 +135,6 @@ object DataModule1: TDataModule1
       FieldName = 'nome_computador'
       Size = 10
     end
-    object ADOQuery1endereco_mac: TStringField
-      FieldName = 'endereco_mac'
-      EditMask = 'AA-AA-AA-AA-AA-AA;1;_'
-      Size = 50
-    end
     object ADOQuery1usuario_responsavel: TStringField
       FieldName = 'usuario_responsavel'
       Size = 50
@@ -177,6 +172,10 @@ object DataModule1: TDataModule1
     object ADOQuery1anydesk: TStringField
       FieldName = 'anydesk'
       Size = 15
+    end
+    object ADOQuery1endereco_mac: TStringField
+      FieldName = 'endereco_mac'
+      Size = 50
     end
   end
   object ADOConnection1: TADOConnection

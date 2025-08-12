@@ -1,10 +1,10 @@
 object TelaPrincipal: TTelaPrincipal
-  Left = 254
-  Top = 118
+  Left = 242
+  Top = 305
   BorderStyle = bsSingle
   Caption = 'Sistema de Controle'
-  ClientHeight = 509
-  ClientWidth = 830
+  ClientHeight = 495
+  ClientWidth = 809
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,12 +13,13 @@ object TelaPrincipal: TTelaPrincipal
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  WindowState = wsMaximized
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 830
+    Width = 809
     Height = 97
     Align = alTop
     TabOrder = 0

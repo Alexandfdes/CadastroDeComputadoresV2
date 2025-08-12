@@ -51,6 +51,7 @@ type
     procedure SpeedButton3Click(Sender: TObject);
     procedure EditEnderecoMACKeyPress(Sender: TObject; var Key: Char);
     procedure SpeedButton1Click(Sender: TObject);
+    procedure LimparCampos;
 
 
   private
@@ -91,7 +92,7 @@ end;
 procedure TformTelaCadastro.SpeedButton2Click(Sender: TObject);
 var
   campoBanco, valor, sql: string;
-   nomeUnidade, nomeSeto: Variant;
+
 begin
 
 
@@ -189,13 +190,10 @@ if not (DataModule1.tabTelaCadastro.State in [dsEdit, dsInsert]) then
   else if RadioNotebook.Checked then
     DataModule1.tabTelaCadastro.FieldByName('tipo').AsString := 'Notebook';
 
-  // Garante que está em modo edição/insert
-  if not (DataModule1.tabTelaCadastro.State in [dsEdit, dsInsert]) then
-    DataModule1.tabTelaCadastro.Edit;
 
- if DataModule1.tabTelaCadastro.Locate('endereco_mac', EditEnderecoMAC.Text, []) then
+ if DataModule1.tabTelaCadastro.Locate('nome_computador', EditnomeComputador.Text, []) then
 begin
-  // Já existe um registro com esse MAC, então atualiza os campos
+  // Já existe um registro com esse nome, então atualiza os campos
   DataModule1.tabTelaCadastro.Edit;
   // Atualize os campos como normalmente faria ao editar
 end
@@ -223,8 +221,7 @@ end;
 
 
 procedure TformTelaCadastro.FormShow(Sender: TObject);
-var
-  valor: string;
+
 begin
 DataModule1.tabTelaCadastro.Append; // ou .Insert
  DateCadastro.Text := FormatDateTime('dd/mm/yyyy', Now);
@@ -340,10 +337,13 @@ else
   DataModule1.tabTelaCadastro.FieldByName('data_cadastro').AsDateTime := StrToDate(DateCadastro.Text);
   DataModule1.tabTelaCadastro.FieldByName('observacoes').AsString          := MemoObservacoes.Text;
 end;
-procedure TformTelaCadastro.SpeedButton5Click(Sender: TObject);
+
+
+
+procedure TformTelaCadastro.LimparCampos;
 begin
 
-   EditNomeComputador.Clear;
+  EditNomeComputador.Clear;
   EditEnderecoIP.Clear;
   EditUsuarioResponsavel.Clear;
   EditEnderecoMAC.Clear;
@@ -360,8 +360,26 @@ begin
   RadioDesktop.Checked := False;
   RadioNotebook.Checked := False;
   EditNomeComputador.SetFocus;
+end;
+
+
+
+ procedure TformTelaCadastro.SpeedButton5Click(Sender: TObject);
+ begin
+ LimparCampos;
  DataModule1.tabTelaCadastro.Append; // ou .Insert
 end;
+
+
+
+
+
+
+
+
+
+
+
 
 procedure TformTelaCadastro.SpeedButton3Click(Sender: TObject);
 var
@@ -385,6 +403,7 @@ begin
         ShowMessage('Não foi possível excluir o registro. Motivo: ' + E.Message);
     end;
   end;
+  LimparCampos;
 end;
 
 

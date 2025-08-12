@@ -33,7 +33,6 @@ type
     ADOConnection1: TADOConnection;
     ADOQuery1id: TAutoIncField;
     ADOQuery1nome_computador: TStringField;
-    ADOQuery1endereco_mac: TStringField;
     ADOQuery1endereco_ip: TStringField;
     ADOQuery1usuario_responsavel: TStringField;
     ADOQuery1tipo: TStringField;
@@ -45,6 +44,7 @@ type
     ADOQuery1unidade_id: TIntegerField;
     ADOQuery1setor_id: TIntegerField;
     ADOQuery1anydesk: TStringField;
+    ADOQuery1endereco_mac: TStringField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

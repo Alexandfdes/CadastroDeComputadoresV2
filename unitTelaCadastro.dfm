@@ -1,6 +1,6 @@
 object formTelaCadastro: TformTelaCadastro
-  Left = 256
-  Top = 98
+  Left = 218
+  Top = 152
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Tela de Cadastro'
@@ -83,7 +83,7 @@ object formTelaCadastro: TformTelaCadastro
     Left = 0
     Top = 0
     Width = 809
-    Height = 433
+    Height = 441
     ActivePage = TabSheet2
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -188,7 +188,7 @@ object formTelaCadastro: TformTelaCadastro
       object Label8: TLabel
         Left = 25
         Top = 32
-        Width = 324
+        Width = 344
         Height = 29
         Caption = 'Cadastro De Computadores'
         Font.Charset = DEFAULT_CHARSET
@@ -354,7 +354,7 @@ object formTelaCadastro: TformTelaCadastro
             Expanded = False
             FieldName = 'setor_nome'
             Title.Caption = 'Setor'
-            Width = 156
+            Width = 138
             Visible = True
           end
           item
@@ -380,28 +380,28 @@ object formTelaCadastro: TformTelaCadastro
             Expanded = False
             FieldName = 'endereco_mac'
             Title.Caption = 'MAC'
-            Width = 161
+            Width = 118
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'endereco_ip'
             Title.Caption = 'IP'
-            Width = 119
+            Width = 95
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'observacoes'
             Title.Caption = 'Observacoes'
-            Width = 315
+            Width = 357
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'data_cadastro'
             Title.Caption = 'Data'
-            Width = 87
+            Width = 122
             Visible = True
           end>
       end
@@ -419,18 +419,25 @@ object formTelaCadastro: TformTelaCadastro
   object CheckBox1: TCheckBox
     Left = 240
     Top = 456
-    Width = 97
+    Width = 105
     Height = 17
     Caption = 'Que contenha'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
     TabOrder = 2
   end
   object ComboBox2: TComboBox
-    Left = 336
+    Left = 368
     Top = 456
     Width = 145
     Height = 21
     ItemHeight = 13
     TabOrder = 3
+    Visible = False
   end
   object EditPesquisa: TEdit
     Left = 8
