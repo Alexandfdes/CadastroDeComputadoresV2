@@ -45,6 +45,19 @@ type
     ADOQuery1setor_id: TIntegerField;
     ADOQuery1anydesk: TStringField;
     ADOQuery1endereco_mac: TStringField;
+    tabCadastroImpressoras: TADOTable;
+    AutoIncField1: TAutoIncField;
+    StringField1: TStringField;
+    IntegerField1: TIntegerField;
+    IntegerField2: TIntegerField;
+    StringField2: TStringField;
+    StringField3: TStringField;
+    StringField4: TStringField;
+    StringField5: TStringField;
+    MemoField1: TMemoField;
+    DateTimeField1: TDateTimeField;
+    StringField6: TStringField;
+    DataSource1: TDataSource;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

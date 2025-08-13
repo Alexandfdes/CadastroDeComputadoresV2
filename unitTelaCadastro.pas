@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Mask, DBCtrls, Buttons, DB, Menus, ComCtrls, Grids,
-  DBGrids;
+  DBGrids, JPEG, ExtCtrls;
 
 type
   TformTelaCadastro = class(TForm)
@@ -52,6 +52,7 @@ type
     procedure EditEnderecoMACKeyPress(Sender: TObject; var Key: Char);
     procedure SpeedButton1Click(Sender: TObject);
     procedure LimparCampos;
+  
 
 
   private
@@ -93,6 +94,7 @@ procedure TformTelaCadastro.SpeedButton2Click(Sender: TObject);
 var
   campoBanco, valor, sql: string;
 
+
 begin
 
 
@@ -131,6 +133,7 @@ begin
 
   if DataModule1.ADOQuery1.RecordCount = 0 then
     ShowMessage('Registro não encontrado!');
+
 
 end;
 

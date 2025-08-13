@@ -1,11 +1,9 @@
-object formTelaCadastro: TformTelaCadastro
-  Left = 279
-  Top = 124
-  BorderIcons = [biSystemMenu]
-  BorderStyle = bsSingle
-  Caption = 'Tela de Cadastro'
-  ClientHeight = 507
-  ClientWidth = 809
+object formTelaCadastroPerifericos: TformTelaCadastroPerifericos
+  Left = 292
+  Top = 131
+  Width = 825
+  Height = 509
+  Caption = 'Tela Cadastro de Perif'#233'ricos'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,15 +11,13 @@ object formTelaCadastro: TformTelaCadastro
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
-  Position = poMainFormCenter
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object SpeedButton2: TSpeedButton
     Left = 240
-    Top = 480
-    Width = 23
-    Height = 22
+    Top = 440
+    Width = 24
+    Height = 23
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
     Font.Height = -11
@@ -81,13 +77,12 @@ object formTelaCadastro: TformTelaCadastro
       B8FFBEBEBEFFCACACAFFC3C3C3FFC2C2C2FFC3C3C3FFC0C0C0FFB5B5B5FFB4B4
       B4FFCFCFCFFFBABABAFFB9B9B9FFC7C7C7FFC0C0C0FFB4B4B4FF}
     ParentFont = False
-    OnClick = SpeedButton2Click
   end
   object SpeedButton3: TSpeedButton
     Left = 720
-    Top = 464
-    Width = 69
-    Height = 32
+    Top = 424
+    Width = 70
+    Height = 33
     Caption = 'Excluir'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -95,13 +90,12 @@ object formTelaCadastro: TformTelaCadastro
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
     ParentFont = False
-    OnClick = SpeedButton3Click
   end
   object SpeedButton4: TSpeedButton
     Left = 544
-    Top = 464
-    Width = 69
-    Height = 32
+    Top = 424
+    Width = 70
+    Height = 33
     Caption = 'Incluir'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -109,13 +103,12 @@ object formTelaCadastro: TformTelaCadastro
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
     ParentFont = False
-    OnClick = SpeedButton4Click
   end
   object SpeedButton5: TSpeedButton
     Left = 632
-    Top = 464
-    Width = 69
-    Height = 32
+    Top = 424
+    Width = 70
+    Height = 33
     Caption = 'Limpar'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -123,13 +116,12 @@ object formTelaCadastro: TformTelaCadastro
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
     ParentFont = False
-    OnClick = SpeedButton5Click
   end
   object Label10: TLabel
     Left = 8
-    Top = 456
-    Width = 75
-    Height = 13
+    Top = 416
+    Width = 76
+    Height = 14
     Caption = 'Procurar por:'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -142,7 +134,7 @@ object formTelaCadastro: TformTelaCadastro
     Left = 0
     Top = 0
     Width = 809
-    Height = 433
+    Height = 393
     ActivePage = TTabSheet
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -158,9 +150,9 @@ object formTelaCadastro: TformTelaCadastro
       object Label1: TLabel
         Left = 25
         Top = 96
-        Width = 122
+        Width = 116
         Height = 13
-        Caption = 'Nome do Computador'
+        Caption = 'Nome da Impressora'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -223,9 +215,9 @@ object formTelaCadastro: TformTelaCadastro
       object Label6: TLabel
         Left = 207
         Top = 96
-        Width = 51
+        Width = 37
         Height = 13
-        Caption = 'AnyDesk'
+        Caption = 'Serial '
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -249,9 +241,9 @@ object formTelaCadastro: TformTelaCadastro
       object Label8: TLabel
         Left = 25
         Top = 32
-        Width = 324
+        Width = 297
         Height = 29
-        Caption = 'Cadastro De Computadores'
+        Caption = 'Cadastro De Impressoras'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -23
@@ -285,68 +277,40 @@ object formTelaCadastro: TformTelaCadastro
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object RadioDesktop: TRadioButton
-        Left = 56
-        Top = 352
-        Width = 117
-        Height = 33
-        Caption = 'Desktop'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 0
-      end
-      object RadioNotebook: TRadioButton
-        Left = 224
-        Top = 352
-        Width = 117
-        Height = 33
-        Caption = 'Notebook'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 1
-      end
       object EditNomeComputador: TEdit
         Left = 24
         Top = 112
         Width = 161
         Height = 21
-        TabOrder = 2
+        TabOrder = 0
       end
       object EditUsuarioResponsavel: TEdit
         Left = 24
         Top = 296
         Width = 161
         Height = 21
-        TabOrder = 3
+        TabOrder = 1
       end
       object EditEnderecoMAC: TEdit
         Left = 24
         Top = 224
         Width = 161
         Height = 21
-        TabOrder = 4
+        TabOrder = 2
       end
       object EditAnydesk: TEdit
         Left = 208
         Top = 112
         Width = 161
         Height = 21
-        TabOrder = 5
+        TabOrder = 3
       end
       object EditEnderecoIP: TEdit
         Left = 208
         Top = 224
         Width = 161
         Height = 21
-        TabOrder = 6
+        TabOrder = 4
       end
       object DateCadastro: TEdit
         Left = 208
@@ -354,7 +318,7 @@ object formTelaCadastro: TformTelaCadastro
         Width = 161
         Height = 21
         ReadOnly = True
-        TabOrder = 7
+        TabOrder = 5
       end
       object ComboUnidade: TComboBox
         Left = 24
@@ -362,7 +326,7 @@ object formTelaCadastro: TformTelaCadastro
         Width = 161
         Height = 21
         ItemHeight = 13
-        TabOrder = 8
+        TabOrder = 6
       end
       object ComboSetor: TComboBox
         Left = 208
@@ -370,14 +334,14 @@ object formTelaCadastro: TformTelaCadastro
         Width = 161
         Height = 21
         ItemHeight = 13
-        TabOrder = 9
+        TabOrder = 7
       end
       object MemoObservacoes: TMemo
         Left = 440
         Top = 112
         Width = 289
         Height = 209
-        TabOrder = 10
+        TabOrder = 8
       end
     end
     object TabSheet2: TTabSheet
@@ -395,93 +359,22 @@ object formTelaCadastro: TformTelaCadastro
         TitleFont.Height = -11
         TitleFont.Name = 'Default'
         TitleFont.Style = []
-        OnDblClick = DBGrid1DblClick
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'nome_computador'
-            Title.Caption = 'Nome'
-            Width = 84
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'usuario_responsavel'
-            Title.Caption = 'Usuario'
-            Width = 146
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'setor_nome'
-            Title.Caption = 'Setor'
-            Width = 138
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'anydesk'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'unidade_nome'
-            Title.Caption = 'Unidade'
-            Width = 108
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'tipo'
-            Title.Caption = 'Tipo'
-            Width = 87
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'endereco_mac'
-            Title.Caption = 'MAC'
-            Width = 118
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'endereco_ip'
-            Title.Caption = 'IP'
-            Width = 95
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'observacoes'
-            Title.Caption = 'Observacoes'
-            Width = 357
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'data_cadastro'
-            Title.Caption = 'Data'
-            Width = 122
-            Visible = True
-          end>
       end
     end
   end
   object ComboBox1: TComboBox
     Left = 88
-    Top = 456
-    Width = 145
+    Top = 416
+    Width = 146
     Height = 21
     ItemHeight = 13
     TabOrder = 1
-    OnChange = ComboBox1Change
   end
   object CheckBox1: TCheckBox
     Left = 240
-    Top = 456
-    Width = 105
-    Height = 17
+    Top = 416
+    Width = 106
+    Height = 18
     Caption = 'Que contenha'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -493,8 +386,8 @@ object formTelaCadastro: TformTelaCadastro
   end
   object ComboBox2: TComboBox
     Left = 368
-    Top = 456
-    Width = 145
+    Top = 416
+    Width = 146
     Height = 21
     ItemHeight = 13
     TabOrder = 3
@@ -502,9 +395,9 @@ object formTelaCadastro: TformTelaCadastro
   end
   object EditPesquisa: TEdit
     Left = 8
-    Top = 480
-    Width = 225
-    Height = 21
+    Top = 440
+    Width = 226
+    Height = 22
     TabOrder = 4
   end
 end

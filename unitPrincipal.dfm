@@ -1,6 +1,6 @@
 object TelaPrincipal: TTelaPrincipal
-  Left = 242
-  Top = 305
+  Left = 274
+  Top = 129
   BorderStyle = bsSingle
   Caption = 'Sistema de Controle'
   ClientHeight = 495
@@ -23,14 +23,31 @@ object TelaPrincipal: TTelaPrincipal
     Height = 97
     Align = alTop
     TabOrder = 0
-    object BitBtn1: TBitBtn
+    object EditComputadores: TBitBtn
       Left = 0
       Top = 0
       Width = 121
       Height = 97
-      Caption = 'Cadastro'
+      Caption = 'Computadores'
       TabOrder = 0
-      OnClick = BitBtn1Click
+      OnClick = EditCompuadoresClick
     end
+    object EditImpressoras: TBitBtn
+      Left = 120
+      Top = 0
+      Width = 121
+      Height = 97
+      Caption = 'Impressoras'
+      TabOrder = 1
+      OnClick = EditImpressorasClick
+    end
+  end
+  object EditRoteadores: TBitBtn
+    Left = 240
+    Top = 0
+    Width = 121
+    Height = 97
+    Caption = 'Roteadores'
+    TabOrder = 1
   end
 end

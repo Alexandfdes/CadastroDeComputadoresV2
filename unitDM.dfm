@@ -3,8 +3,8 @@ object DataModule1: TDataModule1
   OnCreate = DataModuleCreate
   Left = 371
   Top = 190
-  Height = 343
-  Width = 459
+  Height = 392
+  Width = 557
   object conexao: TADOConnection
     Connected = True
     ConnectionString = 
@@ -22,8 +22,8 @@ object DataModule1: TDataModule1
     CursorType = ctStatic
     MasterSource = dsSetores
     TableName = 'unidades'
-    Left = 184
-    Top = 32
+    Left = 352
+    Top = 40
     object tabUnidadesid: TIntegerField
       FieldName = 'id'
     end
@@ -37,8 +37,8 @@ object DataModule1: TDataModule1
     Connection = conexao
     CursorType = ctStatic
     TableName = 'setores'
-    Left = 264
-    Top = 32
+    Left = 432
+    Top = 40
     object tabSetoresid: TIntegerField
       FieldName = 'id'
     end
@@ -49,13 +49,13 @@ object DataModule1: TDataModule1
   end
   object dsUnidades: TDataSource
     DataSet = tabUnidades
-    Left = 200
-    Top = 120
+    Left = 368
+    Top = 128
   end
   object dsSetores: TDataSource
     DataSet = tabSetores
-    Left = 272
-    Top = 120
+    Left = 440
+    Top = 128
   end
   object tabTelaCadastro: TADOTable
     Connection = conexao
@@ -114,8 +114,8 @@ object DataModule1: TDataModule1
   end
   object dsQuery1: TDataSource
     DataSet = ADOQuery1
-    Left = 272
-    Top = 192
+    Left = 440
+    Top = 200
   end
   object ADOQuery1: TADOQuery
     Connection = ADOConnection1
@@ -125,8 +125,8 @@ object DataModule1: TDataModule1
       'FROM teladecadastro t'
       'LEFT JOIN setores s ON t.setor_id = s.id'
       'LEFT JOIN unidades u ON t.unidade_id = u.id')
-    Left = 208
-    Top = 192
+    Left = 376
+    Top = 200
     object ADOQuery1id: TAutoIncField
       FieldName = 'id'
       ReadOnly = True
@@ -186,7 +186,62 @@ object DataModule1: TDataModule1
       'ESKTOP-P6GK0P9\SQLEXPRESS'
     LoginPrompt = False
     Provider = 'SQLOLEDB.1'
-    Left = 104
-    Top = 192
+    Left = 184
+    Top = 208
+  end
+  object tabCadastroImpressoras: TADOTable
+    Connection = conexao
+    CursorType = ctStatic
+    TableName = 'telacadastroimpressoras'
+    Left = 216
+    Top = 32
+    object AutoIncField1: TAutoIncField
+      FieldName = 'id'
+      ReadOnly = True
+    end
+    object StringField1: TStringField
+      FieldName = 'nome_computador'
+      Size = 10
+    end
+    object IntegerField1: TIntegerField
+      FieldName = 'unidade_id'
+    end
+    object IntegerField2: TIntegerField
+      FieldName = 'setor_id'
+    end
+    object StringField2: TStringField
+      FieldName = 'endereco_mac'
+      EditMask = 'AA-AA-AA-AA-AA-AA;1;_'
+      Size = 50
+    end
+    object StringField3: TStringField
+      FieldName = 'endereco_ip'
+      EditMask = 'AA.AA.A.AAA;1;_'
+      Size = 50
+    end
+    object StringField4: TStringField
+      FieldName = 'usuario_responsavel'
+      Size = 50
+    end
+    object StringField5: TStringField
+      FieldName = 'tipo'
+      Size = 50
+    end
+    object MemoField1: TMemoField
+      FieldName = 'observacoes'
+      BlobType = ftMemo
+    end
+    object DateTimeField1: TDateTimeField
+      FieldName = 'data_cadastro'
+    end
+    object StringField6: TStringField
+      FieldName = 'anydesk'
+      Size = 15
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = tabTelaCadastro
+    Left = 224
+    Top = 120
   end
 end
