@@ -1,6 +1,6 @@
 object formTelaCadastro: TformTelaCadastro
-  Left = 279
-  Top = 124
+  Left = -1291
+  Top = 219
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Tela de Cadastro'

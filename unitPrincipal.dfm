@@ -1,6 +1,6 @@
 object TelaPrincipal: TTelaPrincipal
-  Left = 274
-  Top = 129
+  Left = 328
+  Top = 141
   BorderStyle = bsSingle
   Caption = 'Sistema de Controle'
   ClientHeight = 495

@@ -67,7 +67,7 @@ var
 
 implementation
 
-uses unitDM, unitPrincipal, unitListagem;
+uses unitDM, unitPrincipal;
 
 {$R *.dfm}
 

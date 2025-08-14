@@ -1,6 +1,6 @@
 object formTelaCadastroPerifericos: TformTelaCadastroPerifericos
-  Left = 292
-  Top = 131
+  Left = -894
+  Top = 167
   Width = 825
   Height = 509
   Caption = 'Tela Cadastro de Perif'#233'ricos'
@@ -11,6 +11,8 @@ object formTelaCadastroPerifericos: TformTelaCadastroPerifericos
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object SpeedButton2: TSpeedButton
@@ -77,6 +79,7 @@ object formTelaCadastroPerifericos: TformTelaCadastroPerifericos
       B8FFBEBEBEFFCACACAFFC3C3C3FFC2C2C2FFC3C3C3FFC0C0C0FFB5B5B5FFB4B4
       B4FFCFCFCFFFBABABAFFB9B9B9FFC7C7C7FFC0C0C0FFB4B4B4FF}
     ParentFont = False
+    OnClick = SpeedButton2Click
   end
   object SpeedButton3: TSpeedButton
     Left = 720
@@ -103,6 +106,7 @@ object formTelaCadastroPerifericos: TformTelaCadastroPerifericos
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
     ParentFont = False
+    OnClick = SpeedButton4Click
   end
   object SpeedButton5: TSpeedButton
     Left = 632
@@ -116,12 +120,13 @@ object formTelaCadastroPerifericos: TformTelaCadastroPerifericos
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
     ParentFont = False
+    OnClick = SpeedButton5Click
   end
   object Label10: TLabel
     Left = 8
     Top = 416
-    Width = 76
-    Height = 14
+    Width = 75
+    Height = 13
     Caption = 'Procurar por:'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -298,7 +303,7 @@ object formTelaCadastroPerifericos: TformTelaCadastroPerifericos
         Height = 21
         TabOrder = 2
       end
-      object EditAnydesk: TEdit
+      object EditSerial: TEdit
         Left = 208
         Top = 112
         Width = 161
@@ -359,6 +364,7 @@ object formTelaCadastroPerifericos: TformTelaCadastroPerifericos
         TitleFont.Height = -11
         TitleFont.Name = 'Default'
         TitleFont.Style = []
+        OnDblClick = DBGrid1DblClick
       end
     end
   end
@@ -369,6 +375,7 @@ object formTelaCadastroPerifericos: TformTelaCadastroPerifericos
     Height = 21
     ItemHeight = 13
     TabOrder = 1
+    OnChange = ComboBox1Change
   end
   object CheckBox1: TCheckBox
     Left = 240
@@ -397,7 +404,7 @@ object formTelaCadastroPerifericos: TformTelaCadastroPerifericos
     Left = 8
     Top = 440
     Width = 226
-    Height = 22
+    Height = 21
     TabOrder = 4
   end
 end
