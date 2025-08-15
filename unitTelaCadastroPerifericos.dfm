@@ -1,6 +1,6 @@
 object formTelaCadastroPerifericos: TformTelaCadastroPerifericos
-  Left = -894
-  Top = 167
+  Left = -958
+  Top = 174
   Width = 825
   Height = 509
   Caption = 'Tela Cadastro de Perif'#233'ricos'
@@ -11,7 +11,6 @@ object formTelaCadastroPerifericos: TformTelaCadastroPerifericos
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
-  OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -140,7 +139,7 @@ object formTelaCadastroPerifericos: TformTelaCadastroPerifericos
     Top = 0
     Width = 809
     Height = 393
-    ActivePage = TTabSheet
+    ActivePage = TabSheet2
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -282,7 +281,7 @@ object formTelaCadastroPerifericos: TformTelaCadastroPerifericos
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object EditNomeComputador: TEdit
+      object EditNomeImpressora: TEdit
         Left = 24
         Top = 112
         Width = 161
@@ -357,7 +356,7 @@ object formTelaCadastroPerifericos: TformTelaCadastroPerifericos
         Top = 0
         Width = 809
         Height = 401
-        DataSource = DataModule1.dsQuery1
+        DataSource = DataModule1.dsQuery2
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -365,6 +364,61 @@ object formTelaCadastroPerifericos: TformTelaCadastroPerifericos
         TitleFont.Name = 'Default'
         TitleFont.Style = []
         OnDblClick = DBGrid1DblClick
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'nome_impressora'
+            Title.Caption = 'Nome'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'usuario_responsavel'
+            Title.Caption = 'Usuario'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'setor_nome'
+            Title.Caption = 'Setor'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'serial'
+            Title.Caption = 'Serial'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'unidade_nome'
+            Title.Caption = 'Unidade'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'endereco_mac'
+            Title.Caption = 'MAC'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'endereco_ip'
+            Title.Caption = 'IP'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'observacoes'
+            Title.Caption = 'Observacoes'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'data_cadastro'
+            Title.Caption = 'Data'
+            Visible = True
+          end>
       end
     end
   end
@@ -398,7 +452,6 @@ object formTelaCadastroPerifericos: TformTelaCadastroPerifericos
     Height = 21
     ItemHeight = 13
     TabOrder = 3
-    Visible = False
   end
   object EditPesquisa: TEdit
     Left = 8

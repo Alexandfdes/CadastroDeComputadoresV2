@@ -207,10 +207,6 @@ begin
   // Preencha os campos normalmente
 end;
 
-// Preencha os campos normalmente (em ambos os casos)
-DataModule1.tabTelaCadastro.FieldByName('nome_computador').AsString := EditNomeComputador.Text;
-// ... e assim por diante para os outros campos
-
 
 
   SalvarCampos;
@@ -226,6 +222,9 @@ end;
 procedure TformTelaCadastro.FormShow(Sender: TObject);
 
 begin
+DataModule1.tabTelaCadastro.Open;
+DataModule1.tabUnidades.Open;
+DataModule1.tabSetores.Open;
 DataModule1.tabTelaCadastro.Append; // ou .Insert
  DateCadastro.Text := FormatDateTime('dd/mm/yyyy', Now);
   DataModule1.tabTelaCadastro.Open;

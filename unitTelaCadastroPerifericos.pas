@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Grids, DBGrids, ComCtrls, Buttons;
+  Dialogs, StdCtrls, Mask, DBCtrls, Buttons, DB, Menus, ComCtrls, Grids,
+  DBGrids, JPEG, ExtCtrls;
 
 type
   TformTelaCadastroPerifericos = class(TForm)
@@ -24,7 +25,7 @@ type
     Label8: TLabel;
     Label9: TLabel;
     Label7: TLabel;
-    EditNomeComputador: TEdit;
+    EditNomeImpressora: TEdit;
     EditUsuarioResponsavel: TEdit;
     EditEnderecoMAC: TEdit;
     EditSerial: TEdit;
@@ -43,13 +44,13 @@ type
     procedure SpeedButton2Click(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
     procedure SpeedButton4Click(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure CarregarCampos(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
+
   private
-   procedure CarregarCamposImpressoras;
-    procedure SalvarCampos;
+    procedure CarregarCamposImpressoras;
+    procedure SalvarCamposImpressoras;
+    procedure LimparCamposImpressoras;
   public
     { Public declarations }
   end;
@@ -102,7 +103,7 @@ begin
 
 
   sql := 'SELECT timp.*, s.nome AS setor_nome, u.nome AS unidade_nome ' +
-    'FROM teladecadastroimpressoras timp ' +
+    'FROM telacadastroimpressoras timp ' +
     'LEFT JOIN setores s ON timp.setor_id = s.id ' +
     'LEFT JOIN unidades u ON timp.unidade_id = u.id ';
 
@@ -117,14 +118,14 @@ begin
       sql := sql + ' WHERE ' + campoBanco + ' = ' + QuotedStr(valor);
       end;
 
-  DataModule1.ADOQuery1.Close;
-  DataModule1.ADOQuery1.SQL.Text := sql;
+  DataModule1.ADOQuery2.Close;
+  DataModule1.ADOQuery2.SQL.Text := sql;
 
-  DataModule1.ADOQuery1.Open;
+  DataModule1.ADOQuery2.Open;
 
   TTabSheet2.ActivePage := TabSheet2;
 
-  if DataModule1.ADOQuery1.RecordCount = 0 then
+  if DataModule1.ADOQuery2.RecordCount = 0 then
     ShowMessage('Registro não encontrado!');
 
 
@@ -143,13 +144,13 @@ procedure TformTelaCadastroPerifericos.DBGrid1DblClick(Sender: TObject);
 var
   id: Integer;
 begin
-  if not DataModule1.ADOQuery1.IsEmpty then
+  if not DataModule1.ADOQuery2.IsEmpty then
   begin
-    id := DataModule1.ADOQuery1.FieldByName('id').AsInteger;
+    id := DataModule1.ADOQuery2.FieldByName('id').AsInteger;
     DataModule1.tabCadastroImpressoras.Locate('id', id, []);
     CarregarCamposImpressoras; // <-- aqui!
     TTabSheet2.ActivePage := TTabSheet; // volta para aba Cadastro
-    EditNomeComputador.SetFocus;
+    EditNomeImpressora.SetFocus;
 
   end;
 end;
@@ -165,7 +166,7 @@ procedure TformTelaCadastroPerifericos.CarregarCamposImpressoras;
 var
   nomeUnidade, nomeSetor: string;
 begin
-  EditNomeComputador.Text    := DataModule1.tabCadastroImpressoras.FieldByName('nome_computador').AsString;
+  EditNomeImpressora.Text    := DataModule1.tabCadastroImpressoras.FieldByName('nome_Impressora').AsString;
   EditEnderecoIP.Text        := DataModule1.tabCadastroImpressoras.FieldByName('endereco_ip').AsString;
   EditUsuarioResponsavel.Text:= DataModule1.tabCadastroImpressoras.FieldByName('usuario_responsavel').AsString;
   EditEnderecoMAC.Text       := DataModule1.tabCadastroImpressoras.FieldByName('endereco_mac').AsString;
@@ -174,11 +175,11 @@ begin
   MemoObservacoes.Text       := DataModule1.tabCadastroImpressoras.FieldByName('observacoes').AsString;
 
   // Busca o nome da unidade pelo ID
-  nomeUnidade := VarToStr(DataModule1.tabUnidades.Lookup('id', DataModule1.tabTelaCadastro.FieldByName('unidade_id').AsInteger, 'nome'));
+  nomeUnidade := VarToStr(DataModule1.tabUnidades.Lookup('id', DataModule1.tabCadastroImpressoras.FieldByName('unidade_id').AsInteger, 'nome'));
   ComboUnidade.Text := nomeUnidade;
 
   // Busca o nome do setor pelo ID
-  nomeSetor := VarToStr(DataModule1.tabSetores.Lookup('id', DataModule1.tabTelaCadastro.FieldByName('setor_id').AsInteger, 'nome'));
+  nomeSetor := VarToStr(DataModule1.tabSetores.Lookup('id', DataModule1.tabCadastroImpressoras.FieldByName('setor_id').AsInteger, 'nome'));
   ComboSetor.Text := nomeSetor;
 
 end;
@@ -194,10 +195,10 @@ begin
 if not (DataModule1.tabCadastroImpressoras.State in [dsEdit, dsInsert]) then
   DataModule1.tabCadastroImpressoras.Edit;
   // Validação dos campos obrigatórios
-  if Trim(EditNomeComputador.Text) = '' then
+  if Trim(EditNomeImpressora.Text) = '' then
   begin
-    ShowMessage('Preencha o nome do computador!');
-    EditNomeComputador.SetFocus;
+    ShowMessage('Preencha o nome da Impressora!');
+    EditNomeImpressora.SetFocus;
     Exit;
   end;
   if Trim(ComboUnidade.Text) = '' then
@@ -209,7 +210,7 @@ if not (DataModule1.tabCadastroImpressoras.State in [dsEdit, dsInsert]) then
 
 
 
- if DataModule1.tabCadastroImpressoras.Locate('nome_computador', EditnomeComputador.Text, []) then
+ if DataModule1.tabCadastroImpressoras.Locate('serial', EditNomeImpressora.Text, []) then
 begin
   // Já existe um registro com esse nome, então atualiza os campos
   DataModule1.tabCadastroImpressoras.Edit;
@@ -222,13 +223,8 @@ begin
   // Preencha os campos normalmente
 end;
 
-// Preencha os campos normalmente (em ambos os casos)
-DataModule1.tabCadastroImpressoras.FieldByName('nome_computador').AsString := EditNomeComputador.Text;
-// ... e assim por diante para os outros campos
 
-
-
-  SalvarCampos;
+  SalvarCamposImpressoras;
   DataModule1.tabCadastroImpressoras.Post;
   ShowMessage('Registro salvo com sucesso!');
 end;
@@ -294,7 +290,7 @@ ComboBox1.ItemIndex := 0; // Deixa o primeiro selecionado
 // ComboBox2: nomes dos campos reais do banco
 ComboBox2.Items.Clear;
 ComboBox2.Items.Add('  ');
-ComboBox2.Items.Add('nome_computador');
+ComboBox2.Items.Add('nome_impressora');
 ComboBox2.Items.Add('data_cadastro');
 ComboBox2.Items.Add('usuario_responsavel');
 ComboBox2.Items.Add('s.nome');
@@ -309,17 +305,17 @@ ComboBox2.ItemIndex := 0;  // Deixa o primeiro selecionado
 end;
 end;
 
-procedure TformTelaCadastro.SalvarCampos;
+procedure TformTelaCadastroPerifericos.SalvarCamposImpressoras;
 var
   setorID, unidadeID: Variant;
 begin
-  if not (DataModule1.tabTelaCadastro.State in [dsEdit, dsInsert]) then
-    DataModule1.tabTelaCadastro.Edit;
-  DataModule1.tabTelaCadastro.FieldByName('nome_computador').AsString      := EditNomeComputador.Text;
-  DataModule1.tabTelaCadastro.FieldByName('endereco_ip').AsString          := EditEnderecoIP.Text;
-  DataModule1.tabTelaCadastro.FieldByName('usuario_responsavel').AsString  := EditUsuarioResponsavel.Text;
-  DataModule1.tabTelaCadastro.FieldByName('endereco_mac').AsString         := EditEnderecoMAC.Text;
-  DataModule1.tabTelaCadastro.FieldByName('anydesk').AsString              := EditAnydesk.Text;
+  if not (DataModule1.tabCadastroImpressoras.State in [dsEdit, dsInsert]) then
+    DataModule1.tabCadastroImpressoras.Edit;
+  DataModule1.tabCadastroImpressoras.FieldByName('nome_impressora').AsString      := EditNomeImpressora.Text;
+  DataModule1.tabCadastroImpressoras.FieldByName('endereco_ip').AsString          := EditEnderecoIP.Text;
+  DataModule1.tabCadastroImpressoras.FieldByName('usuario_responsavel').AsString  := EditUsuarioResponsavel.Text;
+  DataModule1.tabCadastroImpressoras.FieldByName('endereco_mac').AsString         := EditEnderecoMAC.Text;
+  DataModule1.tabCadastroImpressoras.FieldByName('serial').AsString              := EditSerial.Text;
 
   // Busca o ID correspondente ao nome selecionado no ComboBox
   setorID := DataModule1.tabSetores.Lookup('nome', ComboSetor.Text, 'id');
@@ -327,34 +323,34 @@ begin
 
   // Só atribui se encontrou (evita erro de valor inválido)
   if not VarIsNull(setorID) then
-    DataModule1.tabTelaCadastro.FieldByName('setor_id').AsInteger := setorID
+    DataModule1.tabCadastroImpressoras.FieldByName('setor_id').AsInteger := setorID
   else
-    DataModule1.tabTelaCadastro.FieldByName('setor_id').Clear;
+    DataModule1.tabCadastroImpressoras.FieldByName('setor_id').Clear;
 
   if not VarIsNull(unidadeID) then
-    DataModule1.tabTelaCadastro.FieldByName('unidade_id').AsInteger := unidadeID
+    DataModule1.tabCadastroImpressoras.FieldByName('unidade_id').AsInteger := unidadeID
   else
-    DataModule1.tabTelaCadastro.FieldByName('unidade_id').Clear;
+    DataModule1.tabCadastroImpressoras.FieldByName('unidade_id').Clear;
 
 if Trim(DateCadastro.Text) = '' then
-  DataModule1.tabTelaCadastro.FieldByName('data_cadastro').Clear
+  DataModule1.tabCadastroImpressoras.FieldByName('data_cadastro').Clear
 else
-  DataModule1.tabTelaCadastro.FieldByName('data_cadastro').AsDateTime := StrToDate(DateCadastro.Text);
-  DataModule1.tabTelaCadastro.FieldByName('observacoes').AsString          := MemoObservacoes.Text;
+  DataModule1.tabCadastroImpressoras.FieldByName('data_cadastro').AsDateTime := StrToDate(DateCadastro.Text);
+  DataModule1.tabCadastroImpressoras.FieldByName('observacoes').AsString          := MemoObservacoes.Text;
 end;
 
 
 
 
 
-procedure TformTelaCadastro.LimparCampos;
+procedure TformTelaCadastroPerifericos.LimparCamposImpressoras;
 begin
 
-  EditNomeComputador.Clear;
+  EditNomeImpressora.Clear;
   EditEnderecoIP.Clear;
   EditUsuarioResponsavel.Clear;
   EditEnderecoMAC.Clear;
-  EditAnydesk.Clear;
+  EditSerial.Clear;
   ComboSetor.ItemIndex := -1; // se for ComboBox, limpa seleção
   ComboUnidade.ItemIndex := -1; // idem
   DateCadastro.Text := DateToStr(Date);
@@ -364,18 +360,17 @@ begin
   ComboBox1.ItemIndex := 0;
   ComboBox2.ItemIndex := 0;
   CheckBox1.Checked := False;
-  RadioDesktop.Checked := False;
-  RadioNotebook.Checked := False;
-  EditNomeComputador.SetFocus;
+  EditNomeImpressora.SetFocus;
 end;
 
 
 procedure TformTelaCadastroPerifericos.SpeedButton5Click(Sender: TObject);
-begin
+
  begin
- LimparCampos;
- DataModule1.tabTelaCadastro.Append; // ou .Insert
+ LimparCamposImpressoras;
+ DataModule1.tabCadastroImpressoras.Append; // ou .Insert
 end;
-end;
+
+
 
 end.

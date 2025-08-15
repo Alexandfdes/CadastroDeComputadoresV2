@@ -143,7 +143,7 @@ object formTelaCadastro: TformTelaCadastro
     Top = 0
     Width = 809
     Height = 433
-    ActivePage = TTabSheet
+    ActivePage = TabSheet2
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
