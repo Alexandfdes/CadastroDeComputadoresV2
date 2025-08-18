@@ -1,8 +1,8 @@
 object DataModule1: TDataModule1
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 64869
-  Top = 425
+  Left = 655
+  Top = 293
   Height = 392
   Width = 557
   object conexao: TADOConnection

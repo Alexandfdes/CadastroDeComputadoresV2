@@ -9,7 +9,7 @@ uses
 
 type
   TformTelaCadastro = class(TForm)
-    TabSheet2: TTabSheet;
+    Listagem: TTabSheet;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -29,8 +29,8 @@ type
     Label10: TLabel;
     Label7: TLabel;
     DBGrid1: TDBGrid;
-    TTabSheet2: TPageControl;
-    TTabSheet: TTabSheet;
+    PaginaComputadores: TPageControl;
+    Cadastro: TTabSheet;
     ComboBox2: TComboBox;
     EditPesquisa: TEdit;
     EditNomeComputador: TEdit;
@@ -52,7 +52,8 @@ type
     procedure EditEnderecoMACKeyPress(Sender: TObject; var Key: Char);
     procedure SpeedButton1Click(Sender: TObject);
     procedure LimparCampos;
-  
+
+
 
 
   private
@@ -129,7 +130,7 @@ begin
 
   DataModule1.ADOQuery1.Open;
 
-  TTabSheet2.ActivePage := TabSheet2;
+  PaginaComputadores.ActivePage := Listagem;
 
   if DataModule1.ADOQuery1.RecordCount = 0 then
     ShowMessage('Registro não encontrado!');
@@ -160,7 +161,7 @@ begin
     id := DataModule1.ADOQuery1.FieldByName('id').AsInteger;
     DataModule1.tabTelaCadastro.Locate('id', id, []);
     CarregarCampos; // <-- aqui!
-    TTabSheet2.ActivePage := TTabSheet; // volta para aba Cadastro
+    PaginaComputadores.ActivePage := Cadastro; // volta para aba Cadastro
     EditNomeComputador.SetFocus;
 
   end;
@@ -222,6 +223,10 @@ end;
 procedure TformTelaCadastro.FormShow(Sender: TObject);
 
 begin
+
+ PaginaComputadores.ActivePage := Cadastro;
+
+
 DataModule1.tabTelaCadastro.Open;
 DataModule1.tabUnidades.Open;
 DataModule1.tabSetores.Open;
@@ -423,6 +428,8 @@ procedure TformTelaCadastro.SpeedButton1Click(Sender: TObject);
 begin
 SpeedButton4Click(Sender); // Reutiliza o método de salvar
 end;
+
+
 
 
 

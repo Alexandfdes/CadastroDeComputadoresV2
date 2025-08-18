@@ -1,6 +1,6 @@
 object formTelaCadastro: TformTelaCadastro
-  Left = -1291
-  Top = 219
+  Left = 187
+  Top = 97
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Tela de Cadastro'
@@ -138,12 +138,12 @@ object formTelaCadastro: TformTelaCadastro
     Font.Style = [fsBold]
     ParentFont = False
   end
-  object TTabSheet2: TPageControl
+  object PaginaComputadores: TPageControl
     Left = 0
     Top = 0
     Width = 809
     Height = 433
-    ActivePage = TabSheet2
+    ActivePage = Cadastro
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -151,7 +151,7 @@ object formTelaCadastro: TformTelaCadastro
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    object TTabSheet: TTabSheet
+    object Cadastro: TTabSheet
       Caption = 'Cadastro'
       ParentShowHint = False
       ShowHint = False
@@ -380,7 +380,7 @@ object formTelaCadastro: TformTelaCadastro
         TabOrder = 10
       end
     end
-    object TabSheet2: TTabSheet
+    object Listagem: TTabSheet
       Caption = 'Listagem'
       ImageIndex = 1
       object DBGrid1: TDBGrid

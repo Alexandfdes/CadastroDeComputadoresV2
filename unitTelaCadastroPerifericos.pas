@@ -14,8 +14,8 @@ type
     SpeedButton4: TSpeedButton;
     SpeedButton5: TSpeedButton;
     Label10: TLabel;
-    TTabSheet2: TPageControl;
-    TTabSheet: TTabSheet;
+    PaginaImpressoras: TPageControl;
+    Cadastro: TTabSheet;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -34,7 +34,7 @@ type
     ComboUnidade: TComboBox;
     ComboSetor: TComboBox;
     MemoObservacoes: TMemo;
-    TabSheet2: TTabSheet;
+    Listagem: TTabSheet;
     DBGrid1: TDBGrid;
     ComboBox1: TComboBox;
     CheckBox1: TCheckBox;
@@ -46,6 +46,8 @@ type
     procedure SpeedButton4Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+   
 
   private
     procedure CarregarCamposImpressoras;
@@ -123,7 +125,7 @@ begin
 
   DataModule1.ADOQuery2.Open;
 
-  TTabSheet2.ActivePage := TabSheet2;
+  PaginaImpressoras.ActivePage := Listagem;
 
   if DataModule1.ADOQuery2.RecordCount = 0 then
     ShowMessage('Registro não encontrado!');
@@ -149,7 +151,7 @@ begin
     id := DataModule1.ADOQuery2.FieldByName('id').AsInteger;
     DataModule1.tabCadastroImpressoras.Locate('id', id, []);
     CarregarCamposImpressoras; // <-- aqui!
-    TTabSheet2.ActivePage := TTabSheet; // volta para aba Cadastro
+    PaginaImpressoras.ActivePage := Cadastro; // volta para aba Cadastro
     EditNomeImpressora.SetFocus;
 
   end;
@@ -191,9 +193,9 @@ end;
 
 
 procedure TformTelaCadastroPerifericos.SpeedButton4Click(Sender: TObject);
+var
+  registroExiste: Boolean;
 begin
-if not (DataModule1.tabCadastroImpressoras.State in [dsEdit, dsInsert]) then
-  DataModule1.tabCadastroImpressoras.Edit;
   // Validação dos campos obrigatórios
   if Trim(EditNomeImpressora.Text) = '' then
   begin
@@ -209,22 +211,15 @@ if not (DataModule1.tabCadastroImpressoras.State in [dsEdit, dsInsert]) then
   end;
 
 
+ // Verifica se já existe registro com este serial
+  registroExiste := DataModule1.tabCadastroImpressoras.Locate('serial', EditSerial.Text, []);
+if registroExiste then
+    DataModule1.tabCadastroImpressoras.Edit
+  else
+    DataModule1.tabCadastroImpressoras.Append;
 
- if DataModule1.tabCadastroImpressoras.Locate('serial', EditNomeImpressora.Text, []) then
-begin
-  // Já existe um registro com esse nome, então atualiza os campos
-  DataModule1.tabCadastroImpressoras.Edit;
-  // Atualize os campos como normalmente faria ao editar
-end
-else
-begin
-  // Não existe, então cria um novo
-  DataModule1.tabCadastroImpressoras.Append;
-  // Preencha os campos normalmente
-end;
+  SalvarCamposImpressoras; // Preenche os campos do dataset com os valores dos controles
 
-
-  SalvarCamposImpressoras;
   DataModule1.tabCadastroImpressoras.Post;
   ShowMessage('Registro salvo com sucesso!');
 end;
@@ -248,6 +243,9 @@ end;
 
 procedure TformTelaCadastroPerifericos.FormShow(Sender: TObject);
 begin
+PaginaImpressoras.ActivePage := Cadastro;
+
+
 DataModule1.tabCadastroImpressoras.Append; // ou .Insert
  DateCadastro.Text := FormatDateTime('dd/mm/yyyy', Now);
   DataModule1.tabCadastroImpressoras.Open;
@@ -321,6 +319,18 @@ begin
   setorID := DataModule1.tabSetores.Lookup('nome', ComboSetor.Text, 'id');
   unidadeID := DataModule1.tabUnidades.Lookup('nome', ComboUnidade.Text, 'id');
 
+
+    if VarIsNull(setorID) then
+  begin
+    ShowMessage('Setor não encontrado.');
+    Exit;
+  end;
+
+  if VarIsNull(unidadeID) then
+  begin
+    ShowMessage('Unidade não encontrada.');
+    Exit;
+  end;
   // Só atribui se encontrou (evita erro de valor inválido)
   if not VarIsNull(setorID) then
     DataModule1.tabCadastroImpressoras.FieldByName('setor_id').AsInteger := setorID
@@ -337,6 +347,7 @@ if Trim(DateCadastro.Text) = '' then
 else
   DataModule1.tabCadastroImpressoras.FieldByName('data_cadastro').AsDateTime := StrToDate(DateCadastro.Text);
   DataModule1.tabCadastroImpressoras.FieldByName('observacoes').AsString          := MemoObservacoes.Text;
+   ShowMessage('ID da unidade a ser salvo: ' + IntToStr(unidadeID));
 end;
 
 
@@ -371,6 +382,34 @@ procedure TformTelaCadastroPerifericos.SpeedButton5Click(Sender: TObject);
  DataModule1.tabCadastroImpressoras.Append; // ou .Insert
 end;
 
+
+
+
+
+procedure TformTelaCadastroPerifericos.SpeedButton3Click(Sender: TObject);
+var
+  registroID: Variant;
+begin
+  registroID := DataModule1.tabCadastroImpressoras.FieldByName('id').Value;
+
+  if DataModule1.tabCadastroImpressoras.IsEmpty or VarIsNull(registroID) then
+  begin
+    ShowMessage('Nenhum registro selecionado para excluir.');
+    Exit;
+  end;
+
+  if MessageDlg('Tem certeza que deseja excluir este registro?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  begin
+    try
+      DataModule1.tabCadastroImpressoras.Delete;
+      ShowMessage('Registro excluído com sucesso!');
+    except
+      on E: Exception do
+        ShowMessage('Não foi possível excluir o registro. Motivo: ' + E.Message);
+    end;
+  end;
+  LimparCamposImpressoras;
+end;
 
 
 end.

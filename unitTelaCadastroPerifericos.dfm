@@ -1,6 +1,6 @@
 object formTelaCadastroPerifericos: TformTelaCadastroPerifericos
-  Left = -958
-  Top = 174
+  Left = 382
+  Top = 59
   Width = 825
   Height = 509
   Caption = 'Tela Cadastro de Perif'#233'ricos'
@@ -11,6 +11,7 @@ object formTelaCadastroPerifericos: TformTelaCadastroPerifericos
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  Position = poMainFormCenter
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -92,6 +93,7 @@ object formTelaCadastroPerifericos: TformTelaCadastroPerifericos
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
     ParentFont = False
+    OnClick = SpeedButton3Click
   end
   object SpeedButton4: TSpeedButton
     Left = 544
@@ -134,12 +136,12 @@ object formTelaCadastroPerifericos: TformTelaCadastroPerifericos
     Font.Style = [fsBold]
     ParentFont = False
   end
-  object TTabSheet2: TPageControl
+  object PaginaImpressoras: TPageControl
     Left = 0
     Top = 0
     Width = 809
     Height = 393
-    ActivePage = TabSheet2
+    ActivePage = Listagem
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -147,7 +149,7 @@ object formTelaCadastroPerifericos: TformTelaCadastroPerifericos
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    object TTabSheet: TTabSheet
+    object Cadastro: TTabSheet
       Caption = 'Cadastro'
       ParentShowHint = False
       ShowHint = False
@@ -348,14 +350,14 @@ object formTelaCadastroPerifericos: TformTelaCadastroPerifericos
         TabOrder = 8
       end
     end
-    object TabSheet2: TTabSheet
+    object Listagem: TTabSheet
       Caption = 'Listagem'
       ImageIndex = 1
       object DBGrid1: TDBGrid
-        Left = -8
+        Left = 0
         Top = 0
-        Width = 809
-        Height = 401
+        Width = 801
+        Height = 361
         DataSource = DataModule1.dsQuery2
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
@@ -369,54 +371,62 @@ object formTelaCadastroPerifericos: TformTelaCadastroPerifericos
             Expanded = False
             FieldName = 'nome_impressora'
             Title.Caption = 'Nome'
+            Width = 136
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'usuario_responsavel'
             Title.Caption = 'Usuario'
+            Width = 127
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'setor_nome'
             Title.Caption = 'Setor'
+            Width = 161
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'serial'
             Title.Caption = 'Serial'
+            Width = 105
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'unidade_nome'
             Title.Caption = 'Unidade'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'endereco_mac'
-            Title.Caption = 'MAC'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'endereco_ip'
-            Title.Caption = 'IP'
+            Width = 71
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'observacoes'
             Title.Caption = 'Observacoes'
+            Width = 316
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'data_cadastro'
             Title.Caption = 'Data'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'endereco_mac'
+            Title.Caption = 'MAC'
+            Width = 92
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'endereco_ip'
+            Title.Caption = 'IP'
+            Width = 111
             Visible = True
           end>
       end
