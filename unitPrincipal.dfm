@@ -1,9 +1,10 @@
 object TelaPrincipal: TTelaPrincipal
-  Left = 328
-  Top = 141
+  Left = 279
+  Top = 123
+  BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Sistema de Controle'
-  ClientHeight = 495
+  ClientHeight = 446
   ClientWidth = 809
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -13,7 +14,6 @@ object TelaPrincipal: TTelaPrincipal
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
-  WindowState = wsMaximized
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -49,5 +49,6 @@ object TelaPrincipal: TTelaPrincipal
     Height = 97
     Caption = 'Roteadores'
     TabOrder = 1
+    OnClick = EditRoteadoresClick
   end
 end

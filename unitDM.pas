@@ -16,20 +16,20 @@ type
     tabSetoresnome: TStringField;
     tabUnidadesid: TIntegerField;
     tabUnidadesnome: TStringField;
-    tabTelaCadastro: TADOTable;
-    tabTelaCadastroid: TAutoIncField;
-    tabTelaCadastronome_computador: TStringField;
-    tabTelaCadastrounidade_id: TIntegerField;
-    tabTelaCadastrosetor_id: TIntegerField;
-    tabTelaCadastroendereco_mac: TStringField;
-    tabTelaCadastroendereco_ip: TStringField;
-    tabTelaCadastrousuario_responsavel: TStringField;
-    tabTelaCadastrotipo: TStringField;
-    tabTelaCadastroobservacoes: TMemoField;
-    tabTelaCadastrodata_cadastro: TDateTimeField;
-    dsTelaCadastro: TDataSource;
+    tabCadastroComputadores: TADOTable;
+    tabCadastroComputadoresid: TAutoIncField;
+    tabCadastroComputadoresnome_computador: TStringField;
+    tabCadastroComputadoresunidade_id: TIntegerField;
+    tabCadastroComputadoressetor_id: TIntegerField;
+    tabCadastroComputadoresendereco_mac: TStringField;
+    tabCadastroComputadoresendereco_ip: TStringField;
+    tabCadastroComputadoresusuario_responsavel: TStringField;
+    tabCadastroComputadorestipo: TStringField;
+    tabCadastroComputadoresobservacoes: TMemoField;
+    tabCadastroComputadoresdata_cadastro: TDateTimeField;
+    dsComputadores: TDataSource;
     dsQuery1: TDataSource;
-    tabTelaCadastroanydesk: TStringField;
+    tabCadastroComputadoresanydesk: TStringField;
     tabCadastroImpressoras: TADOTable;
     dsImpressoras: TDataSource;
     tabCadastroImpressorasid: TIntegerField;
@@ -70,6 +70,22 @@ type
     ADOQuery2data_cadastro: TDateTimeField;
     ADOQuery2setor_nome: TStringField;
     ADOQuery2unidade_nome: TStringField;
+    dsQuery3: TDataSource;
+    dsRoteadores: TDataSource;
+    tabCadastroRoteadores: TADOTable;
+    ADOQuery3: TADOQuery;
+    ADOQuery3id: TAutoIncField;
+    ADOQuery3nome_roteador: TStringField;
+    ADOQuery3serial: TStringField;
+    ADOQuery3endereco_mac: TStringField;
+    ADOQuery3endereco_ip: TStringField;
+    ADOQuery3usuario_responsavel: TStringField;
+    ADOQuery3observacoes: TMemoField;
+    ADOQuery3data_cadastro: TDateTimeField;
+    ADOQuery3setor_nome: TStringField;
+    ADOQuery3unidade_nome: TStringField;
+    ADOQuery3unidade_id: TIntegerField;
+    ADOQuery3setor_id: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
    
   private
@@ -89,7 +105,7 @@ procedure TDataModule1.DataModuleCreate(Sender: TObject);
 begin
   tabUnidades.Open;
   tabSetores.Open;
-  tabTelaCadastro.Open;
+  tabCadastroComputadores.Open;
   conexao.Connected := True;
 end;
 

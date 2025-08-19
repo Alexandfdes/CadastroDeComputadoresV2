@@ -1,9 +1,11 @@
-object formTelaCadastroPerifericos: TformTelaCadastroPerifericos
-  Left = 382
-  Top = 59
-  Width = 825
-  Height = 509
-  Caption = 'Tela Cadastro de Perif'#233'ricos'
+object formTelaCadastroImpressoras: TformTelaCadastroImpressoras
+  Left = 323
+  Top = 221
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = 'Tela Cadastro de Impressoras'
+  ClientHeight = 470
+  ClientWidth = 809
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -141,7 +143,7 @@ object formTelaCadastroPerifericos: TformTelaCadastroPerifericos
     Top = 0
     Width = 809
     Height = 393
-    ActivePage = Listagem
+    ActivePage = Cadastro
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11

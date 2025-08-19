@@ -1,10 +1,10 @@
 object DataModule1: TDataModule1
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 655
-  Top = 293
-  Height = 392
-  Width = 557
+  Left = 426
+  Top = 173
+  Height = 439
+  Width = 527
   object conexao: TADOConnection
     Connected = True
     ConnectionString = 
@@ -13,8 +13,8 @@ object DataModule1: TDataModule1
       'ESKTOP-P6GK0P9\SQLEXPRESS'
     LoginPrompt = False
     Provider = 'SQLOLEDB.1'
-    Left = 48
-    Top = 32
+    Left = 456
+    Top = 352
   end
   object tabUnidades: TADOTable
     Active = True
@@ -49,81 +49,80 @@ object DataModule1: TDataModule1
   end
   object dsUnidades: TDataSource
     DataSet = tabUnidades
-    Left = 368
-    Top = 128
+    Left = 352
+    Top = 104
   end
   object dsSetores: TDataSource
     DataSet = tabSetores
     Left = 440
-    Top = 128
+    Top = 104
   end
-  object tabTelaCadastro: TADOTable
-    Active = True
+  object tabCadastroComputadores: TADOTable
     Connection = conexao
     CursorType = ctStatic
-    TableName = 'teladecadastro'
-    Left = 112
+    TableName = 'telacadastrocomputadores'
+    Left = 32
     Top = 32
-    object tabTelaCadastroid: TAutoIncField
+    object tabCadastroComputadoresid: TAutoIncField
       FieldName = 'id'
       ReadOnly = True
     end
-    object tabTelaCadastronome_computador: TStringField
+    object tabCadastroComputadoresnome_computador: TStringField
       FieldName = 'nome_computador'
       Size = 10
     end
-    object tabTelaCadastrounidade_id: TIntegerField
+    object tabCadastroComputadoresunidade_id: TIntegerField
       FieldName = 'unidade_id'
     end
-    object tabTelaCadastrosetor_id: TIntegerField
+    object tabCadastroComputadoressetor_id: TIntegerField
       FieldName = 'setor_id'
     end
-    object tabTelaCadastroendereco_mac: TStringField
+    object tabCadastroComputadoresendereco_mac: TStringField
       FieldName = 'endereco_mac'
       EditMask = 'AA-AA-AA-AA-AA-AA;1;_'
       Size = 50
     end
-    object tabTelaCadastroendereco_ip: TStringField
+    object tabCadastroComputadoresendereco_ip: TStringField
       FieldName = 'endereco_ip'
       EditMask = 'AA.AA.A.AAA;1;_'
       Size = 50
     end
-    object tabTelaCadastrousuario_responsavel: TStringField
+    object tabCadastroComputadoresusuario_responsavel: TStringField
       FieldName = 'usuario_responsavel'
       Size = 50
     end
-    object tabTelaCadastrotipo: TStringField
+    object tabCadastroComputadorestipo: TStringField
       FieldName = 'tipo'
       Size = 50
     end
-    object tabTelaCadastroobservacoes: TMemoField
+    object tabCadastroComputadoresobservacoes: TMemoField
       FieldName = 'observacoes'
       BlobType = ftMemo
     end
-    object tabTelaCadastrodata_cadastro: TDateTimeField
+    object tabCadastroComputadoresdata_cadastro: TDateTimeField
       FieldName = 'data_cadastro'
     end
-    object tabTelaCadastroanydesk: TStringField
+    object tabCadastroComputadoresanydesk: TStringField
       FieldName = 'anydesk'
       Size = 15
     end
   end
-  object dsTelaCadastro: TDataSource
-    DataSet = tabTelaCadastro
-    Left = 104
-    Top = 120
+  object dsComputadores: TDataSource
+    DataSet = tabCadastroComputadores
+    Left = 32
+    Top = 104
   end
   object dsQuery1: TDataSource
     DataSet = ADOQuery1
-    Left = 272
-    Top = 216
+    Left = 32
+    Top = 264
   end
   object tabCadastroImpressoras: TADOTable
     Active = True
     Connection = conexao
     CursorType = ctStatic
     TableName = 'telacadastroimpressoras'
-    Left = 216
+    Left = 136
     Top = 32
     object tabCadastroImpressorasid: TIntegerField
       FieldName = 'id'
@@ -164,21 +163,20 @@ object DataModule1: TDataModule1
   end
   object dsImpressoras: TDataSource
     DataSet = tabSetores
-    Left = 232
-    Top = 120
+    Left = 136
+    Top = 112
   end
   object ADOQuery1: TADOQuery
-    Active = True
     Connection = conexao
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
       'SELECT t.*, s.nome AS setor_nome, u.nome AS unidade_nome'
-      'FROM teladecadastro t'
+      'FROM telacadastrorocomputadores t'
       'LEFT JOIN setores s ON t.setor_id = s.id'
       'LEFT JOIN unidades u ON t.unidade_id = u.id')
-    Left = 208
-    Top = 216
+    Left = 32
+    Top = 192
     object ADOQuery1id: TAutoIncField
       FieldName = 'id'
       ReadOnly = True
@@ -243,8 +241,8 @@ object DataModule1: TDataModule1
       ''
       ''
       '')
-    Left = 208
-    Top = 272
+    Left = 136
+    Top = 192
     object ADOQuery2id: TIntegerField
       FieldName = 'id'
     end
@@ -291,8 +289,88 @@ object DataModule1: TDataModule1
     end
   end
   object dsQuery2: TDataSource
-    DataSet = ADOQuery2
-    Left = 280
+    DataSet = ADOQuery3
+    Left = 120
+    Top = 264
+  end
+  object dsQuery3: TDataSource
+    DataSet = ADOQuery3
+    Left = 232
     Top = 272
+  end
+  object dsRoteadores: TDataSource
+    DataSet = tabCadastroRoteadores
+    Left = 256
+    Top = 104
+  end
+  object tabCadastroRoteadores: TADOTable
+    Active = True
+    Connection = conexao
+    CursorType = ctStatic
+    TableName = 'telacadastroroteadores'
+    Left = 256
+    Top = 32
+  end
+  object ADOQuery3: TADOQuery
+    Active = True
+    Connection = conexao
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT trot.*, s.nome AS setor_nome, u.nome AS unidade_nome '
+      '  FROM telacadastroroteadores trot'
+      '    LEFT JOIN setores s ON trot.setor_id = s.id '
+      '    LEFT JOIN unidades u ON trot.unidade_id = u.id '
+      ''
+      ''
+      ''
+      '')
+    Left = 240
+    Top = 200
+    object ADOQuery3id: TAutoIncField
+      FieldName = 'id'
+      ReadOnly = True
+    end
+    object ADOQuery3nome_roteador: TStringField
+      FieldName = 'nome_roteador'
+      Size = 50
+    end
+    object ADOQuery3serial: TStringField
+      FieldName = 'serial'
+      Size = 50
+    end
+    object ADOQuery3endereco_mac: TStringField
+      FieldName = 'endereco_mac'
+      Size = 50
+    end
+    object ADOQuery3endereco_ip: TStringField
+      FieldName = 'endereco_ip'
+      Size = 50
+    end
+    object ADOQuery3usuario_responsavel: TStringField
+      FieldName = 'usuario_responsavel'
+      Size = 50
+    end
+    object ADOQuery3observacoes: TMemoField
+      FieldName = 'observacoes'
+      BlobType = ftMemo
+    end
+    object ADOQuery3data_cadastro: TDateTimeField
+      FieldName = 'data_cadastro'
+    end
+    object ADOQuery3setor_nome: TStringField
+      FieldName = 'setor_nome'
+      Size = 50
+    end
+    object ADOQuery3unidade_nome: TStringField
+      FieldName = 'unidade_nome'
+      Size = 50
+    end
+    object ADOQuery3unidade_id: TIntegerField
+      FieldName = 'unidade_id'
+    end
+    object ADOQuery3setor_id: TIntegerField
+      FieldName = 'setor_id'
+    end
   end
 end

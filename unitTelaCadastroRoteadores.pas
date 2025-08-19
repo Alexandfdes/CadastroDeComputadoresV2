@@ -1,4 +1,4 @@
-unit unitTelaCadastroPerifericos;
+unit unitTelaCadastroRoteadores;
 
 interface
 
@@ -8,13 +8,13 @@ uses
   DBGrids, JPEG, ExtCtrls;
 
 type
-  TformTelaCadastroPerifericos = class(TForm)
+  TformTelaCadastroRoteadores = class(TForm)
     SpeedButton2: TSpeedButton;
     SpeedButton3: TSpeedButton;
     SpeedButton4: TSpeedButton;
     SpeedButton5: TSpeedButton;
     Label10: TLabel;
-    PaginaImpressoras: TPageControl;
+    PaginaRoteadores: TPageControl;
     Cadastro: TTabSheet;
     Label1: TLabel;
     Label2: TLabel;
@@ -25,7 +25,7 @@ type
     Label8: TLabel;
     Label9: TLabel;
     Label7: TLabel;
-    EditNomeImpressora: TEdit;
+    EditNomeRoteador: TEdit;
     EditUsuarioResponsavel: TEdit;
     EditEnderecoMAC: TEdit;
     EditSerial: TEdit;
@@ -44,21 +44,19 @@ type
     procedure SpeedButton2Click(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
     procedure SpeedButton4Click(Sender: TObject);
-    procedure FormShow(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
-   
-
+    procedure FormShow(Sender: TObject);
   private
-    procedure CarregarCamposImpressoras;
-    procedure SalvarCamposImpressoras;
-    procedure LimparCamposImpressoras;
+    procedure CarregarCamposRoteadores;
+    procedure SalvarCamposRoteadores;
+    procedure LimparCamposRoteadores;
   public
     { Public declarations }
   end;
 
 var
-  formTelaCadastroPerifericos: TformTelaCadastroPerifericos;
+  formTelaCadastroRoteadores: TformTelaCadastroRoteadores;
 
 implementation
 
@@ -69,8 +67,7 @@ uses unitDM, unitPrincipal;
 
 
 
-
-procedure TformTelaCadastroPerifericos.ComboBox1Change(Sender: TObject);
+procedure TformTelaCadastroRoteadores.ComboBox1Change(Sender: TObject);
 begin
   ComboBox2.ItemIndex := ComboBox1.ItemIndex;
 end;
@@ -85,7 +82,7 @@ end;
 
 
 
-procedure TformTelaCadastroPerifericos.SpeedButton2Click(Sender: TObject);
+procedure TformTelaCadastroRoteadores.SpeedButton2Click(Sender: TObject);
 
 var
   campoBanco, valor, sql: string;
@@ -104,10 +101,10 @@ begin
 
 
 
-  sql := 'SELECT timp.*, s.nome AS setor_nome, u.nome AS unidade_nome ' +
-    'FROM telacadastroimpressoras timp ' +
-    'LEFT JOIN setores s ON timp.setor_id = s.id ' +
-    'LEFT JOIN unidades u ON timp.unidade_id = u.id ';
+  sql := 'SELECT trot.*, s.nome AS setor_nome, u.nome AS unidade_nome ' +
+    'FROM telacadastroroteadores trot ' +
+    'LEFT JOIN setores s ON trot.setor_id = s.id ' +
+    'LEFT JOIN unidades u ON trot.unidade_id = u.id ';
 
 
 
@@ -120,14 +117,14 @@ begin
       sql := sql + ' WHERE ' + campoBanco + ' = ' + QuotedStr(valor);
       end;
 
-  DataModule1.ADOQuery2.Close;
-  DataModule1.ADOQuery2.SQL.Text := sql;
+  DataModule1.ADOQuery3.Close;
+  DataModule1.ADOQuery3.SQL.Text := sql;
 
-  DataModule1.ADOQuery2.Open;
+  DataModule1.ADOQuery3.Open;
 
-  PaginaImpressoras.ActivePage := Listagem;
+  PaginaRoteadores.ActivePage := Listagem;
 
-  if DataModule1.ADOQuery2.RecordCount = 0 then
+  if DataModule1.ADOQuery3.RecordCount = 0 then
     ShowMessage('Registro não encontrado!');
 
 
@@ -142,17 +139,17 @@ end;
 
 
 
-procedure TformTelaCadastroPerifericos.DBGrid1DblClick(Sender: TObject);
+procedure TformTelaCadastroRoteadores.DBGrid1DblClick(Sender: TObject);
 var
   id: Integer;
 begin
-  if not DataModule1.ADOQuery2.IsEmpty then
+  if not DataModule1.ADOQuery3.IsEmpty then
   begin
-    id := DataModule1.ADOQuery2.FieldByName('id').AsInteger;
-    DataModule1.tabCadastroImpressoras.Locate('id', id, []);
-    CarregarCamposImpressoras; // <-- aqui!
-    PaginaImpressoras.ActivePage := Cadastro; // volta para aba Cadastro
-    EditNomeImpressora.SetFocus;
+    id := DataModule1.ADOQuery3.FieldByName('id').AsInteger;
+    DataModule1.tabCadastroRoteadores.Locate('id', id, []);
+    CarregarCamposRoteadores; // <-- aqui!
+    PaginaRoteadores.ActivePage := Cadastro; // volta para aba Cadastro
+    EditNomeRoteador.SetFocus;
 
   end;
 end;
@@ -164,24 +161,24 @@ end;
 
 
 
-procedure TformTelaCadastroPerifericos.CarregarCamposImpressoras;
+procedure TformTelaCadastroRoteadores.CarregarCamposRoteadores;
 var
   nomeUnidade, nomeSetor: string;
 begin
-  EditNomeImpressora.Text    := DataModule1.tabCadastroImpressoras.FieldByName('nome_Impressora').AsString;
-  EditEnderecoIP.Text        := DataModule1.tabCadastroImpressoras.FieldByName('endereco_ip').AsString;
-  EditUsuarioResponsavel.Text:= DataModule1.tabCadastroImpressoras.FieldByName('usuario_responsavel').AsString;
-  EditEnderecoMAC.Text       := DataModule1.tabCadastroImpressoras.FieldByName('endereco_mac').AsString;
-  EditSerial.Text           := DataModule1.tabCadastroImpressoras.FieldByName('serial').AsString;
-  DateCadastro.Text          := DataModule1.tabCadastroImpressoras.FieldByName('data_cadastro').AsString;
-  MemoObservacoes.Text       := DataModule1.tabCadastroImpressoras.FieldByName('observacoes').AsString;
+  EditNomeRoteador.Text    := DataModule1.tabCadastroRoteadores.FieldByName('nome_roteador').AsString;
+  EditEnderecoIP.Text        := DataModule1.tabCadastroRoteadores.FieldByName('endereco_ip').AsString;
+  EditUsuarioResponsavel.Text:= DataModule1.tabCadastroRoteadores.FieldByName('usuario_responsavel').AsString;
+  EditEnderecoMAC.Text       := DataModule1.tabCadastroRoteadores.FieldByName('endereco_mac').AsString;
+  EditSerial.Text           := DataModule1.tabCadastroRoteadores.FieldByName('serial').AsString;
+  DateCadastro.Text          := DataModule1.tabCadastroRoteadores.FieldByName('data_cadastro').AsString;
+  MemoObservacoes.Text       := DataModule1.tabCadastroRoteadores.FieldByName('observacoes').AsString;
 
   // Busca o nome da unidade pelo ID
-  nomeUnidade := VarToStr(DataModule1.tabUnidades.Lookup('id', DataModule1.tabCadastroImpressoras.FieldByName('unidade_id').AsInteger, 'nome'));
+  nomeUnidade := VarToStr(DataModule1.tabUnidades.Lookup('id', DataModule1.tabCadastroRoteadores.FieldByName('unidade_id').AsInteger, 'nome'));
   ComboUnidade.Text := nomeUnidade;
 
   // Busca o nome do setor pelo ID
-  nomeSetor := VarToStr(DataModule1.tabSetores.Lookup('id', DataModule1.tabCadastroImpressoras.FieldByName('setor_id').AsInteger, 'nome'));
+  nomeSetor := VarToStr(DataModule1.tabSetores.Lookup('id', DataModule1.tabCadastroRoteadores.FieldByName('setor_id').AsInteger, 'nome'));
   ComboSetor.Text := nomeSetor;
 
 end;
@@ -192,15 +189,15 @@ end;
 
 
 
-procedure TformTelaCadastroPerifericos.SpeedButton4Click(Sender: TObject);
+procedure TformTelaCadastroRoteadores.SpeedButton4Click(Sender: TObject);
 var
   registroExiste: Boolean;
 begin
   // Validação dos campos obrigatórios
-  if Trim(EditNomeImpressora.Text) = '' then
+  if Trim(EditNomeRoteador.Text) = '' then
   begin
-    ShowMessage('Preencha o nome da Impressora!');
-    EditNomeImpressora.SetFocus;
+    ShowMessage('Preencha o nome do Roteador!');
+    EditNomeRoteador.SetFocus;
     Exit;
   end;
   if Trim(ComboUnidade.Text) = '' then
@@ -212,15 +209,15 @@ begin
 
 
  // Verifica se já existe registro com este serial
-  registroExiste := DataModule1.tabCadastroImpressoras.Locate('serial', EditSerial.Text, []);
+  registroExiste := DataModule1.tabCadastroRoteadores.Locate('endereco_mac', EditEnderecoMAC.Text, []);
 if registroExiste then
-    DataModule1.tabCadastroImpressoras.Edit
+    DataModule1.tabCadastroRoteadores.Edit
   else
-    DataModule1.tabCadastroImpressoras.Append;
+    DataModule1.tabCadastroRoteadores.Append;
 
-  SalvarCamposImpressoras; // Preenche os campos do dataset com os valores dos controles
+  SalvarCamposRoteadores; // Preenche os campos do dataset com os valores dos controles
 
-  DataModule1.tabCadastroImpressoras.Post;
+  DataModule1.tabCadastroRoteadores.Post;
   ShowMessage('Registro salvo com sucesso!');
 end;
 
@@ -241,14 +238,14 @@ end;
 
 
 
-procedure TformTelaCadastroPerifericos.FormShow(Sender: TObject);
+procedure TformTelaCadastroRoteadores.FormShow(Sender: TObject);
 begin
-PaginaImpressoras.ActivePage := Cadastro;
+PaginaRoteadores.ActivePage := Cadastro;
 
 
-DataModule1.tabCadastroImpressoras.Append; // ou .Insert
+DataModule1.tabCadastroRoteadores.Append; // ou .Insert
  DateCadastro.Text := FormatDateTime('dd/mm/yyyy', Now);
-  DataModule1.tabCadastroImpressoras.Open;
+  DataModule1.tabCadastroRoteadores.Open;
   DataModule1.tabUnidades.Open;
   DataModule1.tabSetores.Open;
 
@@ -288,7 +285,7 @@ ComboBox1.ItemIndex := 0; // Deixa o primeiro selecionado
 // ComboBox2: nomes dos campos reais do banco
 ComboBox2.Items.Clear;
 ComboBox2.Items.Add('  ');
-ComboBox2.Items.Add('nome_impressora');
+ComboBox2.Items.Add('nome_roteador');
 ComboBox2.Items.Add('data_cadastro');
 ComboBox2.Items.Add('usuario_responsavel');
 ComboBox2.Items.Add('s.nome');
@@ -303,17 +300,17 @@ ComboBox2.ItemIndex := 0;  // Deixa o primeiro selecionado
 end;
 end;
 
-procedure TformTelaCadastroPerifericos.SalvarCamposImpressoras;
+procedure TformTelaCadastroRoteadores.SalvarCamposRoteadores;
 var
   setorID, unidadeID: Variant;
 begin
-  if not (DataModule1.tabCadastroImpressoras.State in [dsEdit, dsInsert]) then
-    DataModule1.tabCadastroImpressoras.Edit;
-  DataModule1.tabCadastroImpressoras.FieldByName('nome_impressora').AsString      := EditNomeImpressora.Text;
-  DataModule1.tabCadastroImpressoras.FieldByName('endereco_ip').AsString          := EditEnderecoIP.Text;
-  DataModule1.tabCadastroImpressoras.FieldByName('usuario_responsavel').AsString  := EditUsuarioResponsavel.Text;
-  DataModule1.tabCadastroImpressoras.FieldByName('endereco_mac').AsString         := EditEnderecoMAC.Text;
-  DataModule1.tabCadastroImpressoras.FieldByName('serial').AsString              := EditSerial.Text;
+  if not (DataModule1.tabCadastroRoteadores.State in [dsEdit, dsInsert]) then
+    DataModule1.tabCadastroRoteadores.Edit;
+  DataModule1.tabCadastroRoteadores.FieldByName('nome_roteador').AsString      := EditNomeRoteador.Text;
+  DataModule1.tabCadastroRoteadores.FieldByName('endereco_ip').AsString          := EditEnderecoIP.Text;
+  DataModule1.tabCadastroRoteadores.FieldByName('usuario_responsavel').AsString  := EditUsuarioResponsavel.Text;
+  DataModule1.tabCadastroRoteadores.FieldByName('endereco_mac').AsString         := EditEnderecoMAC.Text;
+  DataModule1.tabCadastroRoteadores.FieldByName('serial').AsString              := EditSerial.Text;
 
   // Busca o ID correspondente ao nome selecionado no ComboBox
   setorID := DataModule1.tabSetores.Lookup('nome', ComboSetor.Text, 'id');
@@ -333,31 +330,31 @@ begin
   end;
   // Só atribui se encontrou (evita erro de valor inválido)
   if not VarIsNull(setorID) then
-    DataModule1.tabCadastroImpressoras.FieldByName('setor_id').AsInteger := setorID
+    DataModule1.tabCadastroRoteadores.FieldByName('setor_id').AsInteger := setorID
   else
-    DataModule1.tabCadastroImpressoras.FieldByName('setor_id').Clear;
+    DataModule1.tabCadastroRoteadores.FieldByName('setor_id').Clear;
 
   if not VarIsNull(unidadeID) then
-    DataModule1.tabCadastroImpressoras.FieldByName('unidade_id').AsInteger := unidadeID
+    DataModule1.tabCadastroRoteadores.FieldByName('unidade_id').AsInteger := unidadeID
   else
-    DataModule1.tabCadastroImpressoras.FieldByName('unidade_id').Clear;
+    DataModule1.tabCadastroRoteadores.FieldByName('unidade_id').Clear;
 
 if Trim(DateCadastro.Text) = '' then
-  DataModule1.tabCadastroImpressoras.FieldByName('data_cadastro').Clear
+  DataModule1.tabCadastroRoteadores.FieldByName('data_cadastro').Clear
 else
-  DataModule1.tabCadastroImpressoras.FieldByName('data_cadastro').AsDateTime := StrToDate(DateCadastro.Text);
-  DataModule1.tabCadastroImpressoras.FieldByName('observacoes').AsString          := MemoObservacoes.Text;
-   ShowMessage('ID da unidade a ser salvo: ' + IntToStr(unidadeID));
+  DataModule1.tabCadastroRoteadores.FieldByName('data_cadastro').AsDateTime := StrToDate(DateCadastro.Text);
+  DataModule1.tabCadastroRoteadores.FieldByName('observacoes').AsString          := MemoObservacoes.Text;
+   
 end;
 
 
 
 
 
-procedure TformTelaCadastroPerifericos.LimparCamposImpressoras;
+procedure TformTelaCadastroRoteadores.LimparCamposRoteadores;
 begin
 
-  EditNomeImpressora.Clear;
+  EditNomeRoteador.Clear;
   EditEnderecoIP.Clear;
   EditUsuarioResponsavel.Clear;
   EditEnderecoMAC.Clear;
@@ -371,28 +368,36 @@ begin
   ComboBox1.ItemIndex := 0;
   ComboBox2.ItemIndex := 0;
   CheckBox1.Checked := False;
-  EditNomeImpressora.SetFocus;
+  EditNomeRoteador.SetFocus;
 end;
 
 
-procedure TformTelaCadastroPerifericos.SpeedButton5Click(Sender: TObject);
+
+
+
+
+
+procedure TformTelaCadastroRoteadores.SpeedButton5Click(Sender: TObject);
 
  begin
- LimparCamposImpressoras;
- DataModule1.tabCadastroImpressoras.Append; // ou .Insert
+ LimparCamposRoteadores;
+ DataModule1.tabCadastroRoteadores.Append; // ou .Insert
 end;
 
 
 
 
 
-procedure TformTelaCadastroPerifericos.SpeedButton3Click(Sender: TObject);
+
+
+
+procedure TformTelaCadastroRoteadores.SpeedButton3Click(Sender: TObject);
 var
   registroID: Variant;
 begin
-  registroID := DataModule1.tabCadastroImpressoras.FieldByName('id').Value;
+  registroID := DataModule1.tabCadastroRoteadores.FieldByName('id').Value;
 
-  if DataModule1.tabCadastroImpressoras.IsEmpty or VarIsNull(registroID) then
+  if DataModule1.tabCadastroRoteadores.IsEmpty or VarIsNull(registroID) then
   begin
     ShowMessage('Nenhum registro selecionado para excluir.');
     Exit;
@@ -401,15 +406,29 @@ begin
   if MessageDlg('Tem certeza que deseja excluir este registro?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
   begin
     try
-      DataModule1.tabCadastroImpressoras.Delete;
+      DataModule1.tabCadastroRoteadores.Delete;
       ShowMessage('Registro excluído com sucesso!');
     except
       on E: Exception do
         ShowMessage('Não foi possível excluir o registro. Motivo: ' + E.Message);
     end;
   end;
-  LimparCamposImpressoras;
+  LimparCamposRoteadores;
 end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 end.

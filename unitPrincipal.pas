@@ -17,6 +17,7 @@ type
 
     
     procedure EditImpressorasClick(Sender: TObject);
+    procedure EditRoteadoresClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -29,12 +30,13 @@ var
 
 implementation
 
-uses unitTelaCadastro, unitDM, unitTelaCadastroPerifericos;
+uses unitTelaCadastroComputadores, unitDM, unitTelaCadastroImpressoras,
+  unitTelaCadastroRoteadores;
 
 {$R *.dfm}
 
 procedure TTelaPrincipal.EditCompuadoresClick(Sender: TObject);
-begin formTelaCadastro.showModal;
+begin formTelaCadastroComputadores.showModal;
   end;
 
 
@@ -47,7 +49,12 @@ end;
 
 procedure TTelaPrincipal.EditImpressorasClick(Sender: TObject);
 begin
- formTelaCadastroPerifericos.showModal;
+ formTelaCadastroImpressoras.showModal;
+end;
+
+procedure TTelaPrincipal.EditRoteadoresClick(Sender: TObject);
+begin
+formTelaCadastroRoteadores.ShowModal;
 end;
 
 end.
