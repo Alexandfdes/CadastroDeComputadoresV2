@@ -1,6 +1,6 @@
 object formTelaCadastroImpressoras: TformTelaCadastroImpressoras
-  Left = 323
-  Top = 221
+  Left = 285
+  Top = 88
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Tela Cadastro de Impressoras'
@@ -143,7 +143,7 @@ object formTelaCadastroImpressoras: TformTelaCadastroImpressoras
     Top = 0
     Width = 809
     Height = 393
-    ActivePage = Cadastro
+    ActivePage = Listagem
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -406,13 +406,6 @@ object formTelaCadastroImpressoras: TformTelaCadastroImpressoras
           end
           item
             Expanded = False
-            FieldName = 'observacoes'
-            Title.Caption = 'Observacoes'
-            Width = 316
-            Visible = True
-          end
-          item
-            Expanded = False
             FieldName = 'data_cadastro'
             Title.Caption = 'Data'
             Visible = True
@@ -464,6 +457,7 @@ object formTelaCadastroImpressoras: TformTelaCadastroImpressoras
     Height = 21
     ItemHeight = 13
     TabOrder = 3
+    Visible = False
   end
   object EditPesquisa: TEdit
     Left = 8

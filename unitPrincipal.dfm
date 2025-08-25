@@ -1,6 +1,6 @@
 object TelaPrincipal: TTelaPrincipal
-  Left = 279
-  Top = 123
+  Left = 296
+  Top = 131
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Sistema de Controle'

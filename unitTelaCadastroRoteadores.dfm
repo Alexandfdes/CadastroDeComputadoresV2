@@ -1,6 +1,6 @@
 object formTelaCadastroRoteadores: TformTelaCadastroRoteadores
-  Left = 342
-  Top = 134
+  Left = 288
+  Top = 87
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'formTelaCadastroRoteadores'
@@ -171,9 +171,9 @@ object formTelaCadastroRoteadores: TformTelaCadastroRoteadores
       object Label2: TLabel
         Left = 25
         Top = 280
-        Width = 120
+        Width = 106
         Height = 13
-        Caption = 'Usu'#225'rio respons'#225'vel '
+        Caption = 'Usu'#225'rio de acesso'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -223,9 +223,9 @@ object formTelaCadastroRoteadores: TformTelaCadastroRoteadores
       object Label6: TLabel
         Left = 207
         Top = 96
-        Width = 37
+        Width = 99
         Height = 13
-        Caption = 'Serial '
+        Caption = 'Senha de acesso'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -292,7 +292,7 @@ object formTelaCadastroRoteadores: TformTelaCadastroRoteadores
         Height = 21
         TabOrder = 0
       end
-      object EditUsuarioResponsavel: TEdit
+      object EditUsuario: TEdit
         Left = 24
         Top = 296
         Width = 161
@@ -306,7 +306,7 @@ object formTelaCadastroRoteadores: TformTelaCadastroRoteadores
         Height = 21
         TabOrder = 2
       end
-      object EditSerial: TEdit
+      object EditSenha: TEdit
         Left = 208
         Top = 112
         Width = 161
@@ -371,64 +371,50 @@ object formTelaCadastroRoteadores: TformTelaCadastroRoteadores
         Columns = <
           item
             Expanded = False
-            FieldName = 'nome_impressora'
+            FieldName = 'nome_roteador'
             Title.Caption = 'Nome'
-            Width = 136
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'usuario_responsavel'
-            Title.Caption = 'Usuario'
-            Width = 127
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'endereco_mac'
-            Title.Caption = 'MAC'
-            Width = 92
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'unidade_nome'
-            Title.Caption = 'Unidade'
-            Width = 71
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'setor_nome'
             Title.Caption = 'Setor'
-            Width = 161
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'serial'
-            Title.Caption = 'Serial'
-            Width = 105
+            FieldName = 'unidade_nome'
+            Title.Caption = 'Unidade'
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'observacoes'
-            Title.Caption = 'Observacoes'
-            Width = 316
+            FieldName = 'endereco_mac'
+            Title.Caption = 'MAC'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'endereco_ip'
+            Title.Caption = 'Endereco'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'usuario_acesso'
+            Title.Caption = 'Usuario'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'senha_acesso'
+            Title.Caption = 'Senha'
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'data_cadastro'
             Title.Caption = 'Data'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'endereco_ip'
-            Title.Caption = 'IP'
-            Width = 111
             Visible = True
           end>
       end

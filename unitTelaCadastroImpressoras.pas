@@ -38,7 +38,7 @@ type
     DBGrid1: TDBGrid;
     ComboBox1: TComboBox;
     CheckBox1: TCheckBox;
-    ComboBox2: TComboBox;
+     ComboBox2: TComboBox;
     EditPesquisa: TEdit;
     procedure ComboBox1Change(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
@@ -245,7 +245,7 @@ procedure TformTelaCadastroImpressoras.FormShow(Sender: TObject);
 begin
 PaginaImpressoras.ActivePage := Cadastro;
 
-
+ DataModule1.ADOQuery2.Close;
 DataModule1.tabCadastroImpressoras.Append; // ou .Insert
  DateCadastro.Text := FormatDateTime('dd/mm/yyyy', Now);
   DataModule1.tabCadastroImpressoras.Open;

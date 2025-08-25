@@ -26,9 +26,9 @@ type
     Label9: TLabel;
     Label7: TLabel;
     EditNomeRoteador: TEdit;
-    EditUsuarioResponsavel: TEdit;
+    EditUsuario: TEdit;
     EditEnderecoMAC: TEdit;
-    EditSerial: TEdit;
+    EditSenha: TEdit;
     EditEnderecoIP: TEdit;
     DateCadastro: TEdit;
     ComboUnidade: TComboBox;
@@ -47,6 +47,7 @@ type
     procedure SpeedButton5Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+
   private
     procedure CarregarCamposRoteadores;
     procedure SalvarCamposRoteadores;
@@ -167,9 +168,9 @@ var
 begin
   EditNomeRoteador.Text    := DataModule1.tabCadastroRoteadores.FieldByName('nome_roteador').AsString;
   EditEnderecoIP.Text        := DataModule1.tabCadastroRoteadores.FieldByName('endereco_ip').AsString;
-  EditUsuarioResponsavel.Text:= DataModule1.tabCadastroRoteadores.FieldByName('usuario_responsavel').AsString;
+  EditUsuario.Text:= DataModule1.tabCadastroRoteadores.FieldByName('usuario_acesso').AsString;
   EditEnderecoMAC.Text       := DataModule1.tabCadastroRoteadores.FieldByName('endereco_mac').AsString;
-  EditSerial.Text           := DataModule1.tabCadastroRoteadores.FieldByName('serial').AsString;
+  EditSenha.Text           := DataModule1.tabCadastroRoteadores.FieldByName('senha_acesso').AsString;
   DateCadastro.Text          := DataModule1.tabCadastroRoteadores.FieldByName('data_cadastro').AsString;
   MemoObservacoes.Text       := DataModule1.tabCadastroRoteadores.FieldByName('observacoes').AsString;
 
@@ -238,10 +239,12 @@ end;
 
 
 
+
+
 procedure TformTelaCadastroRoteadores.FormShow(Sender: TObject);
 begin
 PaginaRoteadores.ActivePage := Cadastro;
-
+ DataModule1.ADOQuery3.Close;
 
 DataModule1.tabCadastroRoteadores.Append; // ou .Insert
  DateCadastro.Text := FormatDateTime('dd/mm/yyyy', Now);
@@ -308,9 +311,9 @@ begin
     DataModule1.tabCadastroRoteadores.Edit;
   DataModule1.tabCadastroRoteadores.FieldByName('nome_roteador').AsString      := EditNomeRoteador.Text;
   DataModule1.tabCadastroRoteadores.FieldByName('endereco_ip').AsString          := EditEnderecoIP.Text;
-  DataModule1.tabCadastroRoteadores.FieldByName('usuario_responsavel').AsString  := EditUsuarioResponsavel.Text;
+  DataModule1.tabCadastroRoteadores.FieldByName('usuario_acesso').AsString  := EditUsuario.Text;
   DataModule1.tabCadastroRoteadores.FieldByName('endereco_mac').AsString         := EditEnderecoMAC.Text;
-  DataModule1.tabCadastroRoteadores.FieldByName('serial').AsString              := EditSerial.Text;
+  DataModule1.tabCadastroRoteadores.FieldByName('senha_acesso').AsString              := EditSenha.Text;
 
   // Busca o ID correspondente ao nome selecionado no ComboBox
   setorID := DataModule1.tabSetores.Lookup('nome', ComboSetor.Text, 'id');
@@ -343,8 +346,8 @@ if Trim(DateCadastro.Text) = '' then
   DataModule1.tabCadastroRoteadores.FieldByName('data_cadastro').Clear
 else
   DataModule1.tabCadastroRoteadores.FieldByName('data_cadastro').AsDateTime := StrToDate(DateCadastro.Text);
-  DataModule1.tabCadastroRoteadores.FieldByName('observacoes').AsString          := MemoObservacoes.Text;
-   
+  DataModule1.tabCadastroRoteadores.FieldByName('observacoes').AsString := MemoObservacoes.Text;
+
 end;
 
 
@@ -356,9 +359,9 @@ begin
 
   EditNomeRoteador.Clear;
   EditEnderecoIP.Clear;
-  EditUsuarioResponsavel.Clear;
+  EditUsuario.Clear;
   EditEnderecoMAC.Clear;
-  EditSerial.Clear;
+  EditSenha.Clear;
   ComboSetor.ItemIndex := -1; // se for ComboBox, limpa seleção
   ComboUnidade.ItemIndex := -1; // idem
   DateCadastro.Text := DateToStr(Date);
@@ -415,6 +418,10 @@ begin
   end;
   LimparCamposRoteadores;
 end;
+
+
+
+
 
 
 

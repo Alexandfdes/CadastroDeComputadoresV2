@@ -289,7 +289,7 @@ object DataModule1: TDataModule1
     end
   end
   object dsQuery2: TDataSource
-    DataSet = ADOQuery3
+    DataSet = ADOQuery2
     Left = 120
     Top = 264
   end
@@ -310,6 +310,43 @@ object DataModule1: TDataModule1
     TableName = 'telacadastroroteadores'
     Left = 256
     Top = 32
+    object tabCadastroRoteadoresid: TAutoIncField
+      FieldName = 'id'
+      ReadOnly = True
+    end
+    object tabCadastroRoteadoresnome_roteador: TStringField
+      FieldName = 'nome_roteador'
+      Size = 50
+    end
+    object tabCadastroRoteadoressenha_acesso: TStringField
+      FieldName = 'senha_acesso'
+      Size = 50
+    end
+    object tabCadastroRoteadoresunidade_id: TIntegerField
+      FieldName = 'unidade_id'
+    end
+    object tabCadastroRoteadoressetor_id: TIntegerField
+      FieldName = 'setor_id'
+    end
+    object tabCadastroRoteadoresendereco_mac: TStringField
+      FieldName = 'endereco_mac'
+      Size = 50
+    end
+    object tabCadastroRoteadoresendereco_ip: TStringField
+      FieldName = 'endereco_ip'
+      Size = 50
+    end
+    object tabCadastroRoteadoresusuario_acesso: TStringField
+      FieldName = 'usuario_acesso'
+      Size = 50
+    end
+    object tabCadastroRoteadoresobservacoes: TMemoField
+      FieldName = 'observacoes'
+      BlobType = ftMemo
+    end
+    object tabCadastroRoteadoresdata_cadastro: TDateTimeField
+      FieldName = 'data_cadastro'
+    end
   end
   object ADOQuery3: TADOQuery
     Active = True
@@ -335,9 +372,15 @@ object DataModule1: TDataModule1
       FieldName = 'nome_roteador'
       Size = 50
     end
-    object ADOQuery3serial: TStringField
-      FieldName = 'serial'
+    object ADOQuery3senha_acesso: TStringField
+      FieldName = 'senha_acesso'
       Size = 50
+    end
+    object ADOQuery3unidade_id: TIntegerField
+      FieldName = 'unidade_id'
+    end
+    object ADOQuery3setor_id: TIntegerField
+      FieldName = 'setor_id'
     end
     object ADOQuery3endereco_mac: TStringField
       FieldName = 'endereco_mac'
@@ -347,8 +390,8 @@ object DataModule1: TDataModule1
       FieldName = 'endereco_ip'
       Size = 50
     end
-    object ADOQuery3usuario_responsavel: TStringField
-      FieldName = 'usuario_responsavel'
+    object ADOQuery3usuario_acesso: TStringField
+      FieldName = 'usuario_acesso'
       Size = 50
     end
     object ADOQuery3observacoes: TMemoField
@@ -365,12 +408,6 @@ object DataModule1: TDataModule1
     object ADOQuery3unidade_nome: TStringField
       FieldName = 'unidade_nome'
       Size = 50
-    end
-    object ADOQuery3unidade_id: TIntegerField
-      FieldName = 'unidade_id'
-    end
-    object ADOQuery3setor_id: TIntegerField
-      FieldName = 'setor_id'
     end
   end
 end

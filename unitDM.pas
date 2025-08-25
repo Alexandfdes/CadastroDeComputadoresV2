@@ -39,13 +39,11 @@ type
     tabCadastroImpressorassetor_id: TIntegerField;
     tabCadastroImpressorasendereco_mac: TStringField;
     tabCadastroImpressorasendereco_ip: TStringField;
-    tabCadastroImpressorasusuario_responsavel: TStringField;
     tabCadastroImpressorasobservacoes: TMemoField;
     tabCadastroImpressorasdata_cadastro: TDateTimeField;
     ADOQuery1: TADOQuery;
     ADOQuery1id: TAutoIncField;
     ADOQuery1nome_computador: TStringField;
-    ADOQuery1usuario_responsavel: TStringField;
     ADOQuery1endereco_ip: TStringField;
     ADOQuery1tipo: TStringField;
     ADOQuery1observacoes: TMemoField;
@@ -74,18 +72,28 @@ type
     dsRoteadores: TDataSource;
     tabCadastroRoteadores: TADOTable;
     ADOQuery3: TADOQuery;
+    tabCadastroRoteadoresid: TAutoIncField;
+    tabCadastroRoteadoresnome_roteador: TStringField;
+    tabCadastroRoteadoressenha_acesso: TStringField;
+    tabCadastroRoteadoresunidade_id: TIntegerField;
+    tabCadastroRoteadoressetor_id: TIntegerField;
+    tabCadastroRoteadoresendereco_mac: TStringField;
+    tabCadastroRoteadoresendereco_ip: TStringField;
+    tabCadastroRoteadoresusuario_acesso: TStringField;
+    tabCadastroRoteadoresobservacoes: TMemoField;
+    tabCadastroRoteadoresdata_cadastro: TDateTimeField;
     ADOQuery3id: TAutoIncField;
     ADOQuery3nome_roteador: TStringField;
-    ADOQuery3serial: TStringField;
+    ADOQuery3senha_acesso: TStringField;
+    ADOQuery3unidade_id: TIntegerField;
+    ADOQuery3setor_id: TIntegerField;
     ADOQuery3endereco_mac: TStringField;
     ADOQuery3endereco_ip: TStringField;
-    ADOQuery3usuario_responsavel: TStringField;
+    ADOQuery3usuario_acesso: TStringField;
     ADOQuery3observacoes: TMemoField;
     ADOQuery3data_cadastro: TDateTimeField;
     ADOQuery3setor_nome: TStringField;
     ADOQuery3unidade_nome: TStringField;
-    ADOQuery3unidade_id: TIntegerField;
-    ADOQuery3setor_id: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
    
   private

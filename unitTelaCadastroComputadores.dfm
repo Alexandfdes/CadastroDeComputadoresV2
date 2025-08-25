@@ -1,6 +1,6 @@
 object formTelaCadastroComputadores: TformTelaCadastroComputadores
-  Left = 329
-  Top = 77
+  Left = -900
+  Top = 130
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Tela de Cadastro'
@@ -143,7 +143,7 @@ object formTelaCadastroComputadores: TformTelaCadastroComputadores
     Top = 0
     Width = 809
     Height = 433
-    ActivePage = Cadastro
+    ActivePage = Listagem
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -384,8 +384,8 @@ object formTelaCadastroComputadores: TformTelaCadastroComputadores
       Caption = 'Listagem'
       ImageIndex = 1
       object DBGrid1: TDBGrid
-        Left = -8
-        Top = 0
+        Left = 0
+        Top = 16
         Width = 809
         Height = 401
         DataSource = DataModule1.dsQuery1
@@ -449,13 +449,6 @@ object formTelaCadastroComputadores: TformTelaCadastroComputadores
             FieldName = 'endereco_ip'
             Title.Caption = 'IP'
             Width = 95
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'observacoes'
-            Title.Caption = 'Observacoes'
-            Width = 357
             Visible = True
           end
           item
