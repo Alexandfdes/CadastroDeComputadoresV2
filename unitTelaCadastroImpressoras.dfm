@@ -1,6 +1,6 @@
 object formTelaCadastroImpressoras: TformTelaCadastroImpressoras
-  Left = 285
-  Top = 88
+  Left = 284
+  Top = 271
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Tela Cadastro de Impressoras'
@@ -143,7 +143,7 @@ object formTelaCadastroImpressoras: TformTelaCadastroImpressoras
     Top = 0
     Width = 809
     Height = 393
-    ActivePage = Listagem
+    ActivePage = Cadastro
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11

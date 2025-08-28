@@ -1,11 +1,11 @@
 object formTelaCadastroRoteadores: TformTelaCadastroRoteadores
-  Left = 288
-  Top = 87
+  Left = 290
+  Top = 175
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'formTelaCadastroRoteadores'
   ClientHeight = 470
-  ClientWidth = 809
+  ClientWidth = 810
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -143,7 +143,7 @@ object formTelaCadastroRoteadores: TformTelaCadastroRoteadores
     Top = 0
     Width = 809
     Height = 393
-    ActivePage = Listagem
+    ActivePage = Cadastro
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11

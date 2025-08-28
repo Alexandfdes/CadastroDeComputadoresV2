@@ -12,6 +12,7 @@ type
     EditComputadores: TBitBtn;
     EditRoteadores: TBitBtn;
     EditImpressoras: TBitBtn;
+    BitBtn1: TBitBtn;
     procedure EditCompuadoresClick(Sender: TObject);
      procedure TrataExcecao(Sender: TObject; E: Exception);
 
@@ -31,7 +32,7 @@ var
 implementation
 
 uses unitTelaCadastroComputadores, unitDM, unitTelaCadastroImpressoras,
-  unitTelaCadastroRoteadores;
+  unitTelaCadastroRoteadores, unitRelatorios;
 
 {$R *.dfm}
 
@@ -54,7 +55,7 @@ end;
 
 procedure TTelaPrincipal.EditRoteadoresClick(Sender: TObject);
 begin
-formTelaCadastroRoteadores.ShowModal;
+formTelaRelatorios.ShowModal;
 end;
 
 end.

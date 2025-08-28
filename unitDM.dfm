@@ -1,10 +1,10 @@
 object DataModule1: TDataModule1
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 426
-  Top = 173
-  Height = 439
-  Width = 527
+  Left = 362
+  Top = 133
+  Height = 518
+  Width = 550
   object conexao: TADOConnection
     Connected = True
     ConnectionString = 
@@ -13,8 +13,8 @@ object DataModule1: TDataModule1
       'ESKTOP-P6GK0P9\SQLEXPRESS'
     LoginPrompt = False
     Provider = 'SQLOLEDB.1'
-    Left = 456
-    Top = 352
+    Left = 480
+    Top = 192
   end
   object tabUnidades: TADOTable
     Active = True
@@ -58,6 +58,7 @@ object DataModule1: TDataModule1
     Top = 104
   end
   object tabCadastroComputadores: TADOTable
+    Active = True
     Connection = conexao
     CursorType = ctStatic
     TableName = 'telacadastrocomputadores'
@@ -408,6 +409,175 @@ object DataModule1: TDataModule1
     object ADOQuery3unidade_nome: TStringField
       FieldName = 'unidade_nome'
       Size = 50
+    end
+  end
+  object frxDBComputadores: TfrxDBDataset
+    UserName = 'Computadores'
+    CloseDataSource = False
+    DataSource = dsComputadores
+    BCDToCurrency = False
+    Left = 132
+    Top = 368
+  end
+  object frxComputadores: TfrxReport
+    Version = '5.4.6'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Padr'#227'o'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 45894.627214386600000000
+    ReportOptions.LastChange = 45895.592685173600000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      ''
+      'begin'
+      ''
+      'end.')
+    Left = 40
+    Top = 368
+    Datasets = <
+      item
+        DataSet = frxDBComputadores
+        DataSetName = 'Computadores'
+      end>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object mdComputadores: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      object ReportTitle1: TfrxReportTitle
+        FillType = ftBrush
+        Height = 128.504020000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+        object Memo2: TfrxMemoView
+          Left = 37.795300000000000000
+          Top = 34.015770000000000000
+          Width = 377.953000000000000000
+          Height = 94.488250000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -21
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8 = (
+            'CONTROLE DE COMPUTADORES')
+          ParentFont = False
+        end
+        object Line1: TfrxLineView
+          Top = 120.944960000000000000
+          Width = 710.551640000000000000
+          Color = clBlack
+          Diagonal = True
+        end
+        object Date: TfrxMemoView
+          Left = 631.181510000000000000
+          Top = 7.559060000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          Memo.UTF8 = (
+            '[Date]')
+        end
+      end
+      object MasterData1: TfrxMasterData
+        FillType = ftBrush
+        Height = 34.015770000000000000
+        Top = 253.228510000000000000
+        Width = 718.110700000000000000
+        DataSet = frxDBComputadores
+        DataSetName = 'Computadores'
+        RowCount = 0
+        object frxDBDataset1nome_computador: TfrxMemoView
+          Left = 7.559060000000000000
+          Top = 11.338590000000000000
+          Width = 181.417440000000000000
+          Height = 18.897650000000000000
+          DataField = 'nome_computador'
+          DataSet = frxDBComputadores
+          DataSetName = 'Computadores'
+          Memo.UTF8 = (
+            '[Computadores."nome_computador"]')
+        end
+        object frxDBDataset1usuario_responsavel: TfrxMemoView
+          Left = 196.535560000000000000
+          Top = 11.338590000000000000
+          Width = 192.756030000000000000
+          Height = 18.897650000000000000
+          DataField = 'usuario_responsavel'
+          DataSet = frxDBComputadores
+          DataSetName = 'Computadores'
+          Memo.UTF8 = (
+            '[Computadores."usuario_responsavel"]')
+        end
+        object Computadoresanydesk: TfrxMemoView
+          Left = 411.968770000000000000
+          Top = 11.338590000000000000
+          Width = 120.944960000000000000
+          Height = 18.897650000000000000
+          DataField = 'anydesk'
+          DataSet = frxDBComputadores
+          DataSetName = 'Computadores'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haCenter
+          Memo.UTF8 = (
+            '[Computadores."anydesk"]')
+          ParentFont = False
+        end
+        object Computadoresdata_cadastro: TfrxMemoView
+          Align = baWidth
+          Left = 532.913730000000000000
+          Top = 11.338590000000000000
+          Width = 185.196970000000000000
+          Height = 18.897650000000000000
+          DataField = 'data_cadastro'
+          DataSet = frxDBComputadores
+          DataSetName = 'Computadores'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8 = (
+            '[Computadores."data_cadastro"]')
+          ParentFont = False
+        end
+      end
+      object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
+        Height = 22.677180000000000000
+        Top = 347.716760000000000000
+        Width = 718.110700000000000000
+        object Memo1: TfrxMemoView
+          Left = 642.520100000000000000
+          Width = 75.590600000000000000
+          Height = 18.897650000000000000
+          HAlign = haRight
+          Memo.UTF8 = (
+            '[Page#]')
+        end
+      end
+      object Header1: TfrxHeader
+        FillType = ftBrush
+        Height = 22.677180000000000000
+        Top = 207.874150000000000000
+        Width = 718.110700000000000000
+      end
     end
   end
 end

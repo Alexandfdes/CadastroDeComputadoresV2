@@ -1,6 +1,6 @@
 object formTelaCadastroComputadores: TformTelaCadastroComputadores
-  Left = -900
-  Top = 130
+  Left = 260
+  Top = 127
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Tela de Cadastro'
@@ -143,7 +143,7 @@ object formTelaCadastroComputadores: TformTelaCadastroComputadores
     Top = 0
     Width = 809
     Height = 433
-    ActivePage = Listagem
+    ActivePage = Cadastro
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -385,7 +385,7 @@ object formTelaCadastroComputadores: TformTelaCadastroComputadores
       ImageIndex = 1
       object DBGrid1: TDBGrid
         Left = 0
-        Top = 16
+        Top = 0
         Width = 809
         Height = 401
         DataSource = DataModule1.dsQuery1

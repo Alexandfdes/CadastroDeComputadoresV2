@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Mask, DBCtrls, Buttons, DB, Menus, ComCtrls, Grids,
-  DBGrids, JPEG, ExtCtrls;
+  DBGrids, JPEG, ExtCtrls, frxClass, frxDBSet;
 
 type
   TformTelaCadastroComputadores = class(TForm)

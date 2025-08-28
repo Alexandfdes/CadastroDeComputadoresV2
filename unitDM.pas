@@ -3,7 +3,8 @@ unit unitDM;
 interface
 
 uses
-  SysUtils, Classes, DB, ADODB, FMTBcd, SqlExpr, DBXpress;
+  SysUtils, Classes, DB, ADODB, FMTBcd, SqlExpr, DBXpress, frxClass,
+  frxDBSet;
 
 type
   TDataModule1 = class(TDataModule)
@@ -94,6 +95,8 @@ type
     ADOQuery3data_cadastro: TDateTimeField;
     ADOQuery3setor_nome: TStringField;
     ADOQuery3unidade_nome: TStringField;
+    frxDBComputadores: TfrxDBDataset;
+    frxComputadores: TfrxReport;
     procedure DataModuleCreate(Sender: TObject);
    
   private
@@ -113,8 +116,10 @@ procedure TDataModule1.DataModuleCreate(Sender: TObject);
 begin
   tabUnidades.Open;
   tabSetores.Open;
+  tabCadastroComputadores.Close;
   tabCadastroComputadores.Open;
   conexao.Connected := True;
+ 
 end;
 
 

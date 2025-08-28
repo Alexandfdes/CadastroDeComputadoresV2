@@ -1,10 +1,10 @@
 object TelaPrincipal: TTelaPrincipal
-  Left = 296
-  Top = 131
+  Left = 255
+  Top = 188
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Sistema de Controle'
-  ClientHeight = 446
+  ClientHeight = 431
   ClientWidth = 809
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -41,13 +41,22 @@ object TelaPrincipal: TTelaPrincipal
       TabOrder = 1
       OnClick = EditImpressorasClick
     end
+    object BitBtn1: TBitBtn
+      Left = 240
+      Top = 0
+      Width = 121
+      Height = 97
+      Caption = 'Roteadores'
+      TabOrder = 2
+      OnClick = EditRoteadoresClick
+    end
   end
   object EditRoteadores: TBitBtn
-    Left = 240
+    Left = 360
     Top = 0
     Width = 121
     Height = 97
-    Caption = 'Roteadores'
+    Caption = 'Relatorios'
     TabOrder = 1
     OnClick = EditRoteadoresClick
   end
