@@ -1,8 +1,8 @@
 object DataModule1: TDataModule1
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 362
-  Top = 133
+  Left = 285
+  Top = 95
   Height = 518
   Width = 550
   object conexao: TADOConnection
@@ -109,7 +109,7 @@ object DataModule1: TDataModule1
     end
   end
   object dsComputadores: TDataSource
-    DataSet = tabCadastroComputadores
+    DataSet = ADOQuery1
     Left = 32
     Top = 104
   end
@@ -163,17 +163,18 @@ object DataModule1: TDataModule1
     end
   end
   object dsImpressoras: TDataSource
-    DataSet = tabSetores
+    DataSet = ADOQuery2
     Left = 136
     Top = 112
   end
   object ADOQuery1: TADOQuery
+    Active = True
     Connection = conexao
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
       'SELECT t.*, s.nome AS setor_nome, u.nome AS unidade_nome'
-      'FROM telacadastrorocomputadores t'
+      'FROM telacadastrocomputadores t'
       'LEFT JOIN setores s ON t.setor_id = s.id'
       'LEFT JOIN unidades u ON t.unidade_id = u.id')
     Left = 32
@@ -296,11 +297,11 @@ object DataModule1: TDataModule1
   end
   object dsQuery3: TDataSource
     DataSet = ADOQuery3
-    Left = 232
-    Top = 272
+    Left = 240
+    Top = 264
   end
   object dsRoteadores: TDataSource
-    DataSet = tabCadastroRoteadores
+    DataSet = ADOQuery3
     Left = 256
     Top = 104
   end
@@ -416,8 +417,8 @@ object DataModule1: TDataModule1
     CloseDataSource = False
     DataSource = dsComputadores
     BCDToCurrency = False
-    Left = 132
-    Top = 368
+    Left = 44
+    Top = 416
   end
   object frxComputadores: TfrxReport
     Version = '5.4.6'
@@ -428,7 +429,7 @@ object DataModule1: TDataModule1
     PrintOptions.Printer = 'Padr'#227'o'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 45894.627214386600000000
-    ReportOptions.LastChange = 45895.592685173600000000
+    ReportOptions.LastChange = 45902.605996585600000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -436,7 +437,7 @@ object DataModule1: TDataModule1
       ''
       'end.')
     Left = 40
-    Top = 368
+    Top = 352
     Datasets = <
       item
         DataSet = frxDBComputadores
@@ -458,17 +459,16 @@ object DataModule1: TDataModule1
       BottomMargin = 10.000000000000000000
       object ReportTitle1: TfrxReportTitle
         FillType = ftBrush
-        Height = 128.504020000000000000
+        Height = 60.472480000000000000
         Top = 18.897650000000000000
         Width = 718.110700000000000000
         object Memo2: TfrxMemoView
-          Left = 37.795300000000000000
-          Top = 34.015770000000000000
-          Width = 377.953000000000000000
-          Height = 94.488250000000000000
+          Left = 3.779530000000000000
+          Width = 453.543600000000000000
+          Height = 52.913420000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -21
+          Font.Height = -27
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Memo.UTF8 = (
@@ -476,8 +476,9 @@ object DataModule1: TDataModule1
           ParentFont = False
         end
         object Line1: TfrxLineView
-          Top = 120.944960000000000000
-          Width = 710.551640000000000000
+          Left = -3.779530000000000000
+          Top = 56.692950000000000000
+          Width = 721.890230000000000000
           Color = clBlack
           Diagonal = True
         end
@@ -492,38 +493,39 @@ object DataModule1: TDataModule1
       end
       object MasterData1: TfrxMasterData
         FillType = ftBrush
-        Height = 34.015770000000000000
-        Top = 253.228510000000000000
+        Height = 30.236240000000000000
+        Top = 188.976500000000000000
         Width = 718.110700000000000000
         DataSet = frxDBComputadores
         DataSetName = 'Computadores'
         RowCount = 0
         object frxDBDataset1nome_computador: TfrxMemoView
-          Left = 7.559060000000000000
           Top = 11.338590000000000000
-          Width = 181.417440000000000000
+          Width = 102.047310000000000000
           Height = 18.897650000000000000
           DataField = 'nome_computador'
           DataSet = frxDBComputadores
           DataSetName = 'Computadores'
+          HAlign = haBlock
           Memo.UTF8 = (
             '[Computadores."nome_computador"]')
         end
         object frxDBDataset1usuario_responsavel: TfrxMemoView
-          Left = 196.535560000000000000
+          Left = 102.047310000000000000
           Top = 11.338590000000000000
-          Width = 192.756030000000000000
+          Width = 113.385900000000000000
           Height = 18.897650000000000000
           DataField = 'usuario_responsavel'
           DataSet = frxDBComputadores
           DataSetName = 'Computadores'
+          HAlign = haBlock
           Memo.UTF8 = (
             '[Computadores."usuario_responsavel"]')
         end
         object Computadoresanydesk: TfrxMemoView
-          Left = 411.968770000000000000
+          Left = 449.764070000000000000
           Top = 11.338590000000000000
-          Width = 120.944960000000000000
+          Width = 94.488250000000000000
           Height = 18.897650000000000000
           DataField = 'anydesk'
           DataSet = frxDBComputadores
@@ -533,16 +535,15 @@ object DataModule1: TDataModule1
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          HAlign = haCenter
+          HAlign = haBlock
           Memo.UTF8 = (
             '[Computadores."anydesk"]')
           ParentFont = False
         end
         object Computadoresdata_cadastro: TfrxMemoView
-          Align = baWidth
-          Left = 532.913730000000000000
+          Left = 642.520100000000000000
           Top = 11.338590000000000000
-          Width = 185.196970000000000000
+          Width = 75.590600000000000000
           Height = 18.897650000000000000
           DataField = 'data_cadastro'
           DataSet = frxDBComputadores
@@ -557,11 +558,47 @@ object DataModule1: TDataModule1
             '[Computadores."data_cadastro"]')
           ParentFont = False
         end
+        object Computadoresunidade_nome: TfrxMemoView
+          Left = 215.433210000000000000
+          Top = 11.338590000000000000
+          Width = 90.708720000000000000
+          Height = 18.897650000000000000
+          DataField = 'unidade_nome'
+          DataSet = frxDBComputadores
+          DataSetName = 'Computadores'
+          HAlign = haBlock
+          Memo.UTF8 = (
+            '[Computadores."unidade_nome"]')
+        end
+        object Computadoressetor_nome: TfrxMemoView
+          Left = 317.480520000000000000
+          Top = 11.338590000000000000
+          Width = 124.724490000000000000
+          Height = 18.897650000000000000
+          DataField = 'setor_nome'
+          DataSet = frxDBComputadores
+          DataSetName = 'Computadores'
+          HAlign = haBlock
+          Memo.UTF8 = (
+            '[Computadores."setor_nome"]')
+        end
+        object Computadorestipo: TfrxMemoView
+          Left = 551.811380000000000000
+          Top = 11.338590000000000000
+          Width = 90.708720000000000000
+          Height = 18.897650000000000000
+          DataField = 'tipo'
+          DataSet = frxDBComputadores
+          DataSetName = 'Computadores'
+          HAlign = haBlock
+          Memo.UTF8 = (
+            '[Computadores."tipo"]')
+        end
       end
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
         Height = 22.677180000000000000
-        Top = 347.716760000000000000
+        Top = 279.685220000000000000
         Width = 718.110700000000000000
         object Memo1: TfrxMemoView
           Left = 642.520100000000000000
@@ -574,9 +611,678 @@ object DataModule1: TDataModule1
       end
       object Header1: TfrxHeader
         FillType = ftBrush
-        Height = 22.677180000000000000
-        Top = 207.874150000000000000
+        Height = 26.456710000000000000
+        Top = 139.842610000000000000
         Width = 718.110700000000000000
+        object Memo3: TfrxMemoView
+          Left = -3.779530000000000000
+          Top = 7.559060000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haBlock
+          Memo.UTF8 = (
+            'Computador')
+          ParentFont = False
+        end
+        object Memo4: TfrxMemoView
+          Left = 102.047310000000000000
+          Top = 7.559060000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haBlock
+          Memo.UTF8 = (
+            'Usu'#195#161'rio')
+          ParentFont = False
+        end
+        object Memo5: TfrxMemoView
+          Left = 215.433210000000000000
+          Top = 7.559060000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haBlock
+          Memo.UTF8 = (
+            'Unidade')
+          ParentFont = False
+        end
+        object Memo6: TfrxMemoView
+          Left = 317.480520000000000000
+          Top = 7.559060000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haBlock
+          Memo.UTF8 = (
+            'Setor')
+          ParentFont = False
+        end
+        object Memo7: TfrxMemoView
+          Left = 449.764070000000000000
+          Top = 7.559060000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haBlock
+          Memo.UTF8 = (
+            'Anydesk')
+          ParentFont = False
+        end
+        object Memo8: TfrxMemoView
+          Left = 551.811380000000000000
+          Top = 7.559060000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haBlock
+          Memo.UTF8 = (
+            'Tipo')
+          ParentFont = False
+        end
+        object Memo9: TfrxMemoView
+          Left = 665.197280000000000000
+          Top = 7.559060000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haBlock
+          Memo.UTF8 = (
+            'Data')
+          ParentFont = False
+        end
+      end
+    end
+  end
+  object frxDBImpressoras: TfrxDBDataset
+    UserName = 'Impressoras'
+    CloseDataSource = False
+    DataSource = dsImpressoras
+    BCDToCurrency = False
+    Left = 156
+    Top = 416
+  end
+  object frxDBRoteadores: TfrxDBDataset
+    UserName = 'Roteadores'
+    CloseDataSource = False
+    DataSource = dsRoteadores
+    BCDToCurrency = False
+    Left = 260
+    Top = 416
+  end
+  object frxImpressoras: TfrxReport
+    Version = '5.4.6'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Padr'#227'o'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 45894.627214386600000000
+    ReportOptions.LastChange = 45902.650136875000000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      ''
+      'begin'
+      ''
+      'end.')
+    Left = 144
+    Top = 360
+    Datasets = <
+      item
+        DataSet = frxDBImpressoras
+        DataSetName = 'Impressoras'
+      end>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object mdComputadores: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      object ReportTitle1: TfrxReportTitle
+        FillType = ftBrush
+        Height = 60.472480000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+        object Memo2: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 453.543600000000000000
+          Height = 52.913420000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -27
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8 = (
+            'CONTROLE DE IMPRESSORAS')
+          ParentFont = False
+        end
+        object Line1: TfrxLineView
+          Left = -3.779530000000000000
+          Top = 56.692950000000000000
+          Width = 721.890230000000000000
+          Color = clBlack
+          Diagonal = True
+        end
+        object Date: TfrxMemoView
+          Left = 631.181510000000000000
+          Top = 7.559060000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          Memo.UTF8 = (
+            '[Date]')
+        end
+      end
+      object MasterData1: TfrxMasterData
+        FillType = ftBrush
+        Height = 30.236240000000000000
+        Top = 188.976500000000000000
+        Width = 718.110700000000000000
+        DataSet = frxDBImpressoras
+        DataSetName = 'Impressoras'
+        RowCount = 0
+        object frxDBDataset1nome_computador: TfrxMemoView
+          Top = 11.338590000000000000
+          Width = 136.063080000000000000
+          Height = 18.897650000000000000
+          DataField = 'nome_impressora'
+          DataSet = frxDBImpressoras
+          DataSetName = 'Impressoras'
+          HAlign = haBlock
+          Memo.UTF8 = (
+            '[Impressoras."nome_impressora"]')
+        end
+        object frxDBDataset1usuario_responsavel: TfrxMemoView
+          Left = 151.181200000000000000
+          Top = 11.338590000000000000
+          Width = 113.385900000000000000
+          Height = 18.897650000000000000
+          DataField = 'usuario_responsavel'
+          DataSet = frxDBImpressoras
+          DataSetName = 'Impressoras'
+          HAlign = haBlock
+          Memo.UTF8 = (
+            '[Impressoras."usuario_responsavel"]')
+        end
+        object Computadoresanydesk: TfrxMemoView
+          Left = 525.354670000000000000
+          Top = 11.338590000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          DataField = 'serial'
+          DataSet = frxDBImpressoras
+          DataSetName = 'Impressoras'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haBlock
+          Memo.UTF8 = (
+            '[Impressoras."serial"]')
+          ParentFont = False
+        end
+        object Computadoresdata_cadastro: TfrxMemoView
+          Left = 642.520100000000000000
+          Top = 11.338590000000000000
+          Width = 75.590600000000000000
+          Height = 18.897650000000000000
+          DataField = 'data_cadastro'
+          DataSet = frxDBImpressoras
+          DataSetName = 'Impressoras'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8 = (
+            '[Impressoras."data_cadastro"]')
+          ParentFont = False
+        end
+        object Computadoresunidade_nome: TfrxMemoView
+          Left = 279.685220000000000000
+          Top = 11.338590000000000000
+          Width = 90.708720000000000000
+          Height = 18.897650000000000000
+          DataField = 'unidade_nome'
+          DataSet = frxDBImpressoras
+          DataSetName = 'Impressoras'
+          HAlign = haBlock
+          Memo.UTF8 = (
+            '[Impressoras."unidade_nome"]')
+        end
+        object Computadoressetor_nome: TfrxMemoView
+          Left = 389.291590000000000000
+          Top = 11.338590000000000000
+          Width = 124.724490000000000000
+          Height = 18.897650000000000000
+          DataField = 'setor_nome'
+          DataSet = frxDBImpressoras
+          DataSetName = 'Impressoras'
+          HAlign = haBlock
+          Memo.UTF8 = (
+            '[Impressoras."setor_nome"]')
+        end
+      end
+      object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
+        Height = 22.677180000000000000
+        Top = 279.685220000000000000
+        Width = 718.110700000000000000
+        object Memo1: TfrxMemoView
+          Left = 642.520100000000000000
+          Width = 75.590600000000000000
+          Height = 18.897650000000000000
+          HAlign = haRight
+          Memo.UTF8 = (
+            '[Page#]')
+        end
+      end
+      object Header1: TfrxHeader
+        FillType = ftBrush
+        Height = 26.456710000000000000
+        Top = 139.842610000000000000
+        Width = 718.110700000000000000
+        object Memo3: TfrxMemoView
+          Top = 7.559060000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haBlock
+          Memo.UTF8 = (
+            'Impressora')
+          ParentFont = False
+        end
+        object Memo4: TfrxMemoView
+          Left = 151.181200000000000000
+          Top = 7.559060000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haBlock
+          Memo.UTF8 = (
+            'Usu'#195#161'rio')
+          ParentFont = False
+        end
+        object Memo5: TfrxMemoView
+          Left = 279.685220000000000000
+          Top = 7.559060000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haBlock
+          Memo.UTF8 = (
+            'Unidade')
+          ParentFont = False
+        end
+        object Memo6: TfrxMemoView
+          Left = 389.291590000000000000
+          Top = 7.559060000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haBlock
+          Memo.UTF8 = (
+            'Setor')
+          ParentFont = False
+        end
+        object Memo7: TfrxMemoView
+          Left = 525.354670000000000000
+          Top = 7.559060000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haBlock
+          Memo.UTF8 = (
+            'Serial')
+          ParentFont = False
+        end
+        object Memo9: TfrxMemoView
+          Left = 650.079160000000000000
+          Top = 7.559060000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haBlock
+          Memo.UTF8 = (
+            'Data')
+          ParentFont = False
+        end
+      end
+    end
+  end
+  object frxRoteadores: TfrxReport
+    Version = '5.4.6'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Padr'#227'o'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 45894.627214386600000000
+    ReportOptions.LastChange = 45902.654227615740000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      ''
+      'begin'
+      ''
+      'end.')
+    Left = 256
+    Top = 360
+    Datasets = <
+      item
+        DataSet = frxDBRoteadores
+        DataSetName = 'Roteadores'
+      end>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object mdComputadores: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      object ReportTitle1: TfrxReportTitle
+        FillType = ftBrush
+        Height = 60.472480000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+        object Memo2: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 453.543600000000000000
+          Height = 52.913420000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -27
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8 = (
+            'CONTROLE DE ROTEADORES')
+          ParentFont = False
+        end
+        object Line1: TfrxLineView
+          Left = -3.779530000000000000
+          Top = 56.692950000000000000
+          Width = 721.890230000000000000
+          Color = clBlack
+          Diagonal = True
+        end
+        object Date: TfrxMemoView
+          Left = 631.181510000000000000
+          Top = 7.559060000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          Memo.UTF8 = (
+            '[Date]')
+        end
+      end
+      object MasterData1: TfrxMasterData
+        FillType = ftBrush
+        Height = 30.236240000000000000
+        Top = 188.976500000000000000
+        Width = 718.110700000000000000
+        DataSet = frxDBRoteadores
+        DataSetName = 'Roteadores'
+        RowCount = 0
+        object frxDBDataset1nome_computador: TfrxMemoView
+          Top = 11.338590000000000000
+          Width = 136.063080000000000000
+          Height = 18.897650000000000000
+          DataField = 'nome_roteador'
+          DataSet = frxDBRoteadores
+          DataSetName = 'Roteadores'
+          HAlign = haBlock
+          Memo.UTF8 = (
+            '[Roteadores."nome_roteador"]')
+        end
+        object frxDBDataset1usuario_responsavel: TfrxMemoView
+          Left = 151.181200000000000000
+          Top = 11.338590000000000000
+          Width = 113.385900000000000000
+          Height = 18.897650000000000000
+          DataField = 'unidade_nome'
+          DataSet = frxDBRoteadores
+          DataSetName = 'Roteadores'
+          HAlign = haBlock
+          Memo.UTF8 = (
+            '[Roteadores."unidade_nome"]')
+        end
+        object Computadoresanydesk: TfrxMemoView
+          Left = 525.354670000000000000
+          Top = 11.338590000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          DataField = 'senha_acesso'
+          DataSet = frxDBRoteadores
+          DataSetName = 'Roteadores'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haBlock
+          Memo.UTF8 = (
+            '[Roteadores."senha_acesso"]')
+          ParentFont = False
+        end
+        object Computadoresdata_cadastro: TfrxMemoView
+          Left = 642.520100000000000000
+          Top = 11.338590000000000000
+          Width = 75.590600000000000000
+          Height = 18.897650000000000000
+          DataField = 'data_cadastro'
+          DataSet = frxDBRoteadores
+          DataSetName = 'Roteadores'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8 = (
+            '[Roteadores."data_cadastro"]')
+          ParentFont = False
+        end
+        object Computadoresunidade_nome: TfrxMemoView
+          Left = 279.685220000000000000
+          Top = 11.338590000000000000
+          Width = 90.708720000000000000
+          Height = 18.897650000000000000
+          DataField = 'setor_nome'
+          DataSet = frxDBRoteadores
+          DataSetName = 'Roteadores'
+          HAlign = haBlock
+          Memo.UTF8 = (
+            '[Roteadores."setor_nome"]')
+        end
+        object Computadoressetor_nome: TfrxMemoView
+          Left = 389.291590000000000000
+          Top = 11.338590000000000000
+          Width = 124.724490000000000000
+          Height = 18.897650000000000000
+          DataField = 'usuario_acesso'
+          DataSet = frxDBRoteadores
+          DataSetName = 'Roteadores'
+          HAlign = haBlock
+          Memo.UTF8 = (
+            '[Roteadores."usuario_acesso"]')
+        end
+      end
+      object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
+        Height = 22.677180000000000000
+        Top = 279.685220000000000000
+        Width = 718.110700000000000000
+        object Memo1: TfrxMemoView
+          Left = 642.520100000000000000
+          Width = 75.590600000000000000
+          Height = 18.897650000000000000
+          HAlign = haRight
+          Memo.UTF8 = (
+            '[Page#]')
+        end
+      end
+      object Header1: TfrxHeader
+        FillType = ftBrush
+        Height = 26.456710000000000000
+        Top = 139.842610000000000000
+        Width = 718.110700000000000000
+        object Memo3: TfrxMemoView
+          Top = 7.559060000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haBlock
+          Memo.UTF8 = (
+            'Impressora')
+          ParentFont = False
+        end
+        object Memo4: TfrxMemoView
+          Left = 151.181200000000000000
+          Top = 7.559060000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haBlock
+          Memo.UTF8 = (
+            'Unidade')
+          ParentFont = False
+        end
+        object Memo5: TfrxMemoView
+          Left = 279.685220000000000000
+          Top = 7.559060000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haBlock
+          Memo.UTF8 = (
+            'Setor')
+          ParentFont = False
+        end
+        object Memo6: TfrxMemoView
+          Left = 385.512060000000000000
+          Top = 7.559060000000000000
+          Width = 124.724490000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haBlock
+          Memo.UTF8 = (
+            'Usu'#195#161'rio Acesso')
+          ParentFont = False
+        end
+        object Memo7: TfrxMemoView
+          Left = 521.575140000000000000
+          Top = 7.559060000000000000
+          Width = 109.606370000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haBlock
+          Memo.UTF8 = (
+            'Senha Acesso')
+          ParentFont = False
+        end
+        object Memo9: TfrxMemoView
+          Left = 650.079160000000000000
+          Top = 7.559060000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haBlock
+          Memo.UTF8 = (
+            'Data')
+          ParentFont = False
+        end
       end
     end
   end

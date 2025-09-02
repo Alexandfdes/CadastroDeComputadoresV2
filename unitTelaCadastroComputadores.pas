@@ -231,7 +231,7 @@ DataModule1.tabCadastroComputadores.Open;
 DataModule1.tabUnidades.Open;
 DataModule1.tabSetores.Open;
 DataModule1.tabCadastroComputadores.Append; // ou .Insert
- DateCadastro.Text := FormatDateTime('dd/mm/yyyy', Now);
+ DateCadastro.Text := FormatDateTime('yyyy-mm-dd', Now);
 
   DataModule1.tabCadastroComputadores.Open;
   DataModule1.tabUnidades.Open;

@@ -4,21 +4,23 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, ExtCtrls;
+  Dialogs, StdCtrls, Buttons, ExtCtrls, jpeg, RXCtrls;
 
 type
   TTelaPrincipal = class(TForm)
-    Panel1: TPanel;
     EditComputadores: TBitBtn;
-    EditRoteadores: TBitBtn;
+    EditRelatorios: TBitBtn;
     EditImpressoras: TBitBtn;
     BitBtn1: TBitBtn;
+    RxSpeedButton1: TRxSpeedButton;
+    SecretPanel1: TSecretPanel;
+    Panel1: TPanel;
     procedure EditCompuadoresClick(Sender: TObject);
      procedure TrataExcecao(Sender: TObject; E: Exception);
 
     
     procedure EditImpressorasClick(Sender: TObject);
-    procedure EditRoteadoresClick(Sender: TObject);
+    procedure EditRelatoriosClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -53,7 +55,7 @@ begin
  formTelaCadastroImpressoras.showModal;
 end;
 
-procedure TTelaPrincipal.EditRoteadoresClick(Sender: TObject);
+procedure TTelaPrincipal.EditRelatoriosClick(Sender: TObject);
 begin
 formTelaRelatorios.ShowModal;
 end;

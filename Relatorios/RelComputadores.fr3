@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TfrxReport Version="5.4.6" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="4095" PreviewOptions.Zoom="1" PrintOptions.Printer="Padrão" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="45894,6272143866" ReportOptions.Description.Text="" ReportOptions.LastChange="45895,5926851736" ScriptLanguage="PascalScript" ScriptText.Text="&#13;&#10;begin&#13;&#10;&#13;&#10;end.">
+<TfrxReport Version="5.4.6" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="4095" PreviewOptions.Zoom="1" PrintOptions.Printer="Padrão" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="45894,6272143866" ReportOptions.Description.Text="" ReportOptions.LastChange="45902,6059965856" ScriptLanguage="PascalScript" ScriptText.Text="&#13;&#10;begin&#13;&#10;&#13;&#10;end.">
   <Datasets>
     <item DataSet="frxDBComputadores" DataSetName="Computadores"/>
   </Datasets>
   <TfrxDataPage Name="Data" Height="1000" Left="0" Top="0" Width="1000"/>
   <TfrxReportPage Name="mdComputadores" PaperWidth="210" PaperHeight="297" PaperSize="9" LeftMargin="10" RightMargin="10" TopMargin="10" BottomMargin="10" ColumnWidth="0" ColumnPositions.Text="" HGuides.Text="" VGuides.Text="">
-    <TfrxReportTitle Name="ReportTitle1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="151,1812" Left="0" Top="18,89765" Width="718,1107">
+    <TfrxReportTitle Name="ReportTitle1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="128,50402" Left="0" Top="18,89765" Width="718,1107">
       <TfrxMemoView Name="Memo2" Left="37,7953" Top="34,01577" Width="377,953" Height="94,48825" Font.Charset="1" Font.Color="0" Font.Height="-21" Font.Name="Arial" Font.Style="1" ParentFont="False" Text="CONTROLE DE COMPUTADORES"/>
       <TfrxLineView Name="Line1" Left="0" Top="120,94496" Width="710,55164" Height="0" Color="0" Diagonal="True"/>
       <TfrxMemoView Name="Date" Left="631,18151" Top="7,55906" Width="79,37013" Height="18,89765" Text="[Date]"/>
     </TfrxReportTitle>
-    <TfrxMasterData Name="MasterData1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="75,5906" Left="0" Top="230,55133" Width="718,1107" ColumnWidth="0" ColumnGap="0" DataSet="frxDBComputadores" DataSetName="Computadores" RowCount="0">
-      <TfrxMemoView Name="frxDBDataset1nome_computador" Left="7,55906" Top="11,33859" Width="181,41744" Height="18,89765" DataField="nome_computador" DataSet="frxDBComputadores" DataSetName="Computadores" Text="[Computadores.&#34;nome_computador&#34;]"/>
-      <TfrxMemoView Name="frxDBDataset1usuario_responsavel" Left="196,53556" Top="11,33859" Width="192,75603" Height="18,89765" DataField="usuario_responsavel" DataSet="frxDBComputadores" DataSetName="Computadores" Text="[Computadores.&#34;usuario_responsavel&#34;]"/>
-      <TfrxMemoView Name="Computadoresanydesk" Left="411,96877" Top="11,33859" Width="120,94496" Height="18,89765" DataField="anydesk" DataSet="frxDBComputadores" DataSetName="Computadores" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" HAlign="haCenter" ParentFont="False" Text="[Computadores.&#34;anydesk&#34;]"/>
-      <TfrxMemoView Name="Computadoresdata_cadastro" Align="baWidth" Left="532,91373" Top="11,33859" Width="185,19697" Height="18,89765" DataField="data_cadastro" DataSet="frxDBComputadores" DataSetName="Computadores" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" HAlign="haRight" ParentFont="False" Text="[Computadores.&#34;data_cadastro&#34;]"/>
+    <TfrxMasterData Name="MasterData1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="30,23624" Left="0" Top="264,5671" Width="718,1107" ColumnWidth="0" ColumnGap="0" DataSet="frxDBComputadores" DataSetName="Computadores" RowCount="0">
+      <TfrxMemoView Name="frxDBDataset1nome_computador" Left="0" Top="11,33859" Width="102,04731" Height="18,89765" DataField="nome_computador" DataSet="frxDBComputadores" DataSetName="Computadores" HAlign="haBlock" Text="[Computadores.&#34;nome_computador&#34;]"/>
+      <TfrxMemoView Name="frxDBDataset1usuario_responsavel" Left="102,04731" Top="11,33859" Width="113,3859" Height="18,89765" DataField="usuario_responsavel" DataSet="frxDBComputadores" DataSetName="Computadores" HAlign="haCenter" Text="[Computadores.&#34;usuario_responsavel&#34;]"/>
+      <TfrxMemoView Name="Computadoresanydesk" Left="457,32313" Top="11,33859" Width="94,48825" Height="18,89765" DataField="anydesk" DataSet="frxDBComputadores" DataSetName="Computadores" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" HAlign="haBlock" ParentFont="False" Text="[Computadores.&#34;anydesk&#34;]"/>
+      <TfrxMemoView Name="Computadoresdata_cadastro" Left="642,5201" Top="11,33859" Width="75,5906" Height="18,89765" DataField="data_cadastro" DataSet="frxDBComputadores" DataSetName="Computadores" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" HAlign="haRight" ParentFont="False" Text="[Computadores.&#34;data_cadastro&#34;]"/>
+      <TfrxMemoView Name="Computadoresunidade_nome" Left="215,43321" Top="11,33859" Width="117,16543" Height="18,89765" DataField="unidade_nome" DataSet="frxDBComputadores" DataSetName="Computadores" HAlign="haCenter" Text="[Computadores.&#34;unidade_nome&#34;]"/>
+      <TfrxMemoView Name="Computadoressetor_nome" Left="332,59864" Top="11,33859" Width="124,72449" Height="18,89765" DataField="setor_nome" DataSet="frxDBComputadores" DataSetName="Computadores" HAlign="haCenter" Text="[Computadores.&#34;setor_nome&#34;]"/>
+      <TfrxMemoView Name="Computadorestipo" Left="551,81138" Top="11,33859" Width="90,70872" Height="18,89765" DataField="tipo" DataSet="frxDBComputadores" DataSetName="Computadores" HAlign="haBlock" Text="[Computadores.&#34;tipo&#34;]"/>
     </TfrxMasterData>
-    <TfrxPageFooter Name="PageFooter1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="22,67718" Left="0" Top="366,61441" Width="718,1107">
+    <TfrxPageFooter Name="PageFooter1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="22,67718" Left="0" Top="355,27582" Width="718,1107">
       <TfrxMemoView Name="Memo1" Left="642,5201" Top="0" Width="75,5906" Height="18,89765" HAlign="haRight" Text="[Page#]"/>
     </TfrxPageFooter>
+    <TfrxHeader Name="Header1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="34,01577" Left="0" Top="207,87415" Width="718,1107">
+      <TfrxMemoView Name="Memo3" Left="-3,77953" Top="15,11812" Width="94,48825" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial" Font.Style="0" HAlign="haCenter" ParentFont="False" Text="Computador"/>
+      <TfrxMemoView Name="Memo4" Left="102,04731" Top="15,11812" Width="94,48825" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial" Font.Style="0" HAlign="haCenter" ParentFont="False" Text="UsuÃ¡rio"/>
+      <TfrxMemoView Name="Memo5" Left="215,43321" Top="11,33859" Width="94,48825" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial" Font.Style="0" HAlign="haCenter" ParentFont="False" Text="Unidade"/>
+    </TfrxHeader>
   </TfrxReportPage>
 </TfrxReport>

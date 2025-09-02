@@ -247,7 +247,7 @@ PaginaRoteadores.ActivePage := Cadastro;
  DataModule1.ADOQuery3.Close;
 
 DataModule1.tabCadastroRoteadores.Append; // ou .Insert
- DateCadastro.Text := FormatDateTime('dd/mm/yyyy', Now);
+ DateCadastro.Text := FormatDateTime('yyyy-mm-dd', Now);
   DataModule1.tabCadastroRoteadores.Open;
   DataModule1.tabUnidades.Open;
   DataModule1.tabSetores.Open;

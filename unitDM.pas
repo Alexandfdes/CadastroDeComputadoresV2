@@ -97,6 +97,10 @@ type
     ADOQuery3unidade_nome: TStringField;
     frxDBComputadores: TfrxDBDataset;
     frxComputadores: TfrxReport;
+    frxDBImpressoras: TfrxDBDataset;
+    frxDBRoteadores: TfrxDBDataset;
+    frxImpressoras: TfrxReport;
+    frxRoteadores: TfrxReport;
     procedure DataModuleCreate(Sender: TObject);
    
   private
@@ -116,8 +120,9 @@ procedure TDataModule1.DataModuleCreate(Sender: TObject);
 begin
   tabUnidades.Open;
   tabSetores.Open;
-  tabCadastroComputadores.Close;
   tabCadastroComputadores.Open;
+  tabCadastroImpressoras.Open;
+  tabCadastroRoteadores.Open;
   conexao.Connected := True;
  
 end;
