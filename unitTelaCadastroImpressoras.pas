@@ -9,10 +9,6 @@ uses
 
 type
   TformTelaCadastroImpressoras = class(TForm)
-    SpeedButton2: TSpeedButton;
-    SpeedButton3: TSpeedButton;
-    SpeedButton4: TSpeedButton;
-    SpeedButton5: TSpeedButton;
     Label10: TLabel;
     PaginaImpressoras: TPageControl;
     Cadastro: TTabSheet;
@@ -39,6 +35,11 @@ type
     ComboBox1: TComboBox;
     CheckBox1: TCheckBox;
      ComboBox2: TComboBox;
+    GroupBox1: TGroupBox;
+    SpeedButton1: TSpeedButton;
+    SpeedButton6: TSpeedButton;
+    SpeedButton7: TSpeedButton;
+    SpeedButton3: TSpeedButton;
     EditPesquisa: TEdit;
     procedure ComboBox1Change(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
@@ -247,7 +248,7 @@ PaginaImpressoras.ActivePage := Cadastro;
 
  DataModule1.ADOQuery2.Close;
 DataModule1.tabCadastroImpressoras.Append; // ou .Insert
- DateCadastro.Text := FormatDateTime('yyyy-mm-dd', Now);
+ DateCadastro.Text := FormatDateTime('dd/mm/yyyy', Now);
   DataModule1.tabCadastroImpressoras.Open;
   DataModule1.tabUnidades.Open;
   DataModule1.tabSetores.Open;

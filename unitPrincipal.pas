@@ -8,19 +8,24 @@ uses
 
 type
   TTelaPrincipal = class(TForm)
-    EditComputadores: TBitBtn;
-    EditRelatorios: TBitBtn;
-    EditImpressoras: TBitBtn;
-    BitBtn1: TBitBtn;
     RxSpeedButton1: TRxSpeedButton;
     SecretPanel1: TSecretPanel;
-    Panel1: TPanel;
+    RxSpeedButton2: TRxSpeedButton;
+    RxSpeedButton3: TRxSpeedButton;
+    RxSpeedButton4: TRxSpeedButton;
+    RxSpeedButton5: TRxSpeedButton;
+    RxSpeedButton6: TRxSpeedButton;
+    RxSpeedButton7: TRxSpeedButton;
     procedure EditCompuadoresClick(Sender: TObject);
      procedure TrataExcecao(Sender: TObject; E: Exception);
 
     
     procedure EditImpressorasClick(Sender: TObject);
     procedure EditRelatoriosClick(Sender: TObject);
+    procedure RxSpeedButton1Click(Sender: TObject);
+    procedure RxSpeedButton7Click(Sender: TObject);
+    procedure RxSpeedButton3Click(Sender: TObject);
+    procedure RxSpeedButton6Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -58,6 +63,27 @@ end;
 procedure TTelaPrincipal.EditRelatoriosClick(Sender: TObject);
 begin
 formTelaRelatorios.ShowModal;
+end;
+
+procedure TTelaPrincipal.RxSpeedButton1Click(Sender: TObject);
+begin
+
+formTelaRelatorios.ShowModal;
+end;
+
+procedure TTelaPrincipal.RxSpeedButton7Click(Sender: TObject);
+begin
+formTelaCadastroComputadores.ShowModal;
+end;
+
+procedure TTelaPrincipal.RxSpeedButton3Click(Sender: TObject);
+begin
+ formTelaCadastroImpressoras.ShowModal;
+end;
+
+procedure TTelaPrincipal.RxSpeedButton6Click(Sender: TObject);
+begin
+formTelaCadastroRoteadores.ShowModal;
 end;
 
 end.

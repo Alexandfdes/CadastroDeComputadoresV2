@@ -9,10 +9,6 @@ uses
 
 type
   TformTelaCadastroRoteadores = class(TForm)
-    SpeedButton2: TSpeedButton;
-    SpeedButton3: TSpeedButton;
-    SpeedButton4: TSpeedButton;
-    SpeedButton5: TSpeedButton;
     Label10: TLabel;
     PaginaRoteadores: TPageControl;
     Cadastro: TTabSheet;
@@ -39,6 +35,11 @@ type
     ComboBox1: TComboBox;
     CheckBox1: TCheckBox;
     ComboBox2: TComboBox;
+    GroupBox1: TGroupBox;
+    SpeedButton4: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    SpeedButton5: TSpeedButton;
+    SpeedButton2: TSpeedButton;
     EditPesquisa: TEdit;
     procedure ComboBox1Change(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
@@ -247,7 +248,7 @@ PaginaRoteadores.ActivePage := Cadastro;
  DataModule1.ADOQuery3.Close;
 
 DataModule1.tabCadastroRoteadores.Append; // ou .Insert
- DateCadastro.Text := FormatDateTime('yyyy-mm-dd', Now);
+ DateCadastro.Text := FormatDateTime('dd/mm/yyyy', Now);
   DataModule1.tabCadastroRoteadores.Open;
   DataModule1.tabUnidades.Open;
   DataModule1.tabSetores.Open;

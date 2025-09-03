@@ -113,7 +113,7 @@ begin
     'LEFT JOIN unidades u ON t.unidade_id = u.id ' +
     'WHERE 1=1 ' +
     filtro;
-   ShowMessage(sql);
+
     DataModule1.ADOQuery1.Close;
     DataModule1.ADOQuery1.SQL.Text := sql;
     DataModule1.ADOQuery1.Open;
@@ -127,7 +127,7 @@ begin
     'LEFT JOIN unidades u ON tim.unidade_id = u.id ' +
     'WHERE 1=1 ' +
     filtro;
-   ShowMessage(sql);
+
     DataModule1.ADOQuery2.Close;
     DataModule1.ADOQuery2.SQL.Text := sql;
     DataModule1.ADOQuery2.Open;
@@ -141,7 +141,7 @@ begin
     'LEFT JOIN unidades u ON trot.unidade_id = u.id ' +
     'WHERE 1=1 ' +
     filtro;
-   ShowMessage(sql);;
+
     DataModule1.ADOQuery3.Close;
     DataModule1.ADOQuery3.SQL.Text := sql;
     DataModule1.ADOQuery3.Open;

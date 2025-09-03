@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Mask, DBCtrls, Buttons, DB, Menus, ComCtrls, Grids,
-  DBGrids, JPEG, ExtCtrls, frxClass, frxDBSet;
+  DBGrids, JPEG, ExtCtrls, frxClass, frxDBSet, RXCtrls;
 
 type
   TformTelaCadastroComputadores = class(TForm)
@@ -23,9 +23,6 @@ type
     SpeedButton2: TSpeedButton;
     ComboBox1: TComboBox;
     CheckBox1: TCheckBox;
-    SpeedButton3: TSpeedButton;
-    SpeedButton4: TSpeedButton;
-    SpeedButton5: TSpeedButton;
     Label10: TLabel;
     Label7: TLabel;
     DBGrid1: TDBGrid;
@@ -42,6 +39,10 @@ type
     ComboUnidade: TComboBox;
     ComboSetor: TComboBox;
     MemoObservacoes: TMemo;
+    SpeedButton3: TSpeedButton;
+    SpeedButton4: TSpeedButton;
+    SpeedButton5: TSpeedButton;
+    GroupBox1: TGroupBox;
     procedure SpeedButton4Click(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
@@ -52,6 +53,7 @@ type
     procedure EditEnderecoMACKeyPress(Sender: TObject; var Key: Char);
     procedure SpeedButton1Click(Sender: TObject);
     procedure LimparCampos;
+  
 
 
 
@@ -231,7 +233,7 @@ DataModule1.tabCadastroComputadores.Open;
 DataModule1.tabUnidades.Open;
 DataModule1.tabSetores.Open;
 DataModule1.tabCadastroComputadores.Append; // ou .Insert
- DateCadastro.Text := FormatDateTime('yyyy-mm-dd', Now);
+ DateCadastro.Text := FormatDateTime('dd/mm/yyyy', Now);
 
   DataModule1.tabCadastroComputadores.Open;
   DataModule1.tabUnidades.Open;
@@ -429,6 +431,8 @@ procedure TformTelaCadastroComputadores.SpeedButton1Click(Sender: TObject);
 begin
 SpeedButton4Click(Sender); // Reutiliza o método de salvar
 end;
+
+
 
 
 
