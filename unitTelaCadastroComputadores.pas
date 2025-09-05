@@ -53,6 +53,7 @@ type
     procedure EditEnderecoMACKeyPress(Sender: TObject; var Key: Char);
     procedure SpeedButton1Click(Sender: TObject);
     procedure LimparCampos;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   
 
 
@@ -189,27 +190,32 @@ if not (DataModule1.tabCadastroComputadores.State in [dsEdit, dsInsert]) then
     ComboUnidade.SetFocus;
     Exit;
   end;
-  
-  // Define tipo
-  if RadioDesktop.Checked then
-    DataModule1.tabCadastroComputadores.FieldByName('tipo').AsString := 'Desktop'
-  else if RadioNotebook.Checked then
-    DataModule1.tabCadastroComputadores.FieldByName('tipo').AsString := 'Notebook';
+
+  if Trim(ComboUnidade.Text) = '' then
+  begin
+    ShowMessage('Selecione uma unidade!');
+    ComboUnidade.SetFocus;
+    Exit;
+  end;
 
 
- if DataModule1.tabCadastroComputadores.Locate('nome_computador', EditnomeComputador.Text, []) then
+
+ if not (RadioDesktop.Checked or RadioNotebook.Checked) then
+begin
+  ShowMessage('Selecione se é Desktop ou Notebook!');
+  Exit;
+end;
+
+if DataModule1.tabCadastroComputadores.Locate('nome_computador', EditNomeComputador.Text, []) then
 begin
   // Já existe um registro com esse nome, então atualiza os campos
   DataModule1.tabCadastroComputadores.Edit;
-  // Atualize os campos como normalmente faria ao editar
 end
 else
 begin
   // Não existe, então cria um novo
   DataModule1.tabCadastroComputadores.Append;
-  // Preencha os campos normalmente
 end;
-
 
 
   SalvarCampos;
@@ -232,7 +238,7 @@ begin
 DataModule1.tabCadastroComputadores.Open;
 DataModule1.tabUnidades.Open;
 DataModule1.tabSetores.Open;
-DataModule1.tabCadastroComputadores.Append; // ou .Insert
+
  DateCadastro.Text := FormatDateTime('dd/mm/yyyy', Now);
 
   DataModule1.tabCadastroComputadores.Open;
@@ -304,6 +310,8 @@ begin
   DateCadastro.Text          := DataModule1.tabCadastroComputadores.FieldByName('data_cadastro').AsString;
   MemoObservacoes.Text       := DataModule1.tabCadastroComputadores.FieldByName('observacoes').AsString;
 
+ 
+
   // Busca o nome da unidade pelo ID
   nomeUnidade := VarToStr(DataModule1.tabUnidades.Lookup('id', DataModule1.tabCadastroComputadores.FieldByName('unidade_id').AsInteger, 'nome'));
   ComboUnidade.Text := nomeUnidade;
@@ -329,6 +337,19 @@ begin
   // Busca o ID correspondente ao nome selecionado no ComboBox
   setorID := DataModule1.tabSetores.Lookup('nome', ComboSetor.Text, 'id');
   unidadeID := DataModule1.tabUnidades.Lookup('nome', ComboUnidade.Text, 'id');
+
+
+
+
+  if RadioDesktop.Checked then
+  DataModule1.tabCadastroComputadores.FieldByName('tipo').AsString := 'Desktop'
+  else if RadioNotebook.Checked then
+  DataModule1.tabCadastroComputadores.FieldByName('tipo').AsString := 'Notebook';
+
+
+
+
+
 
   // Só atribui se encontrou (evita erro de valor inválido)
   if not VarIsNull(setorID) then
@@ -377,7 +398,7 @@ end;
  procedure TformTelaCadastroComputadores.SpeedButton5Click(Sender: TObject);
  begin
  LimparCampos;
- DataModule1.tabCadastroComputadores.Append; // ou .Insert
+
 end;
 
 
@@ -439,6 +460,13 @@ end;
 
 
 
+
+procedure TformTelaCadastroComputadores.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  if DataModule1.tabCadastroComputadores.State in [dsInsert, dsEdit] then
+    DataModule1.tabCadastroComputadores.Cancel;
+end;
 
 end.
 

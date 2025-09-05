@@ -48,6 +48,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
    
 
   private
@@ -215,18 +216,16 @@ begin
  // Verifica se já existe registro com este serial
   registroExiste := DataModule1.tabCadastroImpressoras.Locate('serial', EditSerial.Text, []);
 if registroExiste then
-    DataModule1.tabCadastroImpressoras.Edit
-  else
-    DataModule1.tabCadastroImpressoras.Append;
+begin
+    DataModule1.tabCadastroImpressoras.Edit;
+
 
   SalvarCamposImpressoras; // Preenche os campos do dataset com os valores dos controles
-
   DataModule1.tabCadastroImpressoras.Post;
   ShowMessage('Registro salvo com sucesso!');
 end;
 
-
-
+end;
 
 
 
@@ -412,5 +411,12 @@ begin
   LimparCamposImpressoras;
 end;
 
+
+procedure TformTelaCadastroImpressoras.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  if DataModule1.tabCadastroImpressoras.State in [dsInsert, dsEdit] then
+    DataModule1.tabCadastroImpressoras.Cancel;
+end;
 
 end.

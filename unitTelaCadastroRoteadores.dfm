@@ -14,6 +14,7 @@ object formTelaCadastroRoteadores: TformTelaCadastroRoteadores
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -134,7 +135,7 @@ object formTelaCadastroRoteadores: TformTelaCadastroRoteadores
     Top = 0
     Width = 809
     Height = 393
-    ActivePage = Listagem
+    ActivePage = Cadastro
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -324,7 +325,7 @@ object formTelaCadastroRoteadores: TformTelaCadastroRoteadores
         Top = 160
         Width = 161
         Height = 21
-        ItemHeight = 0
+        ItemHeight = 13
         TabOrder = 6
       end
       object ComboSetor: TComboBox
@@ -332,7 +333,7 @@ object formTelaCadastroRoteadores: TformTelaCadastroRoteadores
         Top = 160
         Width = 161
         Height = 21
-        ItemHeight = 0
+        ItemHeight = 13
         TabOrder = 7
       end
       object MemoObservacoes: TMemo

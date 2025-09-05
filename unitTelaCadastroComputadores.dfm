@@ -1,6 +1,6 @@
 object formTelaCadastroComputadores: TformTelaCadastroComputadores
-  Left = -907
-  Top = 118
+  Left = 277
+  Top = 121
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Tela de Cadastro'
@@ -14,6 +14,7 @@ object formTelaCadastroComputadores: TformTelaCadastroComputadores
   Font.Style = []
   OldCreateOrder = False
   Position = poMainFormCenter
+  OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -278,27 +279,27 @@ object formTelaCadastroComputadores: TformTelaCadastroComputadores
       end
       object RadioDesktop: TRadioButton
         Left = 56
-        Top = 352
+        Top = 344
         Width = 117
         Height = 33
         Caption = 'Desktop'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -11
+        Font.Height = -13
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 0
       end
       object RadioNotebook: TRadioButton
-        Left = 224
-        Top = 352
+        Left = 216
+        Top = 344
         Width = 117
         Height = 33
         Caption = 'Notebook'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -11
+        Font.Height = -13
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False

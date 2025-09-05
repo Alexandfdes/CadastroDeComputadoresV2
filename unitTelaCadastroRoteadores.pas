@@ -48,6 +48,7 @@ type
     procedure SpeedButton5Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
 
   private
     procedure CarregarCamposRoteadores;
@@ -213,9 +214,8 @@ begin
  // Verifica se já existe registro com este serial
   registroExiste := DataModule1.tabCadastroRoteadores.Locate('endereco_mac', EditEnderecoMAC.Text, []);
 if registroExiste then
-    DataModule1.tabCadastroRoteadores.Edit
-  else
-    DataModule1.tabCadastroRoteadores.Append;
+    DataModule1.tabCadastroRoteadores.Edit;
+
 
   SalvarCamposRoteadores; // Preenche os campos do dataset com os valores dos controles
 
@@ -366,7 +366,7 @@ begin
   ComboSetor.ItemIndex := -1; // se for ComboBox, limpa seleção
   ComboUnidade.ItemIndex := -1; // idem
   DateCadastro.Text := DateToStr(Date);
-  
+
   MemoObservacoes.Clear;
   EditPesquisa.Clear;
   ComboBox1.ItemIndex := 0;
@@ -439,4 +439,10 @@ end;
 
 
 
+procedure TformTelaCadastroRoteadores.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  if DataModule1.tabCadastroRoteadores.State in [dsInsert, dsEdit] then
+    DataModule1.tabCadastroRoteadores.Cancel;
+end;
 end.
